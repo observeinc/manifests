@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: observe-state
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: observe-state
+subjects:
+- kind: ServiceAccount
+  name: observe-state

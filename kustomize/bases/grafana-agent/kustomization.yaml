@@ -1,0 +1,10 @@
+resources:
+  - clusterrole.yaml
+  - clusterrolebinding.yaml
+  - deployment.yaml
+  - serviceaccount.yaml
+
+configMapGenerator:
+- name: grafana-agent
+  files:
+    - agent.yaml

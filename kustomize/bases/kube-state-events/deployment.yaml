@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: observe-state
+spec:
+  selector:
+    matchLabels:
+      name: observe-state
+  template:
+    metadata:
+      labels:
+        name: observe-state
+    spec:
+      serviceAccountName: observe-state
+      initContainers:
+      - name: kube-cluster-info
+        image: observeinc/kube-cluster-info:latest
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+      containers:
+      - name: kube-state-events
+        image: observeinc/kube-state-events:latest
+        args:
+          - -healthz-addr=:5171
+          - -o=https://$(OBSERVE_CUSTOMER):$(OBSERVE_TOKEN)@collect.observeinc.com/v1/http?clusterUid=$(OBSERVE_CLUSTER)
+          - v1
+          - apps/v1
+          - networking.k8s.io/v1
+        ports:
+          - containerPort: 5171
+        env:
+          - name: OBSERVE_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: credentials
+                key: token
+          - name: OBSERVE_CUSTOMER
+            valueFrom:
+              secretKeyRef:
+                name: credentials
+                key: customer
+          - name: OBSERVE_CLUSTER
+            valueFrom:
+              configMapKeyRef:
+                name: cluster-info
+                key: id
+        envFrom:
+          - configMapRef: 
+              name: kube-state-events-env
+        readinessProbe:
+          httpGet:
+           path: /healthz
+           port: 5171
+        livenessProbe:
+          httpGet:
+           path: /healthz
+           port: 5171
+          timeoutSeconds: 5
+          failureThreshold: 10
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 500m
+            memory: 128Mi
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+          capabilities:
+            drop:
+              - all

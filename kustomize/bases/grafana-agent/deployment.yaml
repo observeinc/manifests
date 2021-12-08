@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-agent
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: grafana-agent
+  template:
+    metadata:
+      labels:
+        name: grafana-agent
+    spec:
+      containers:
+      - args:
+        - -config.file=/etc/agent/agent.yaml
+        - -config.expand-env
+        command:
+        - /bin/agent
+        env:
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: OBSERVE_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: credentials
+              key: token
+        - name: OBSERVE_CUSTOMER
+          valueFrom:
+            secretKeyRef:
+              name: credentials
+              key: customer
+        - name: OBSERVE_CLUSTER
+          valueFrom:
+            configMapKeyRef:
+              name: cluster-info
+              key: id
+        image: grafana/agent:v0.20.0
+        imagePullPolicy: IfNotPresent
+        name: agent
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 12345
+          name: http-metrics
+        volumeMounts:
+        - mountPath: /etc/agent
+          name: grafana-agent
+      serviceAccount: grafana-agent
+      volumes:
+      - configMap:
+          name: grafana-agent
+        name: grafana-agent
