@@ -29,7 +29,7 @@ spec:
       terminationGracePeriodSeconds: 15
       containers:
       - name: telegraf
-        image: observeinc/telegraf:1.17
+        image: telegraf
         livenessProbe:
           httpGet:
             path: /

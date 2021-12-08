@@ -7,8 +7,3 @@ bases:
   - ../../bases/kube-state-events
   - ../../bases/agent
 
-images:
-  - name: observeinc/kube-state-events
-    newTag: v0.5.0
-  - name: observeinc/kube-cluster-info
-    newTag: v0.5.0

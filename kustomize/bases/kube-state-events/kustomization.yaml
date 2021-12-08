@@ -10,3 +10,9 @@ configMapGenerator:
   - name: kube-state-events-env
     literals:
       - V=2
+
+images:
+  - name: observeinc/kube-state-events
+    newTag: v0.5.0
+  - name: observeinc/kube-cluster-info
+    newTag: v0.5.0
