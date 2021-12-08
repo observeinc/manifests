@@ -1,0 +1,38 @@
+---
+resources:
+  - daemonset.yaml
+
+namePrefix: observe-
+
+commonLabels:
+  observeinc.com/component: 'logs'
+
+configMapGenerator:
+  - name: fluent-bit-config
+    literals:
+      - fluent-bit-extra.conf=
+    files:
+      - fluent-bit.conf
+      - parsers.conf
+  - name: fluent-bit-env
+    literals:
+      - FB_BUFFER_CHUNK_SIZE=32k
+      - FB_BUFFER_MAX_SIZE=256k
+      - FB_DOCKER_MODE=On
+      - FB_DOCKER_MODE_FLUSH=4
+      - FB_FLUSH=2
+      - FB_GRACE=10
+      - FB_LOG_LEVEL=warning
+      - FB_MEM_BUF_LIMIT=5MB
+      - FB_NODE_LOG_INCLUDE_PATH=/var/log/*.log,/var/log/syslog
+      - FB_NODE_LOG_EXCLUDE_PATH=/var/log/kube-apiserver-audit-*.log
+      - FB_REFRESH_INTERVAL=2
+      - FB_READ_FROM_HEAD=True
+      - FB_ROTATE_WAIT=5
+      - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
+      - OBSERVE_COLLECTOR_PORT=443
+      - OBSERVE_COLLECTOR_TLS=on
+
+images:
+  - name: fluent/fluent-bit
+    newTag: '1.8.11'

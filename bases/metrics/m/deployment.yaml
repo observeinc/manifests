@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  strategy:
+    # reduce likelihood of scheduling issues due to high memory usage
+    type: Recreate
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: metrics
+  template:
+    metadata:
+      labels:
+        name: metrics
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "12345"
+    spec:
+      containers:
+        - name: grafana-agent
+          image: grafana/agent:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - -config.file=/etc/agent/agent.yaml
+            - -config.expand-env
+          command:
+            - /bin/agent
+          envFrom:
+            - configMapRef:
+                name: grafana-agent-env
+          env:
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: OBSERVE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: credentials
+                  key: token
+            - name: OBSERVE_CUSTOMER
+              valueFrom:
+                secretKeyRef:
+                  name: credentials
+                  key: customer
+            - name: OBSERVE_CLUSTER
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-info
+                  key: id
+          resources:
+            limits:
+              cpu: 500m
+              memory: 2Gi
+            requests:
+              cpu: 100m
+              memory: 1Gi
+          ports:
+            - containerPort: 12345
+              name: http-metrics
+          volumeMounts:
+            - mountPath: /etc/agent
+              name: grafana-agent
+      serviceAccountName: metrics
+      volumes:
+        - name: grafana-agent
+          configMap:
+            name: grafana-agent

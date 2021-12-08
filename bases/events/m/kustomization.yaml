@@ -1,0 +1,26 @@
+---
+resources:
+  - clusterrole.yaml
+  - clusterrolebinding.yaml
+  - deployment.yaml
+  - role.yaml
+  - rolebinding.yaml
+  - serviceaccount.yaml
+
+namePrefix: observe-
+
+commonLabels:
+  observeinc.com/component: 'events'
+
+configMapGenerator:
+  - name: kube-state-events-env
+    literals:
+      - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
+      - OBSERVE_COLLECTOR_PORT=443
+      - V=2
+
+images:
+  - name: observeinc/kube-state-events
+    newTag: 'v0.6.0'
+  - name: observeinc/kube-cluster-info
+    newTag: 'v0.6.0'
