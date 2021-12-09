@@ -1,10 +1,11 @@
+---
 resources:
-- clusterrole.yaml
-- clusterrolebinding.yaml
-- deployment.yaml
-- role.yaml
-- rolebinding.yaml
-- serviceaccount.yaml
+  - clusterrole.yaml
+  - clusterrolebinding.yaml
+  - deployment.yaml
+  - role.yaml
+  - rolebinding.yaml
+  - serviceaccount.yaml
 
 configMapGenerator:
   - name: kube-state-events-env

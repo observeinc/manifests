@@ -1,9 +1,10 @@
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: observe-state
 rules:
-- apiGroups: [""]
-  verbs: ["create"]
-  resources:
-  - configmaps
+  - apiGroups: [""]
+    verbs: ["create"]
+    resources:
+      - configmaps
