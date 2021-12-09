@@ -1,3 +1,4 @@
+---
 server:
   http_listen_port: 12345
 prometheus:
@@ -7,40 +8,42 @@ prometheus:
     external_labels:
       clusterUid: ${OBSERVE_CLUSTER}
   configs:
-  - name: integrations
-    remote_write:
-    - url: https://collect.observeinc.com/v1/prometheus
-      basic_auth:
-        username: ${OBSERVE_CUSTOMER}
-        password: ${OBSERVE_TOKEN}
-    scrape_configs:
-    - job_name: pods
-      kubernetes_sd_configs:
-      - role: pod
-        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-        api_server: https://kubernetes.default.svc
-        tls_config:
-          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-      relabel_configs:
-      - action: keep
-        regex: true
-        source_labels: [ __meta_kubernetes_pod_annotation_prometheus_io_scrape ]
-      - action: replace
-        regex: (.+)
-        source_labels: [ __meta_kubernetes_pod_annotation_prometheus_io_path ]
-        target_label: __metrics_path__
-      - action: replace
-        regex: ([^:]+)(?::\d+)?;(\d+)
-        replacement: $1:$2
-        source_labels: [ __address__, __meta_kubernetes_pod_annotation_prometheus_io_port ]
-        target_label: __address__
-      - action: replace
-        source_labels: [ __meta_kubernetes_namespace ]
-        target_label: kubernetes_namespace
-      - action: replace
-        source_labels: [ __meta_kubernetes_pod_name ]
-        target_label: kubernetes_pod_name
-      - action: labelmap
-        regex: __meta_kubernetes_pod_label_(.+)
-      - action: labelmap
-        regex: __meta_kubernetes_annotations_label_(.+)
+    - name: integrations
+      remote_write:
+        - url: https://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/prometheus
+          basic_auth:
+            username: ${OBSERVE_CUSTOMER}
+            password: ${OBSERVE_TOKEN}
+          tls_config:
+            insecure_skip_verify: ${OBSERVE_COLLECTOR_INSECURE}
+      scrape_configs:
+        - job_name: pods
+          kubernetes_sd_configs:
+            - role: pod
+              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              api_server: https://kubernetes.default.svc
+              tls_config:
+                ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          relabel_configs:
+            - action: keep
+              regex: true
+              source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+            - action: replace
+              regex: (.+)
+              source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+              target_label: __metrics_path__
+            - action: replace
+              regex: ([^:]+)(?::\d+)?;(\d+)
+              replacement: $1:$2
+              source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+              target_label: __address__
+            - action: replace
+              source_labels: [__meta_kubernetes_namespace]
+              target_label: kubernetes_namespace
+            - action: replace
+              source_labels: [__meta_kubernetes_pod_name]
+              target_label: kubernetes_pod_name
+            - action: labelmap
+              regex: __meta_kubernetes_pod_label_(.+)
+            - action: labelmap
+              regex: __meta_kubernetes_annotations_label_(.+)

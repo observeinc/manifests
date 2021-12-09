@@ -1,3 +1,4 @@
+---
 resources:
   - clusterrole.yaml
   - clusterrolebinding.yaml
@@ -5,6 +6,11 @@ resources:
   - serviceaccount.yaml
 
 configMapGenerator:
-- name: grafana-agent
-  files:
-    - agent.yaml
+  - name: grafana-agent
+    files:
+      - agent.yaml
+  - name: grafana-agent-env
+    literals:
+      - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
+      - OBSERVE_COLLECTOR_PORT=443
+      - OBSERVE_COLLECTOR_INSECURE=off
