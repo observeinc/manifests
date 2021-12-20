@@ -2,13 +2,21 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: state
+  name: events
 rules:
   - apiGroups: [""]
     verbs: ["list", "get", "watch"]
     resources:
       - "*"
   - apiGroups: ["apps"]
+    verbs: ["list", "get", "watch"]
+    resources:
+      - "*"
+  - apiGroups: ["autoscaling"]
+    verbs: ["list", "get", "watch"]
+    resources:
+      - "*"
+  - apiGroups: ["batch"]
     verbs: ["list", "get", "watch"]
     resources:
       - "*"

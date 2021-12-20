@@ -1,0 +1,6 @@
+---
+bases:
+  - ../m
+
+patchesStrategicMerge:
+  - patch.yaml
