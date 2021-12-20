@@ -7,6 +7,9 @@ resources:
 
 namePrefix: observe-
 
+commonLabels:
+  observeinc.com/component: 'metrics'
+
 configMapGenerator:
   - name: grafana-agent
     files:

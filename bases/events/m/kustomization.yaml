@@ -9,6 +9,9 @@ resources:
 
 namePrefix: observe-
 
+commonLabels:
+  observeinc.com/component: 'events'
+
 configMapGenerator:
   - name: kube-state-events-env
     literals:

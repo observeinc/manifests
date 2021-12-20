@@ -1,9 +1,6 @@
 ---
 namespace: observe
 
-commonLabels:
-  observeinc.com/stack: xs
-
 resources:
   - namespace.yaml
   - ../../bases/events/m

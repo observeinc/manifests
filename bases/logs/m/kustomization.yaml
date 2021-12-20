@@ -4,6 +4,9 @@ resources:
 
 namePrefix: observe-
 
+commonLabels:
+  observeinc.com/component: 'logs'
+
 configMapGenerator:
   - name: fluent-bit-config
     files:

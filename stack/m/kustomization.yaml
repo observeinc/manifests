@@ -1,13 +1,8 @@
 ---
 namespace: observe
 
-commonLabels:
-  observeinc.com/stack: 'm'
-
 resources:
   - namespace.yaml
-
-bases:
   - ../../bases/events/m
   - ../../bases/logs/m
   - ../../bases/metrics/m
