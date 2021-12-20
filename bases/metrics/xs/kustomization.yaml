@@ -3,4 +3,20 @@ bases:
   - ../m
 
 patchesStrategicMerge:
-  - patch.yaml
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: metrics
+    spec:
+      template:
+        spec:
+          containers:
+            - name: grafana-agent
+              resources:
+                limits:
+                  cpu: 500m
+                  memory: 256Mi
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
