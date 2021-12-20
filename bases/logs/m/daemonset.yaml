@@ -90,13 +90,8 @@ spec:
               readOnly: true
       volumes:
         - name: config
-          projected:
-            sources:
-              - configMap:
-                  name: fluent-bit-config
-              - configMap:
-                  name: fluent-bit-overrides
-                  optional: true
+          configMap:
+            name: fluent-bit-config
         - name: varlog
           hostPath:
             path: /var/log

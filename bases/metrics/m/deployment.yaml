@@ -6,6 +6,9 @@ metadata:
 spec:
   minReadySeconds: 10
   replicas: 1
+  strategy:
+    # reduce likelihood of scheduling issues due to high memory usage
+    type: Recreate
   revisionHistoryLimit: 10
   selector:
     matchLabels:

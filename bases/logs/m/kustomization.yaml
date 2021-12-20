@@ -9,6 +9,8 @@ commonLabels:
 
 configMapGenerator:
   - name: fluent-bit-config
+    literals:
+      - fluent-bit-extra.conf=
     files:
       - fluent-bit.conf
       - parsers.conf

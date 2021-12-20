@@ -1,8 +1,10 @@
 ---
 namespace: observe
 
-resources:
-  - namespace.yaml
+bases:
   - ../../bases/events/m
   - ../../bases/logs/m
   - ../../bases/metrics/m
+
+resources:
+  - namespace.yaml

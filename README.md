@@ -15,18 +15,19 @@ kubectl -n observe create secret generic credentials \
         --from-literal=token=${OBSERVE_TOKEN?}
 ```
 
-# Layout 
+This will create an `observe` namespace for you and start collecting Kubernetes state, logs and metrics.
 
-We provide four "base" layers:
+# Components
+
+We provide four "base" components:
 
 - `bases/events` - responsible for collecting Kubernetes state using `kube-state-events`
 - `bases/logs` - responsible for collecting container logs using `fluent-bit`
 - `bases/metrics` - responsible for collecting container logs using `grafana-agent`
 - `bases/traces` - responsible for collecting traces using `otel-collector`
 
-We compose these layers into default stacks (`overlays` in kustomize
-nomenclature). Our default stack defined in [here] collects events, logs and
-metrics.
+We compose these base layers into overlays. Our default `stack` overlay
+collects events, logs and metrics.
 
 # Sizing
 
@@ -47,11 +48,11 @@ override the `FB_DEBUG` variable in the fluent-bit environment variable
 configmap:
 
 ```
-DEMO_HOME=$(mktemp -d)
+EXAMPLE_DIR=$(mktemp -d)
 
-cat <<EOF >$DEMO_HOME/kustomization.yaml
+cat <<EOF >$EXAMPLE_DIR/kustomization.yaml
 bases:
-  - ssh://git@github.com/observeinc/manifests/stack?ref=main
+  - github.com/observeinc/manifests/stack?ref=main
 
 configMapGenerator:
   - name: fluent-bit-env
@@ -60,8 +61,10 @@ configMapGenerator:
       - FB_DEBUG=true
 EOF
 
-kubectl apply -k $DEMO_HOME
+kubectl apply -k $EXAMPLE_DIR
 ```
+
+You can version control your kustomized directory while tracking upstream changes through the use of branch tags.
 
 # Pruning and deletion
 

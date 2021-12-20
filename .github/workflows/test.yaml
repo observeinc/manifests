@@ -4,13 +4,23 @@ name: Test apply
 on: pull_request
 
 jobs:
-  create-cluster:
+  cluster-apply:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - name: Create k8s Kind Cluster
-        uses: helm/kind-action@v1.2.0
-      - name: Testing
-        run: |
-          export KUBECONFIG="$(kind get kubeconfig-path)"
-          kubectl cluster-info
+        uses: helm/kind-action@main
+        with:
+          kubectl_version: v1.23.0    # leading edge  (EOL 2023-02-28)
+          node_image: kindest/node:v1.23.0@sha256:49824ab1727c04e56a21a5d8372a402fcd32ea51ac96a2706a12af38934f81ac
+        env:
+          KUBE_CONFIG: .kubeconfig
+      - name: Label check
+        run: make label_check
+      - name: Test apply
+        env:
+          OBSERVE_CUSTOMER: ${{ secrets.OBSERVE_CUSTOMER }}
+          OBSERVE_TOKEN: ${{ secrets.OBSERVE_TOKEN }}
+        run: make apply
+      - name: Test delete
+        run: make delete
