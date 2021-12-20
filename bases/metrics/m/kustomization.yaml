@@ -1,0 +1,31 @@
+---
+resources:
+  - clusterrole.yaml
+  - clusterrolebinding.yaml
+  - deployment.yaml
+  - serviceaccount.yaml
+
+namePrefix: observe-
+
+configMapGenerator:
+  - name: grafana-agent
+    files:
+      - agent.yaml
+  - name: grafana-agent-env
+    literals:
+      - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
+      - OBSERVE_COLLECTOR_PORT=443
+      - OBSERVE_COLLECTOR_INSECURE=off
+      - PROM_BATCH_SEND_DEADLINE=5s
+      - PROM_CAPACITY=15000
+      - PROM_LOG_LEVEL=info
+      - PROM_MAX_BACKOFF=30s
+      - PROM_MAX_SAMPLES_PER_SEND=5000
+      - PROM_MAX_SHARDS=10
+      - PROM_MIN_BACKOFF=1s
+      - PROM_REMOTE_TIMEOUT=30s
+      - PROM_SCRAPE_INTERVAL=15s
+
+images:
+  - name: grafana/agent
+    newTag: 'v0.21.2'

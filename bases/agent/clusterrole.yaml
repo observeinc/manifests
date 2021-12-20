@@ -1,0 +1,15 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: agent
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - nodes/proxy
+    verbs:
+      - get
+      - list
+      - watch

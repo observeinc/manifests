@@ -1,9 +1,0 @@
----
-namespace: observe
-
-resources:
-  - namespace.yaml
-
-bases:
-  - ../../bases/kube-state-events
-  - ../../bases/agent

@@ -1,6 +1,0 @@
----
-namespace: observe
-
-bases:
-  - ../base
-  - ../../bases/grafana-agent
