@@ -1,5 +1,7 @@
 # Observe kustomize manifests
 
+> **WARNING**: Use at your own peril, we are still iterating towards a 1.0.0 release
+
 This repository contains kustomized Kubernetes manifests supported by Observe.
 These are intended as a way of quickly ingesting Kubernetes data into your
 Observe instance.
@@ -80,3 +82,10 @@ To delete an existing install, just use `delete -k`:
 ```
 kubectl delete -k github.com/observeinc/manifests/stack
 ```
+
+# Release cycle
+
+Releases are automatically cut on a weekly basis on Tuesdays. Release tags
+follow [Semantic versioning](https://semver.org/). Bugfixes increment the patch
+version number, whereas new features increment the minor version. In the
+absence of bugfixes or features, no release is cut.
