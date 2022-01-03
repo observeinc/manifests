@@ -3,11 +3,7 @@
   path: "/rules"
   value:
     - apiGroups:
-        - ""
-        - "apps"
-        - "autoscaling"
-        - "batch"
-        - "networking.k8s.io"
+        - "argoproj.io"
       verbs:
         - "list"
         - "get"

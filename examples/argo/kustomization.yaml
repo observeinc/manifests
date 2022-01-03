@@ -1,11 +1,10 @@
 ---
 bases:
-  - ../noop
+  - ../../bases/events/noop
 
-namePrefix: observe-
+namespace: observe
 
-commonLabels:
-  observeinc.com/component: 'events'
+namePrefix: observe-argo-
 
 patchesJson6902:
   - target:

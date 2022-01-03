@@ -1,0 +1,13 @@
+---
+- op: add
+  path: "/spec/template/spec/containers/0/args/-"
+  value: "argoproj.io/v1alpha1"
+- op: replace
+  path: "/spec/template/spec/containers/0/resources"
+  value:
+    limits:
+      cpu: 200m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi

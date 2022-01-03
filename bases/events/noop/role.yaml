@@ -5,6 +5,6 @@ metadata:
   name: events
 rules:
   - apiGroups: [""]
-    verbs: ["create"]
+    verbs: ["create", "get"]
     resources:
       - configmaps
