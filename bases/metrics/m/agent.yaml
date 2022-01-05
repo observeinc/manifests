@@ -27,12 +27,9 @@ prometheus:
             insecure_skip_verify: ${OBSERVE_COLLECTOR_INSECURE}
       scrape_configs:
         - job_name: "integrations/kubernetes/pods"
+          bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
           kubernetes_sd_configs:
             - role: pod
-              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-              api_server: https://kubernetes.default.svc
-              tls_config:
-                ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
           relabel_configs:
             - action: keep
               regex: true
@@ -56,18 +53,25 @@ prometheus:
               regex: __meta_kubernetes_pod_label_(.+)
             - action: labelmap
               regex: __meta_kubernetes_annotations_label_(.+)
-
-        - job_name: integrations/kubernetes/apiserver
-          kubernetes_sd_configs:
-            - role: endpoints
-          scheme: https
           tls_config:
             ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            insecure_skip_verify: false
+            server_name: kubernetes
+
+
+        - job_name: "integrations/kubernetes/apiserver"
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+          kubernetes_sd_configs:
+            - role: endpoints
           relabel_configs:
             - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
               action: keep
               regex: default;kubernetes;https
+          scheme: https
+          tls_config:
+            ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            insecure_skip_verify: false
+            server_name: kubernetes
 
         - job_name: "integrations/kubernetes/kubelet"
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -91,16 +95,6 @@ prometheus:
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
           kubernetes_sd_configs:
             - role: node
-          metric_relabel_configs:
-            - action: drop
-              regex: container_([a-z_]+);
-              source_labels:
-                - __name__
-                - image
-            - action: drop
-              regex: container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
-              source_labels:
-                - __name__
           relabel_configs:
             - replacement: kubernetes.default.svc:443
               target_label: __address__
@@ -109,6 +103,21 @@ prometheus:
               source_labels:
                 - __meta_kubernetes_node_name
               target_label: __metrics_path__
+          metric_relabel_configs:
+            # drop "pod" level aggregates, identified by absence of image
+            - action: drop
+              regex: container_([a-z_]+);
+              source_labels:
+                - __name__
+                - image
+            # the following metrics are exported with 0 values in default cadvisor installs
+            # see
+            # - https://github.com/kubernetes/kubernetes/issues/60279
+            # - https://github.com/google/cadvisor/issues/1672
+            - action: drop
+              regex: container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
+              source_labels:
+                - __name__
           scheme: https
           tls_config:
             ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
