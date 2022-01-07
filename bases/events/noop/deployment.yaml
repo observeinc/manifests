@@ -11,10 +11,6 @@ spec:
     metadata:
       labels:
         name: events
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: "/metrics"
-        prometheus.io/port: "9090"
     spec:
       serviceAccountName: events
       initContainers:
@@ -34,6 +30,8 @@ spec:
             - -o=https://$(OBSERVE_CUSTOMER):$(OBSERVE_TOKEN)@$(OBSERVE_COLLECTOR_HOST):$(OBSERVE_COLLECTOR_PORT)/v1/http/kubernetes/events?clusterUid=$(OBSERVE_CLUSTER)
           ports:
             - containerPort: 5171
+            - containerPort: 9090
+              name: http-metrics
           env:
             - name: OBSERVE_TOKEN
               valueFrom:

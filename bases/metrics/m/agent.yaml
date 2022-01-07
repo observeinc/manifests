@@ -2,14 +2,16 @@
 server:
   http_listen_port: 12345
   log_level: ${PROM_LOG_LEVEL}
-prometheus:
+metrics:
   wal_directory: /tmp/grafana-agent-wal
   global:
     scrape_interval: ${PROM_SCRAPE_INTERVAL}
+    scrape_timeout: ${PROM_SCRAPE_TIMEOUT}
     external_labels:
       clusterUid: ${OBSERVE_CLUSTER}
   configs:
     - name: integrations
+      host_filter: ${PROM_HOST_FILTER}
       remote_write:
         - url: https://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/prometheus
           basic_auth:
@@ -25,39 +27,8 @@ prometheus:
             capacity: ${PROM_CAPACITY}
           tls_config:
             insecure_skip_verify: ${OBSERVE_COLLECTOR_INSECURE}
-      scrape_configs:
-        - job_name: "integrations/kubernetes/pods"
-          bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-          kubernetes_sd_configs:
-            - role: pod
-          relabel_configs:
-            - action: keep
-              regex: true
-              source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
-            - action: replace
-              regex: (.+)
-              source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
-              target_label: __metrics_path__
-            - action: replace
-              regex: ([^:]+)(?::\d+)?;(\d+)
-              replacement: $1:$2
-              source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
-              target_label: __address__
-            - action: replace
-              source_labels: [__meta_kubernetes_namespace]
-              target_label: kubernetes_namespace
-            - action: replace
-              source_labels: [__meta_kubernetes_pod_name]
-              target_label: kubernetes_pod_name
-            - action: labelmap
-              regex: __meta_kubernetes_pod_label_(.+)
-            - action: labelmap
-              regex: __meta_kubernetes_annotations_label_(.+)
-          tls_config:
-            ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-            insecure_skip_verify: false
-            server_name: kubernetes
 
+      scrape_configs:
         - job_name: "integrations/kubernetes/apiserver"
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
           kubernetes_sd_configs:
@@ -67,6 +38,83 @@ prometheus:
               action: keep
               regex: default;kubernetes;https
           scheme: https
+          tls_config:
+            ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            insecure_skip_verify: false
+            server_name: kubernetes
+
+        - job_name: "integrations/kubernetes/pods"
+          bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+          kubernetes_sd_configs:
+            - role: pod
+          relabel_configs:
+            # Drop any endpoint whose pod port name does not end with metrics.
+            - action: 'keep'
+              source_labels: ['__meta_kubernetes_pod_container_port_name']
+              regex: '.*-metrics'
+            # Drop pods without a name label.
+            # - action: 'drop'
+            #   regex: ''
+            #   source_labels: ['__meta_kubernetes_pod_label_name']
+            # Drop pods with phase Succeeded or Failed.
+            - action: 'drop'
+              regex: 'Succeeded|Failed'
+              source_labels: ['__meta_kubernetes_pod_phase']
+            # Drop anything annotated with 'prometheus.io.scrape=false'.
+            - action: 'drop'
+              regex: 'false'
+              source_labels: ['__meta_kubernetes_pod_annotation_prometheus_io_scrape']
+            # Allow pods to override the scrape scheme with 'prometheus.io.scheme=https'.
+            - action: 'replace'
+              regex: '(https?)'
+              replacement: '$1'
+              source_labels: ['__meta_kubernetes_pod_annotation_prometheus_io_scheme']
+              target_label: '__scheme__'
+            # Allow service to override the scrape path with 'prometheus.io.path=/other_metrics_path'.
+            - action: 'replace'
+              regex: '(.+)'
+              replacement: '$1'
+              source_labels: ['__meta_kubernetes_pod_annotation_prometheus_io_path']
+              target_label: '__metrics_path__'
+            # Allow services to override the scrape port with 'prometheus.io.port=1234'.
+            - action: 'replace'
+              regex: '(.+?)(\\:\\d+)?;(\\d+)'
+              replacement: '$1:$3'
+              source_labels: ['__address__', '__meta_kubernetes_pod_annotation_prometheus_io_port']
+              target_label: '__address__'
+            # Map all K8s labels/annotations starting with
+            # 'prometheus.io/param-' to URL params for Prometheus scraping.
+            - action: 'labelmap'
+              regex: '__meta_kubernetes_pod_annotation_prometheus_io_param_(.+)'
+              replacement: '__param_$1'
+            # Map all K8s labels/annotations starting with
+            # 'prometheus.io/label-' to Prometheus labels.
+            - action: 'labelmap'
+              regex: '__meta_kubernetes_pod_label_prometheus_io_label_(.+)'
+            - action: 'labelmap'
+              regex: '__meta_kubernetes_pod_annotation_prometheus_io_label_(.+)'
+            # Rename jobs to be <namespace>/<name, from pod name label>.
+            # - action: 'replace'
+            #   separator: '/'
+            #   source_labels: ['__meta_kubernetes_namespace', '__meta_kubernetes_pod_label_name']
+            #   target_label: 'job'
+            #   replacement: '$1'
+            # But also include the namespace, container, pod as separate labels,
+            # for routing alerts and joining with cAdvisor metrics.
+            - action: 'replace'
+              source_labels: ['__meta_kubernetes_namespace']
+              target_label: 'namespace'
+            - action: 'replace'
+              source_labels: ['__meta_kubernetes_pod_name']
+              # Not 'pod_name', which disappeared in K8s 1.16.
+              target_label: 'pod'
+            - action: 'replace'
+              source_labels: ['__meta_kubernetes_pod_container_name']
+              # Not 'container_name', which disappeared in K8s 1.16.
+              target_label: 'container'
+            - action: 'replace'
+              source_labels: ['__meta_kubernetes_pod_node_name']
+              target_label: 'node'
           tls_config:
             ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
             insecure_skip_verify: false

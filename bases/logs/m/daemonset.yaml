@@ -16,7 +16,6 @@ spec:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/path: "/api/v1/metrics/prometheus"
-        prometheus.io/port: "2020"
     spec:
       tolerations:
         - operator: Exists
@@ -59,20 +58,21 @@ spec:
                   key: id
           ports:
             - containerPort: 2020
+              name: http-metrics
           command:
             - /fluent-bit/bin/fluent-bit
             - -c
             - /fluent-bit/etc/fluent-bit.conf
           readinessProbe:
             httpGet:
-              path: /api/v1/metrics/prometheus
+              path: /api/v1/health
               port: 2020
           livenessProbe:
             httpGet:
-              path: /
+              path: /api/v1/health
               port: 2020
             timeoutSeconds: 5
-            failureThreshold: 10
+            failureThreshold: 5
           resources:
             limits:
               cpu: 500m

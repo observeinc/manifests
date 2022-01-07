@@ -17,10 +17,6 @@ spec:
     metadata:
       labels:
         name: metrics
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: "/metrics"
-        prometheus.io/port: "12345"
     spec:
       containers:
         - name: grafana-agent
