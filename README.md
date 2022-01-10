@@ -1,10 +1,10 @@
 # Observe kustomize manifests
 
-> **WARNING**: Use at your own peril, we are still iterating towards a 1.0.0 release
-
 This repository contains kustomized Kubernetes manifests supported by Observe.
 These are intended as a way of quickly ingesting Kubernetes data into your
 Observe instance.
+
+> **WARNING**: we are still iterating towards a stable release. Feedback welcome.
 
 # Quick setup
 
@@ -37,7 +37,7 @@ range. However, some clusters will inevitably fall outside this range. We
 provide additional configurations that are more appropriate for these extremes:
 
 - `github.com/observeinc/stack/xs` - intended to run on small clusters such as development environments, where resources are scarce and reliability is less of a concern
-- `github.com/observeinc/stack/xl` - intended to run on large clusters with 100+ nodes
+- `github.com/observeinc/stack/xl` - intended to run on large clusters with 100+ nodes. Collection is preferentially performed using daemonsets rather than deployments.
 
 # Configuration
 
