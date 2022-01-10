@@ -12,6 +12,10 @@ metrics:
   configs:
     - name: integrations
       host_filter: ${PROM_HOST_FILTER}
+      min_wal_time: ${PROM_MIN_WAL_TIME}
+      max_wal_time: ${PROM_MAX_WAL_TIME}
+      wal_truncate_frequency: ${PROM_WAL_TRUNCATE_FREQUENCY}
+      remote_flush_deadline: ${PROM_REMOTE_FLUSH_DEADLINE}
       remote_write:
         - url: https://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/prometheus
           basic_auth:
