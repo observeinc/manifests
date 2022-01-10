@@ -1,0 +1,77 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: metrics
+spec:
+  selector:
+    matchLabels:
+      name: metrics
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: metrics
+    spec:
+      tolerations:
+        - operator: Exists
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - {key: observeinc.com/unschedulable, operator: DoesNotExist}
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: grafana-agent
+          image: grafana/agent:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - -config.file=/etc/agent/agent.yaml
+            - -config.expand-env
+          command:
+            - /bin/agent
+          envFrom:
+            - configMapRef:
+                name: grafana-agent-env
+          env:
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: OBSERVE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: credentials
+                  key: token
+            - name: OBSERVE_CUSTOMER
+              valueFrom:
+                secretKeyRef:
+                  name: credentials
+                  key: customer
+            - name: OBSERVE_CLUSTER
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-info
+                  key: id
+            - name: PROM_HOST_FILTER
+              value: "true"
+          resources:
+            limits:
+              cpu: 200m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
+          ports:
+            - containerPort: 12345
+              name: http-metrics
+          volumeMounts:
+            - mountPath: /etc/agent
+              name: grafana-agent
+      serviceAccountName: metrics
+      volumes:
+        - name: grafana-agent
+          configMap:
+            name: grafana-agent

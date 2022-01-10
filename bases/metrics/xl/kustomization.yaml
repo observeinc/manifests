@@ -1,3 +1,11 @@
 ---
 bases:
-  - ../m
+  - ../base
+
+resources:
+  - daemonset.yaml
+
+namePrefix: observe-
+
+commonLabels:
+  observeinc.com/component: 'metrics'
