@@ -33,16 +33,6 @@ spec:
             - containerPort: 9090
               name: http-metrics
           env:
-            - name: OBSERVE_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: credentials
-                  key: token
-            - name: OBSERVE_CUSTOMER
-              valueFrom:
-                secretKeyRef:
-                  name: credentials
-                  key: customer
             - name: OBSERVE_CLUSTER
               valueFrom:
                 configMapKeyRef:
@@ -51,6 +41,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: kube-state-events-env
+            - secretRef:
+                name: credentials
           readinessProbe:
             httpGet:
               path: /healthz

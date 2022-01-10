@@ -30,21 +30,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: grafana-agent-env
+            - secretRef:
+                name: credentials
           env:
             - name: HOSTNAME
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-            - name: OBSERVE_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: credentials
-                  key: token
-            - name: OBSERVE_CUSTOMER
-              valueFrom:
-                secretKeyRef:
-                  name: credentials
-                  key: customer
             - name: OBSERVE_CLUSTER
               valueFrom:
                 configMapKeyRef:

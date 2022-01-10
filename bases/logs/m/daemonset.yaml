@@ -32,6 +32,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: fluent-bit-env
+            - secretRef:
+                name: credentials
           env:
             - name: NODE
               valueFrom:
@@ -41,16 +43,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-            - name: OBSERVE_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: credentials
-                  key: token
-            - name: OBSERVE_CUSTOMER
-              valueFrom:
-                secretKeyRef:
-                  name: credentials
-                  key: customer
             - name: OBSERVE_CLUSTER
               valueFrom:
                 configMapKeyRef:

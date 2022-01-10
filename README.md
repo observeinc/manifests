@@ -13,8 +13,8 @@ Try it out by installing our kustomized stack:
 ```
 kubectl apply -k github.com/observeinc/manifests/stack
 kubectl -n observe create secret generic credentials \
-        --from-literal=customer=${OBSERVE_CUSTOMER?} \
-        --from-literal=token=${OBSERVE_TOKEN?}
+        --from-literal=OBSERVE_CUSTOMER=${OBSERVE_CUSTOMER?} \
+        --from-literal=OBSERVE_TOKEN=${OBSERVE_TOKEN?}
 ```
 
 This will create an `observe` namespace for you and start collecting Kubernetes state, logs and metrics.
