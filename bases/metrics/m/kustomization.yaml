@@ -21,6 +21,7 @@ configMapGenerator:
       - OBSERVE_COLLECTOR_INSECURE=off
       - PROM_BATCH_SEND_DEADLINE=5s
       - PROM_CAPACITY=15000
+      - PROM_HOST_FILTER=false
       - PROM_LOG_LEVEL=info
       - PROM_MAX_BACKOFF=30s
       - PROM_MAX_SAMPLES_PER_SEND=5000
@@ -29,7 +30,6 @@ configMapGenerator:
       - PROM_REMOTE_TIMEOUT=30s
       - PROM_SCRAPE_INTERVAL=15s
       - PROM_SCRAPE_TIMEOUT=10s
-      - HOST_FILTER=false
 
 images:
   - name: grafana/agent
