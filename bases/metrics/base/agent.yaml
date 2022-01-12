@@ -41,7 +41,7 @@ metrics:
             # Drop any endpoint whose pod port name does not end with metrics, or does not have an explicit prometheus port annotation.
             - action: 'keep'
               source_labels: ['__meta_kubernetes_pod_container_port_name', '__meta_kubernetes_pod_annotation_prometheus_io_port']
-              regex: '.*(-metrics;|;\d+)'
+              regex: '.*(metrics;|;\d+)'
             # Drop pods without a name label.
             # - action: 'drop'
             #   regex: ''
