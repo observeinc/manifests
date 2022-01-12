@@ -2,7 +2,7 @@
 namespace: observe
 
 bases:
-  - ../../bases/events/m
+  - ../../bases/events/xs
   - ../../bases/logs/m
   - ../../bases/metrics/xs
 
