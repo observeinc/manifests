@@ -22,6 +22,7 @@ spec:
             nodeSelectorTerms:
               - matchExpressions:
                   - {key: observeinc.com/unschedulable, operator: DoesNotExist}
+                  - {key: eks.amazonaws.com/compute-type, operator: NotIn, values: [fargate]}
       terminationGracePeriodSeconds: 15
       containers:
         - name: grafana-agent
