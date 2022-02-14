@@ -1,3 +1,21 @@
+# [0.4.0](https://github.com/observeinc/manifests/compare/v0.3.0...v0.4.0) (2022-02-14)
+
+
+### Bug Fixes
+
+* bump kube-state-events to 0.6.2 ([67dc874](https://github.com/observeinc/manifests/commit/67dc874532dc337ace4a18952959246b10f151a6))
+* revise `m` sizing ([9c0a683](https://github.com/observeinc/manifests/commit/9c0a68386b1bf47092d63403a84cf47e9f7527d2))
+
+
+### Features
+
+* add `l` stack ([fda45b5](https://github.com/observeinc/manifests/commit/fda45b5406cc982f8fabb5b8995c1a15ffc0c943))
+* bump fluentbit to v1.8.12 ([cd05628](https://github.com/observeinc/manifests/commit/cd05628edfd7558b2c51f99a5072795b2c5b09bf))
+* bump grafana-agent to v0.22.0 ([f2f6638](https://github.com/observeinc/manifests/commit/f2f6638475c250598f9eea0deee76299803e19ff))
+* update limits ([422bb71](https://github.com/observeinc/manifests/commit/422bb71e218d99b3d8b8c7bda56c9ecb517094b2))
+
+
+
 # [0.3.0](https://github.com/observeinc/manifests/compare/v0.2.0...v0.3.0) (2022-01-21)
 
 
