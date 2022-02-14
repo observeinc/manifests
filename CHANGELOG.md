@@ -1,3 +1,12 @@
+## [0.4.1](https://github.com/observeinc/manifests/compare/v0.4.0...v0.4.1) (2022-02-14)
+
+
+### Bug Fixes
+
+* adjust limits for `m` ([164945c](https://github.com/observeinc/manifests/commit/164945c8bb10f347962f4e366285bca3ef9382bb))
+
+
+
 # [0.4.0](https://github.com/observeinc/manifests/compare/v0.3.0...v0.4.0) (2022-02-14)
 
 
