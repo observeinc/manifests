@@ -47,7 +47,7 @@ Resource limits for each sizing is as follows:
 |--------:|:------------:|:-------------:|:-------------:|:-------------:|
 |  events |  10m<br>64Mi |  50m<br>256Mi |   200m<br>1Gi |   400m<br>2Gi |
 |   logs* |  10m<br>64Mi | 100m<br>128Mi | 200m<br>192Mi | 500m<br>256Mi |
-| metrics | 50m<br>256Mi |   100m<br>1Gi | 500m<br>4Gi   |  200m*<br>1Gi |
+| metrics | 50m<br>256Mi | 150m<br>1.5Gi | 300m<br>3Gi   |  200m*<br>1Gi |
 
 \* run as daemonset
 
