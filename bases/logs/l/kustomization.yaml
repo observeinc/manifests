@@ -1,0 +1,9 @@
+---
+bases:
+  - ../m
+
+commonLabels:
+  observeinc.com/component: 'logs'
+
+patchesStrategicMerge:
+  - patch.yaml

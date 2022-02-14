@@ -9,8 +9,8 @@ spec:
         - name: kube-state-events
           resources:
             limits:
-              cpu: 500m
-              memory: 1Gi
+              cpu: 400m
+              memory: 2Gi
             requests:
-              cpu: 100m
-              memory: 1Gi
+              cpu: 400m
+              memory: 2Gi

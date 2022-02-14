@@ -55,10 +55,10 @@ spec:
             failureThreshold: 10
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 50m
+              memory: 256Mi
             requests:
-              cpu: 500m
+              cpu: 50m
               memory: 256Mi
           securityContext:
             runAsNonRoot: true

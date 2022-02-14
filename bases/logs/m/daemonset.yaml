@@ -68,11 +68,11 @@ spec:
             failureThreshold: 5
           resources:
             limits:
-              cpu: 500m
+              cpu: 100m
               memory: 128Mi
             requests:
               cpu: 100m
-              memory: 64Mi
+              memory: 128Mi
           volumeMounts:
             - name: config
               mountPath: /fluent-bit/etc
