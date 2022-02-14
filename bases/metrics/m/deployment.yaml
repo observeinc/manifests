@@ -44,11 +44,11 @@ spec:
                   key: id
           resources:
             limits:
-              cpu: 150m
-              memory: 1.5Gi
+              cpu: 200m
+              memory: 2Gi
             requests:
-              cpu: 150m
-              memory: 1.5Gi
+              cpu: 200m
+              memory: 2Gi
           ports:
             - containerPort: 12345
               name: http-metrics

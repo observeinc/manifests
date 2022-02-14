@@ -9,8 +9,8 @@ spec:
         - name: grafana-agent
           resources:
             limits:
-              cpu: 500m
+              cpu: 400m
               memory: 4Gi
             requests:
-              cpu: 500m
+              cpu: 400m
               memory: 4Gi
