@@ -12,7 +12,7 @@ r="[m"
 
 KUSTOMIZE_DIR="${KUSTOMIZE_DIR:=stack}"
 CLUSTER_NAME="${CLUSTER_NAME:=unknown}"
-WAIT_TIMEOUT="${WAIT_TIMEOUT:=30s}"
+WAIT_TIMEOUT="${WAIT_TIMEOUT:=60s}"
 
 usage() {
     echo "${B}$0 [-hv] <command>${r}"
