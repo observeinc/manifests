@@ -1,4 +1,7 @@
 ---
+commonLabels:
+  observeinc.com/component: 'events'
+
 resources:
   - clusterrole.yaml
   - clusterrolebinding.yaml
