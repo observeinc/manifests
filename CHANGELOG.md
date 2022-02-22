@@ -1,3 +1,13 @@
+# [0.5.0](https://github.com/observeinc/manifests/compare/v0.4.1...v0.5.0) (2022-02-22)
+
+
+### Features
+
+* bump grafana-agent to 0.23.0 ([cfad88d](https://github.com/observeinc/manifests/commit/cfad88dd1b902290899fb852f55eddb731b10453))
+* bump kube-state-events to v0.7.0 ([#3](https://github.com/observeinc/manifests/issues/3)) ([53960d3](https://github.com/observeinc/manifests/commit/53960d341ab3baee657b041bea0f74a42ec9194e))
+
+
+
 ## [0.4.1](https://github.com/observeinc/manifests/compare/v0.4.0...v0.4.1) (2022-02-14)
 
 
@@ -64,15 +74,6 @@
 
 * add custom CRD example ([9beb1ec](https://github.com/observeinc/manifests/commit/9beb1ec8ea25d9df3ea7d747da0bf49ffd84c8a8))
 * add LICENSE ([60c35fb](https://github.com/observeinc/manifests/commit/60c35fb63f4767cb6cc684692fbf203734b718f7))
-
-
-
-# [0.1.0](https://github.com/observeinc/manifests/compare/1e4593ae2ba4ee2db2c827efa44b7bde6433565f...v0.1.0) (2021-12-21)
-
-
-### Features
-
-* first commit ([1e4593a](https://github.com/observeinc/manifests/commit/1e4593ae2ba4ee2db2c827efa44b7bde6433565f))
 
 
 
