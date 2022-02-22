@@ -1,3 +1,12 @@
+## [0.5.1](https://github.com/observeinc/manifests/compare/v0.5.0...v0.5.1) (2022-02-22)
+
+
+### Bug Fixes
+
+* pin grafana-agent ([#4](https://github.com/observeinc/manifests/issues/4)) ([6c10d9e](https://github.com/observeinc/manifests/commit/6c10d9eb628fcaf731152e8fe4beb0e550eefa5e))
+
+
+
 # [0.5.0](https://github.com/observeinc/manifests/compare/v0.4.1...v0.5.0) (2022-02-22)
 
 
@@ -59,21 +68,6 @@
 * allow setting OBSERVE_COLLECTOR_* in credentials ([a8d225d](https://github.com/observeinc/manifests/commit/a8d225da307c0b97004a5446e8228a9b6c1d7c1f))
 * **metrics:** add daemonset mode for xl ([0b01298](https://github.com/observeinc/manifests/commit/0b01298153b6b971a82a975abf1b56575e223e7c))
 * **prometheus:** port-based service discovery ([13dc600](https://github.com/observeinc/manifests/commit/13dc6003dd2da9a8827d83d62a0282262b7953c7))
-
-
-
-# [0.2.0](https://github.com/observeinc/manifests/compare/v0.1.0...v0.2.0) (2022-01-04)
-
-
-### Bug Fixes
-
-* remove fluentbit multiline parser ([b414109](https://github.com/observeinc/manifests/commit/b4141093484fcab3376c0ba7a65656c05196caaf))
-
-
-### Features
-
-* add custom CRD example ([9beb1ec](https://github.com/observeinc/manifests/commit/9beb1ec8ea25d9df3ea7d747da0bf49ffd84c8a8))
-* add LICENSE ([60c35fb](https://github.com/observeinc/manifests/commit/60c35fb63f4767cb6cc684692fbf203734b718f7))
 
 
 
