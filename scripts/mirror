@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o pipefail
+
+DIR=${1}
+TAG="${TAG:=tag}"
+S3_ROOT="${S3_ROOT:=s3://observeinc/manifests}"
+
+DIE() { echo "${R}E! $*${r}" 1>&2; exit 1; }
+INFO() { echo "${B}I: $*${r}" 1>&2; }
+DEBUG() { test -z "$VERBOSE" || echo "D: $*" 1>&2; }
+
+
+STACKS=`find ${DIR} -name 'kustomization.yaml' -exec dirname {} ';'`
+for STACK in $STACKS
+do  
+    DST=${S3_ROOT}/${TAG}/${STACK}.yaml
+    INFO "uploading ${STACK} to ${DST}"
+    kubectl kustomize ${STACK} | aws s3 cp --acl public-read - ${DST}
+done
