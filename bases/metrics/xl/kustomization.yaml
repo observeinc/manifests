@@ -9,3 +9,7 @@ namePrefix: observe-
 
 commonLabels:
   observeinc.com/component: 'metrics'
+
+images:
+  - name: grafana/agent
+    newTag: 'v0.23.0'

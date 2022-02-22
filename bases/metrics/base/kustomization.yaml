@@ -30,7 +30,3 @@ configMapGenerator:
       - PROM_SCRAPE_INTERVAL=15s
       - PROM_SCRAPE_TIMEOUT=10s
       - PROM_WAL_TRUNCATE_FREQUENCY=30m
-
-images:
-  - name: grafana/agent
-    newTag: 'v0.23.0'
