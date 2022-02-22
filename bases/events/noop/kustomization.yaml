@@ -19,6 +19,6 @@ configMapGenerator:
 
 images:
   - name: observeinc/kube-state-events
-    newTag: 'v0.6.2'
+    newTag: 'v0.7.0'
   - name: observeinc/kube-cluster-info
-    newTag: 'v0.6.2'
+    newTag: 'v0.7.0'
