@@ -45,7 +45,7 @@ Resource limits for each sizing is as follows:
 
 |         |      xs      |       m       |       l       |       xl      |
 |--------:|:------------:|:-------------:|:-------------:|:-------------:|
-|  events |  10m<br>64Mi |  50m<br>256Mi |   200m<br>1Gi |   400m<br>2Gi |
+|  events |  20m<br>64Mi |  50m<br>256Mi |   200m<br>1Gi |   400m<br>2Gi |
 |   logs* |  10m<br>64Mi | 100m<br>128Mi | 200m<br>192Mi | 500m<br>256Mi |
 | metrics | 50m<br>256Mi |   250m<br>2Gi | 500m<br>4Gi   |  200m*<br>1Gi |
 
