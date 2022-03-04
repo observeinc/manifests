@@ -1,0 +1,45 @@
+---
+exporters:
+  otlphttp:
+    endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/otel?clusterUid=${OBSERVE_CLUSTER}"
+    headers:
+      authorization: "Bearer ${OBSERVE_CUSTOMER} ${OBSERVE_TOKEN}"
+    sending_queue:
+      num_consumers: ${OTEL_SENDING_QUEUE}
+      queue_size: ${OTEL_QUEUE_SIZE}
+    retry_on_failure:
+      enabled: ${OTEL_RETRY_ON_FAILURE}
+  prometheusremotewrite:
+    endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/otel?clusterUid=${OBSERVE_CLUSTER}"
+    headers:
+      authorization: "Bearer ${OBSERVE_CUSTOMER} ${OBSERVE_TOKEN}"
+extensions:
+  health_check: {}
+  zpages: {}
+processors:
+  batch:
+  memory_limiter:
+    # 80% of maximum memory up to 2G
+    limit_mib: ${OTEL_MEMORY_LIMITER_LIMIT_MIB}
+    # 25% of limit up to 2G
+    spike_limit_mib: ${OTEL_MEMORY_LIMITER_SPIKE_LIMIT_MIB}
+    check_interval: "${OTEL_MEMORY_LIMITER_CHECK_INTERVAL}"
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+service:
+  telemetry:
+    logs:
+      level: "${OTEL_LOG_LEVEL}"
+  extensions: [health_check, zpages]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlphttp]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [prometheusremotewrite]

@@ -1,0 +1,71 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traces
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: traces
+  template:
+    metadata:
+      labels:
+        name: traces
+    spec:
+      containers:
+        - name: otel-collector
+          image: otel/opentelemetry-collector-contrib
+          command:
+            - "/otelcol-contrib"
+            - "--config=/etc/config/config.yaml"
+            - "--config=/etc/config/extra.yaml"
+            # for internal prometheus metrics
+            - "--set=service.telemetry.metrics.address=:58888"
+          ports:
+            - containerPort: 55679    # ZPages endpoint.
+            - containerPort: 4317     # Default OpenTelemetry receiver port.
+            - containerPort: 4318     # Default OpenTelemetry HTTP receiver port.
+            - containerPort: 55680    # Default Legacy OpenTelemetry receiver port.
+            - containerPort: 58888    # Internal Prometheus Metrics.
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 13133     # Health Check extension default port.
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 13133     # Health Check extension default port.
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: OBSERVE_CLUSTER
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-info
+                  key: id
+          envFrom:
+            - configMapRef:
+                name: otel-collector-env
+            - secretRef:
+                name: credentials
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            capabilities:
+              drop:
+                - all
+          volumeMounts:
+            - mountPath: /etc/config
+              name: otel-collector
+      volumes:
+        - name: otel-collector
+          configMap:
+            name: otel-collector

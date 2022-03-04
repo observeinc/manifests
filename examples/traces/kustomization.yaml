@@ -1,0 +1,11 @@
+---
+namespace: observe
+
+bases:
+  - ../../bases/traces/m
+
+configMapGenerator:
+  - name: otel-collector
+    behavior: merge
+    files:
+      - extra.yaml
