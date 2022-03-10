@@ -17,6 +17,7 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/path: "/api/v1/metrics/prometheus"
     spec:
+      serviceAccountName: logs
       tolerations:
         - operator: Exists
       affinity:
