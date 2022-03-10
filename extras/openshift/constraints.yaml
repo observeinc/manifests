@@ -1,0 +1,58 @@
+---
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: observe-logs
+# Allows fluent-bit to read/write to host's /var/log.
+allowPrivilegedContainer: true
+allowHostNetwork: false
+# Allows fluent-bit to mount host's /var/log using hostPath.
+allowHostDirVolumePlugin: true
+allowHostPorts: false
+allowHostPID: false
+allowHostIPC: false
+readOnlyRootFilesystem: false
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: MustRunAs
+users:
+  - system:serviceaccount:observe:observe-logs
+---
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: observe-events
+allowPrivilegedContainer: false
+allowHostNetwork: false
+allowHostDirVolumePlugin: false
+allowHostPorts: false
+allowHostPID: false
+allowHostIPC: false
+readOnlyRootFilesystem: false
+runAsUser:
+  type: MustRunAs
+  uid: 65534
+seLinuxContext:
+  type: MustRunAs
+users:
+  - system:serviceaccount:observe:observe-events
+---
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: observe-metrics
+allowPrivilegedContainer: false
+allowHostNetwork: false
+allowHostDirVolumePlugin: false
+allowHostPorts: false
+allowHostPID: false
+allowHostIPC: false
+readOnlyRootFilesystem: false
+runAsUser:
+  type: MustRunAs
+  uid: 65534
+seLinuxContext:
+  type: MustRunAs
+users:
+  - system:serviceaccount:observe:observe-metrics
