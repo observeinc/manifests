@@ -9,6 +9,8 @@ spec:
       name: logs
   updateStrategy:
     type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: "20%"
   template:
     metadata:
       labels:
