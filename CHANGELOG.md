@@ -1,3 +1,15 @@
+## [0.6.1](https://github.com/observeinc/manifests/compare/v0.6.0...v0.6.1) (2022-03-10)
+
+
+### Bug Fixes
+
+* add service account for observe-logs ([#14](https://github.com/observeinc/manifests/issues/14)) ([7714ad8](https://github.com/observeinc/manifests/commit/7714ad84d2b9331e665adfe3d9dc9d716e07f698))
+* adjust max unavailable in daemonsets ([#11](https://github.com/observeinc/manifests/issues/11)) ([9f9eac9](https://github.com/observeinc/manifests/commit/9f9eac99cbe2cd3c7e8b47df8d63faeb43cf23c1))
+* **logs:** adjust buffer limit ([#12](https://github.com/observeinc/manifests/issues/12)) ([9f9b18d](https://github.com/observeinc/manifests/commit/9f9b18d2d0a630347c64917afa6404d26d3318e5))
+* tighten security context ([#13](https://github.com/observeinc/manifests/issues/13)) ([749aff3](https://github.com/observeinc/manifests/commit/749aff3afa4f1022a1508f7a73c2007ad656640a))
+
+
+
 # [0.6.0](https://github.com/observeinc/manifests/compare/v0.5.1...v0.6.0) (2022-03-08)
 
 
@@ -42,24 +54,6 @@
 ### Bug Fixes
 
 * adjust limits for `m` ([164945c](https://github.com/observeinc/manifests/commit/164945c8bb10f347962f4e366285bca3ef9382bb))
-
-
-
-# [0.4.0](https://github.com/observeinc/manifests/compare/v0.3.0...v0.4.0) (2022-02-14)
-
-
-### Bug Fixes
-
-* bump kube-state-events to 0.6.2 ([67dc874](https://github.com/observeinc/manifests/commit/67dc874532dc337ace4a18952959246b10f151a6))
-* revise `m` sizing ([9c0a683](https://github.com/observeinc/manifests/commit/9c0a68386b1bf47092d63403a84cf47e9f7527d2))
-
-
-### Features
-
-* add `l` stack ([fda45b5](https://github.com/observeinc/manifests/commit/fda45b5406cc982f8fabb5b8995c1a15ffc0c943))
-* bump fluentbit to v1.8.12 ([cd05628](https://github.com/observeinc/manifests/commit/cd05628edfd7558b2c51f99a5072795b2c5b09bf))
-* bump grafana-agent to v0.22.0 ([f2f6638](https://github.com/observeinc/manifests/commit/f2f6638475c250598f9eea0deee76299803e19ff))
-* update limits ([422bb71](https://github.com/observeinc/manifests/commit/422bb71e218d99b3d8b8c7bda56c9ecb517094b2))
 
 
 
