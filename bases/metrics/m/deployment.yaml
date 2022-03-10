@@ -55,6 +55,12 @@ spec:
           volumeMounts:
             - mountPath: /etc/agent
               name: grafana-agent
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            capabilities:
+              drop:
+                - all
       serviceAccountName: metrics
       volumes:
         - name: grafana-agent

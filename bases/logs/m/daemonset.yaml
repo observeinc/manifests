@@ -81,6 +81,14 @@ spec:
             - name: varlibdockercontainers
               mountPath: /var/lib/docker/containers
               readOnly: true
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - CAP_FOWNER
       volumes:
         - name: config
           configMap:
