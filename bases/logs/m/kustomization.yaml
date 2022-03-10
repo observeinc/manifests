@@ -1,6 +1,7 @@
 ---
 resources:
   - daemonset.yaml
+  - serviceaccount.yaml
 
 namePrefix: observe-
 
