@@ -7,3 +7,9 @@ commonLabels:
 
 patchesStrategicMerge:
   - patch.yaml
+
+configMapGenerator:
+  - name: fluent-bit-env
+    behavior: merge
+    literals:
+      - FB_MEM_BUF_LIMIT=5MB
