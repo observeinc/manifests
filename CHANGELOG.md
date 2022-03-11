@@ -1,3 +1,19 @@
+# [0.7.0](https://github.com/observeinc/manifests/compare/v0.6.1...v0.7.0) (2022-03-11)
+
+
+### Bug Fixes
+
+* add audit log back in ([fec0471](https://github.com/observeinc/manifests/commit/fec047195d6f0fd3cbdfa7fcf819f37c6104405f))
+* add component label for openshift ([9c39616](https://github.com/observeinc/manifests/commit/9c3961602e472fc5b2d52a491e2d8bc284ea7d22))
+* default node logs off ([#16](https://github.com/observeinc/manifests/issues/16)) ([6e7fe60](https://github.com/observeinc/manifests/commit/6e7fe60dad112cc701544dfc554728e315aabbac))
+
+
+### Features
+
+* add support for openshift ([#15](https://github.com/observeinc/manifests/issues/15)) ([a4246e2](https://github.com/observeinc/manifests/commit/a4246e258844a3316b528ee6e0922903d4432046))
+
+
+
 ## [0.6.1](https://github.com/observeinc/manifests/compare/v0.6.0...v0.6.1) (2022-03-10)
 
 
@@ -45,15 +61,6 @@
 
 * bump grafana-agent to 0.23.0 ([cfad88d](https://github.com/observeinc/manifests/commit/cfad88dd1b902290899fb852f55eddb731b10453))
 * bump kube-state-events to v0.7.0 ([#3](https://github.com/observeinc/manifests/issues/3)) ([53960d3](https://github.com/observeinc/manifests/commit/53960d341ab3baee657b041bea0f74a42ec9194e))
-
-
-
-## [0.4.1](https://github.com/observeinc/manifests/compare/v0.4.0...v0.4.1) (2022-02-14)
-
-
-### Bug Fixes
-
-* adjust limits for `m` ([164945c](https://github.com/observeinc/manifests/commit/164945c8bb10f347962f4e366285bca3ef9382bb))
 
 
 
