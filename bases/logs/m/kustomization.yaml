@@ -28,8 +28,8 @@ configMapGenerator:
       - FB_HC_PERIOD=10
       - FB_LOG_LEVEL=warning
       - FB_MEM_BUF_LIMIT=10MB
-      - FB_NODE_LOG_INCLUDE_PATH=/var/log/*.log,/var/log/syslog
-      - FB_NODE_LOG_EXCLUDE_PATH=*
+      - FB_NODE_LOG_INCLUDE_PATH=/var/log/kube-apiserver-audit.log
+      - FB_NODE_LOG_EXCLUDE_PATH=nomatch
       - FB_READ_FROM_HEAD=True
       - FB_REFRESH_INTERVAL=2
       - FB_RETRY_LIMIT=5
