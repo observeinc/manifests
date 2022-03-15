@@ -1,6 +1,0 @@
----
-commonLabels:
-  observeinc.com/component: 'openshift'
-
-resources:
-  - constraints.yaml

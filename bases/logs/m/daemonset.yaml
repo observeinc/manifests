@@ -85,8 +85,7 @@ spec:
               mountPath: /var/lib/docker/containers
               readOnly: true
           securityContext:
-            allowPrivilegeEscalation: false
-            privileged: false
+            privileged: true
             capabilities:
               drop:
                 - ALL
