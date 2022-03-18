@@ -1,3 +1,12 @@
+## [0.7.1](https://github.com/observeinc/manifests/compare/v0.7.0...v0.7.1) (2022-03-18)
+
+
+### Bug Fixes
+
+* rollback fluent-bit to v1.8.12 ([#17](https://github.com/observeinc/manifests/issues/17)) ([c55b1ed](https://github.com/observeinc/manifests/commit/c55b1ed62a78a9b6c139a3259ab954b5db7c8756))
+
+
+
 # [0.7.0](https://github.com/observeinc/manifests/compare/v0.6.1...v0.7.0) (2022-03-11)
 
 
@@ -51,16 +60,6 @@
 ### Bug Fixes
 
 * pin grafana-agent ([#4](https://github.com/observeinc/manifests/issues/4)) ([6c10d9e](https://github.com/observeinc/manifests/commit/6c10d9eb628fcaf731152e8fe4beb0e550eefa5e))
-
-
-
-# [0.5.0](https://github.com/observeinc/manifests/compare/v0.4.1...v0.5.0) (2022-02-22)
-
-
-### Features
-
-* bump grafana-agent to 0.23.0 ([cfad88d](https://github.com/observeinc/manifests/commit/cfad88dd1b902290899fb852f55eddb731b10453))
-* bump kube-state-events to v0.7.0 ([#3](https://github.com/observeinc/manifests/issues/3)) ([53960d3](https://github.com/observeinc/manifests/commit/53960d341ab3baee657b041bea0f74a42ec9194e))
 
 
 
