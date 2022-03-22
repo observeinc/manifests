@@ -1,0 +1,774 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    observeinc.com/component: stack
+  name: observe
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    observeinc.com/component: events
+  name: observe-events
+  namespace: observe
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    observeinc.com/component: logs
+  name: observe-logs
+  namespace: observe
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    observeinc.com/component: metrics
+  name: observe-metrics
+  namespace: observe
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    observeinc.com/component: events
+  name: observe-events
+  namespace: observe
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    observeinc.com/component: events
+  name: observe-events
+rules:
+- apiGroups:
+  - ""
+  - apps
+  - autoscaling
+  - batch
+  - networking.k8s.io
+  resources:
+  - '*'
+  verbs:
+  - list
+  - get
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    observeinc.com/component: metrics
+  name: observe-metrics
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - nodes/proxy
+  - services
+  - endpoints
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+- nonResourceURLs:
+  - /metrics
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    observeinc.com/component: events
+  name: observe-events
+  namespace: observe
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: observe-events
+subjects:
+- kind: ServiceAccount
+  name: observe-events
+  namespace: observe
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    observeinc.com/component: events
+  name: observe-events
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: observe-events
+subjects:
+- kind: ServiceAccount
+  name: observe-events
+  namespace: observe
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    observeinc.com/component: metrics
+  name: observe-metrics
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: observe-metrics
+subjects:
+- kind: ServiceAccount
+  name: observe-metrics
+  namespace: observe
+---
+apiVersion: v1
+data:
+  fluent-bit-extra.conf: ""
+  fluent-bit.conf: |
+    [SERVICE]
+        Flush                  ${FB_FLUSH}
+        Grace                  ${FB_GRACE}
+        Daemon                 Off
+        Log_Level              ${FB_LOG_LEVEL}
+        Parsers_File           parsers.conf
+        HTTP_Server            On
+        HTTP_Listen            0.0.0.0
+        HTTP_PORT              2020
+        Health_Check           On
+        HC_Errors_Count        ${FB_HC_ERRORS_COUNT}
+        HC_Retry_Failure_Count ${FB_HC_RETRY_FAILURE_COUNT}
+        HC_Period              ${FB_HC_PERIOD}
+
+    [INPUT]
+        Name                tail
+        Tag                 k8slogs
+        Alias               k8slogs
+        Path                /var/log/containers/*.log
+        Path_Key            filename
+        DB                  /var/log/flb_kube_${NAMESPACE}.db
+        Skip_Long_Lines     On
+        Read_From_Head      ${FB_READ_FROM_HEAD}
+        Mem_Buf_Limit       ${FB_MEM_BUF_LIMIT}
+        Buffer_Chunk_Size   ${FB_BUFFER_CHUNK_SIZE}
+        Buffer_Max_Size     ${FB_BUFFER_MAX_SIZE}
+        Rotate_Wait         ${FB_ROTATE_WAIT}
+        Refresh_Interval    ${FB_REFRESH_INTERVAL}
+
+    [INPUT]
+        Name                tail
+        Tag                 k8snode
+        Alias               k8snode
+        Path                ${FB_NODE_LOG_INCLUDE_PATH}
+        Exclude_Path        ${FB_NODE_LOG_EXCLUDE_PATH}
+        Path_Key            filename
+        DB                  /var/log/flb_node_${NAMESPACE}.db
+        Skip_Long_Lines     On
+        Read_From_Head      ${FB_READ_FROM_HEAD}
+        Mem_Buf_Limit       ${FB_MEM_BUF_LIMIT}
+        Buffer_Chunk_Size   ${FB_BUFFER_CHUNK_SIZE}
+        Buffer_Max_Size     ${FB_BUFFER_MAX_SIZE}
+        Rotate_Wait         ${FB_ROTATE_WAIT}
+
+    [FILTER]
+        Name                record_modifier
+        Alias               add_nodename
+        Match               *
+        Record              nodeName ${NODE}
+
+    [FILTER]
+        Name                parser
+        Alias               parse_filename
+        Match               k8slogs
+        Key_Name            filename
+        Reserve_Data        True
+        Parser              kube-custom
+
+    [FILTER]
+        Name                record_modifier
+        Alias               filter_docker
+        Match               k8slogs
+        Whitelist_key       containerId
+        Whitelist_key       containerName
+        Whitelist_key       log
+        Whitelist_key       podName
+        Whitelist_key       namespace
+        Whitelist_key       nodeName
+
+    @INCLUDE fluent-bit-extra.conf
+
+    [OUTPUT]
+        Name                http
+        Match               k8slogs
+        Alias               k8slogs
+        Host                ${OBSERVE_COLLECTOR_HOST}
+        Port                ${OBSERVE_COLLECTOR_PORT}
+        TLS                 ${OBSERVE_COLLECTOR_TLS}
+        URI                 /v1/http/kubernetes/logs?clusterUid=${OBSERVE_CLUSTER}
+        Format              msgpack
+        Header              X-Observe-Decoder fluent
+        HTTP_User           ${OBSERVE_CUSTOMER}
+        HTTP_Passwd         ${OBSERVE_TOKEN}
+        Compress            gzip
+        Retry_Limit         ${FB_RETRY_LIMIT}
+
+    [OUTPUT]
+        Name                http
+        Match               k8snode
+        Alias               k8snode
+        Host                ${OBSERVE_COLLECTOR_HOST}
+        Port                ${OBSERVE_COLLECTOR_PORT}
+        TLS                 ${OBSERVE_COLLECTOR_TLS}
+        URI                 /v1/http/kubernetes/node?clusterUid=${OBSERVE_CLUSTER}
+        Format              msgpack
+        Header              X-Observe-Decoder fluent
+        HTTP_User           ${OBSERVE_CUSTOMER}
+        HTTP_Passwd         ${OBSERVE_TOKEN}
+        Compress            gzip
+        Retry_Limit         ${FB_RETRY_LIMIT}
+  parsers.conf: |
+    [PARSER]
+        Name        kube-custom
+        Format      regex
+        Regex       (?<podName>[a-z0-9](?:[-a-z0-9]*[a-z0-9])?(?:\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*)_(?<namespace>[^_]+)_(?<containerName>.+)-(?<containerId>[a-f0-9]{64})\.log$
+kind: ConfigMap
+metadata:
+  labels:
+    observeinc.com/component: logs
+  name: observe-fluent-bit-config-2578t4974b
+  namespace: observe
+---
+apiVersion: v1
+data:
+  FB_BUFFER_CHUNK_SIZE: 32k
+  FB_BUFFER_MAX_SIZE: 256k
+  FB_DOCKER_MODE: "On"
+  FB_DOCKER_MODE_FLUSH: "4"
+  FB_FLUSH: "2"
+  FB_GRACE: "10"
+  FB_HC_ERRORS_COUNT: "5"
+  FB_HC_PERIOD: "10"
+  FB_HC_RETRY_FAILURE_COUNT: "5"
+  FB_LOG_LEVEL: warning
+  FB_MEM_BUF_LIMIT: 10MB
+  FB_NODE_LOG_EXCLUDE_PATH: nomatch
+  FB_NODE_LOG_INCLUDE_PATH: /var/log/kube-apiserver-audit.log
+  FB_READ_FROM_HEAD: "True"
+  FB_REFRESH_INTERVAL: "2"
+  FB_RETRY_LIMIT: "5"
+  FB_ROTATE_WAIT: "5"
+  OBSERVE_COLLECTOR_HOST: collect.observeinc.com
+  OBSERVE_COLLECTOR_PORT: "443"
+  OBSERVE_COLLECTOR_TLS: "on"
+kind: ConfigMap
+metadata:
+  labels:
+    observeinc.com/component: logs
+  name: observe-fluent-bit-env-6625kb2dkc
+  namespace: observe
+---
+apiVersion: v1
+data:
+  OBSERVE_COLLECTOR_HOST: collect.observeinc.com
+  OBSERVE_COLLECTOR_INSECURE: "off"
+  OBSERVE_COLLECTOR_PORT: "443"
+  OBSERVE_COLLECTOR_SCHEME: https
+  PROM_BATCH_SEND_DEADLINE: 5s
+  PROM_CAPACITY: "15000"
+  PROM_LOG_LEVEL: info
+  PROM_MAX_BACKOFF: 30s
+  PROM_MAX_SAMPLES_PER_SEND: "5000"
+  PROM_MAX_SHARDS: "10"
+  PROM_MAX_WAL_TIME: 30m
+  PROM_MIN_BACKOFF: 1s
+  PROM_MIN_WAL_TIME: 15s
+  PROM_REMOTE_FLUSH_DEADLINE: 1m
+  PROM_REMOTE_TIMEOUT: 30s
+  PROM_SCRAPE_INTERVAL: 15s
+  PROM_SCRAPE_TIMEOUT: 10s
+  PROM_WAL_TRUNCATE_FREQUENCY: 30m
+kind: ConfigMap
+metadata:
+  labels:
+    observeinc.com/component: metrics
+  name: observe-grafana-agent-env-45th89fc8f
+  namespace: observe
+---
+apiVersion: v1
+data:
+  agent.yaml: |
+    ---
+    server:
+      http_listen_port: 12345
+      log_level: ${PROM_LOG_LEVEL}
+    metrics:
+      wal_directory: /tmp/grafana-agent-wal
+      global:
+        scrape_interval: ${PROM_SCRAPE_INTERVAL}
+        scrape_timeout: ${PROM_SCRAPE_TIMEOUT}
+        external_labels:
+          clusterUid: ${OBSERVE_CLUSTER}
+      configs:
+        - name: integrations
+          host_filter: ${PROM_HOST_FILTER}
+          min_wal_time: ${PROM_MIN_WAL_TIME}
+          max_wal_time: ${PROM_MAX_WAL_TIME}
+          wal_truncate_frequency: ${PROM_WAL_TRUNCATE_FREQUENCY}
+          remote_flush_deadline: ${PROM_REMOTE_FLUSH_DEADLINE}
+          remote_write:
+            - url: ${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/prometheus
+              basic_auth:
+                username: ${OBSERVE_CUSTOMER}
+                password: ${OBSERVE_TOKEN}
+              remote_timeout: ${PROM_REMOTE_TIMEOUT}
+              queue_config:
+                batch_send_deadline: ${PROM_BATCH_SEND_DEADLINE}
+                min_backoff: ${PROM_MIN_BACKOFF}
+                max_backoff: ${PROM_MAX_BACKOFF}
+                max_shards: ${PROM_MAX_SHARDS}
+                max_samples_per_send: ${PROM_MAX_SAMPLES_PER_SEND}
+                capacity: ${PROM_CAPACITY}
+              tls_config:
+                insecure_skip_verify: ${OBSERVE_COLLECTOR_INSECURE}
+
+          scrape_configs:
+            - job_name: "integrations/kubernetes/pods"
+              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              kubernetes_sd_configs:
+                - role: pod
+              relabel_configs:
+                # Drop any endpoint whose pod port name does not end with metrics, or does not have an explicit prometheus port annotation.
+                - action: 'keep'
+                  source_labels: ['__meta_kubernetes_pod_container_port_name', '__meta_kubernetes_pod_annotation_prometheus_io_port']
+                  regex: '.*(metrics;|;\d+)'
+                # Drop pods without a name label.
+                # - action: 'drop'
+                #   regex: ''
+                #   source_labels: ['__meta_kubernetes_pod_label_name']
+                # Drop pods with phase Succeeded or Failed.
+                - action: 'drop'
+                  regex: 'Succeeded|Failed'
+                  source_labels: ['__meta_kubernetes_pod_phase']
+                # Drop anything annotated with 'prometheus.io.scrape=false'.
+                - action: 'drop'
+                  regex: 'false'
+                  source_labels: ['__meta_kubernetes_pod_annotation_prometheus_io_scrape']
+                # Allow pods to override the scrape scheme with 'prometheus.io.scheme=https'.
+                - action: 'replace'
+                  regex: '(https?)'
+                  replacement: '$1'
+                  source_labels: ['__meta_kubernetes_pod_annotation_prometheus_io_scheme']
+                  target_label: '__scheme__'
+                # Allow service to override the scrape path with 'prometheus.io.path=/other_metrics_path'.
+                - action: 'replace'
+                  regex: '(.+)'
+                  replacement: '$1'
+                  source_labels: ['__meta_kubernetes_pod_annotation_prometheus_io_path']
+                  target_label: '__metrics_path__'
+                # Allow services to override the scrape port with 'prometheus.io.port=1234'.
+                - action: 'replace'
+                  regex: '(.+?)(\:\d+)?;(\d+)'
+                  replacement: '$1:$3'
+                  source_labels: ['__address__', '__meta_kubernetes_pod_annotation_prometheus_io_port']
+                  target_label: '__address__'
+                # Map all K8s labels/annotations starting with
+                # 'prometheus.io/param-' to URL params for Prometheus scraping.
+                - action: 'labelmap'
+                  regex: '__meta_kubernetes_pod_annotation_prometheus_io_param_(.+)'
+                  replacement: '__param_$1'
+                # Map all K8s labels/annotations starting with
+                # 'prometheus.io/label-' to Prometheus labels.
+                - action: 'labelmap'
+                  regex: '__meta_kubernetes_pod_label_prometheus_io_label_(.+)'
+                - action: 'labelmap'
+                  regex: '__meta_kubernetes_pod_annotation_prometheus_io_label_(.+)'
+                # Rename jobs to be <namespace>/<name, from pod name label>.
+                # - action: 'replace'
+                #   separator: '/'
+                #   source_labels: ['__meta_kubernetes_namespace', '__meta_kubernetes_pod_label_name']
+                #   target_label: 'job'
+                #   replacement: '$1'
+                # But also include the namespace, container, pod as separate labels,
+                # for routing alerts and joining with cAdvisor metrics.
+                - action: 'replace'
+                  source_labels: ['__meta_kubernetes_namespace']
+                  target_label: 'namespace'
+                - action: 'replace'
+                  source_labels: ['__meta_kubernetes_pod_name']
+                  # Not 'pod_name', which disappeared in K8s 1.16.
+                  target_label: 'pod'
+                - action: 'replace'
+                  source_labels: ['__meta_kubernetes_pod_container_name']
+                  # Not 'container_name', which disappeared in K8s 1.16.
+                  target_label: 'container'
+                - action: 'replace'
+                  source_labels: ['__meta_kubernetes_pod_node_name']
+                  target_label: 'node'
+              tls_config:
+                ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                insecure_skip_verify: false
+                server_name: kubernetes
+
+            - job_name: "integrations/kubernetes/kubelet"
+              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              kubernetes_sd_configs:
+                - role: node
+              relabel_configs:
+                - replacement: kubernetes.default.svc:443
+                  target_label: __address__
+                - regex: (.+)
+                  replacement: /api/v1/nodes/$1/proxy/metrics
+                  source_labels:
+                    - __meta_kubernetes_node_name
+                  target_label: __metrics_path__
+              scheme: https
+              tls_config:
+                ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                insecure_skip_verify: false
+                server_name: kubernetes
+
+            - job_name: "integrations/kubernetes/resource"
+              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              kubernetes_sd_configs:
+                - role: node
+              relabel_configs:
+                - replacement: kubernetes.default.svc:443
+                  target_label: __address__
+                - regex: (.+)
+                  replacement: /api/v1/nodes/$1/proxy/metrics/resource
+                  source_labels:
+                    - __meta_kubernetes_node_name
+                  target_label: __metrics_path__
+              scheme: https
+              tls_config:
+                ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                insecure_skip_verify: false
+                server_name: kubernetes
+
+            - job_name: "integrations/kubernetes/cadvisor"
+              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              kubernetes_sd_configs:
+                - role: node
+              relabel_configs:
+                - replacement: kubernetes.default.svc:443
+                  target_label: __address__
+                - regex: (.+)
+                  replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
+                  source_labels:
+                    - __meta_kubernetes_node_name
+                  target_label: __metrics_path__
+              metric_relabel_configs:
+                # drop "pod" level aggregates, identified by absence of image
+                - action: drop
+                  regex: container_([a-z_]+);
+                  source_labels:
+                    - __name__
+                    - image
+                # the following metrics are exported with 0 values in default cadvisor installs
+                # see
+                # - https://github.com/kubernetes/kubernetes/issues/60279
+                # - https://github.com/google/cadvisor/issues/1672
+                - action: drop
+                  regex: container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
+                  source_labels:
+                    - __name__
+              scheme: https
+              tls_config:
+                ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                insecure_skip_verify: false
+                server_name: kubernetes
+kind: ConfigMap
+metadata:
+  labels:
+    observeinc.com/component: metrics
+  name: observe-grafana-agent-85cbm86d5b
+  namespace: observe
+---
+apiVersion: v1
+data:
+  OBSERVE_COLLECTOR_HOST: collect.observeinc.com
+  OBSERVE_COLLECTOR_PORT: "443"
+  OBSERVE_COLLECTOR_SCHEME: https
+  V: "2"
+kind: ConfigMap
+metadata:
+  labels:
+    observeinc.com/component: events
+  name: observe-kube-state-events-env-59cc772gm8
+  namespace: observe
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    observeinc.com/component: events
+  name: observe-events
+  namespace: observe
+spec:
+  selector:
+    matchLabels:
+      name: events
+      observeinc.com/component: events
+  template:
+    metadata:
+      labels:
+        name: events
+        observeinc.com/component: events
+    spec:
+      containers:
+      - args:
+        - -healthz-addr=:5171
+        - -metrics-addr=:9090
+        - -o=$(OBSERVE_COLLECTOR_SCHEME)://$(OBSERVE_CUSTOMER):$(OBSERVE_TOKEN)@$(OBSERVE_COLLECTOR_HOST):$(OBSERVE_COLLECTOR_PORT)/v1/http/kubernetes/events?clusterUid=$(OBSERVE_CLUSTER)
+        - v1
+        - apps/v1
+        - autoscaling/v1
+        - batch/v1
+        - networking.k8s.io/v1
+        env:
+        - name: OBSERVE_CLUSTER
+          valueFrom:
+            configMapKeyRef:
+              key: id
+              name: cluster-info
+        envFrom:
+        - configMapRef:
+            name: observe-kube-state-events-env-59cc772gm8
+        - secretRef:
+            name: credentials
+        image: observeinc/kube-state-events:v0.7.1
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /healthz
+            port: 5171
+          timeoutSeconds: 5
+        name: kube-state-events
+        ports:
+        - containerPort: 5171
+        - containerPort: 9090
+          name: http-metrics
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 5171
+        resources:
+          limits:
+            cpu: 50m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+        securityContext:
+          capabilities:
+            drop:
+            - all
+          runAsNonRoot: true
+          runAsUser: 65534
+      initContainers:
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: observeinc/kube-cluster-info:v0.7.1
+        name: kube-cluster-info
+      serviceAccountName: observe-events
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    observeinc.com/component: metrics
+  name: observe-metrics
+  namespace: observe
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: metrics
+      observeinc.com/component: metrics
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: metrics
+        observeinc.com/component: metrics
+    spec:
+      containers:
+      - args:
+        - -config.file=/etc/agent/agent.yaml
+        - -config.expand-env
+        command:
+        - /bin/agent
+        env:
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: OBSERVE_CLUSTER
+          valueFrom:
+            configMapKeyRef:
+              key: id
+              name: cluster-info
+        envFrom:
+        - configMapRef:
+            name: observe-grafana-agent-env-45th89fc8f
+        - secretRef:
+            name: credentials
+        image: grafana/agent:v0.23.0
+        imagePullPolicy: IfNotPresent
+        name: grafana-agent
+        ports:
+        - containerPort: 12345
+          name: http-metrics
+        resources:
+          limits:
+            cpu: 200m
+            memory: 2Gi
+          requests:
+            cpu: 200m
+            memory: 2Gi
+        securityContext:
+          capabilities:
+            drop:
+            - all
+          runAsNonRoot: true
+          runAsUser: 65534
+        volumeMounts:
+        - mountPath: /etc/agent
+          name: grafana-agent
+      serviceAccountName: observe-metrics
+      volumes:
+      - configMap:
+          name: observe-grafana-agent-85cbm86d5b
+        name: grafana-agent
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    observeinc.com/component: logs
+  name: observe-logs
+  namespace: observe
+spec:
+  selector:
+    matchLabels:
+      name: logs
+      observeinc.com/component: logs
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /api/v1/metrics/prometheus
+        prometheus.io/scrape: "true"
+      labels:
+        name: logs
+        observeinc.com/component: logs
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: observeinc.com/unschedulable
+                operator: DoesNotExist
+              - key: eks.amazonaws.com/compute-type
+                operator: NotIn
+                values:
+                - fargate
+      containers:
+      - command:
+        - /fluent-bit/bin/fluent-bit
+        - -c
+        - /fluent-bit/etc/fluent-bit.conf
+        env:
+        - name: NODE
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: OBSERVE_CLUSTER
+          valueFrom:
+            configMapKeyRef:
+              key: id
+              name: cluster-info
+        envFrom:
+        - configMapRef:
+            name: observe-fluent-bit-env-6625kb2dkc
+        - secretRef:
+            name: credentials
+        image: fluent/fluent-bit:1.8.12
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /api/v1/health
+            port: 2020
+          timeoutSeconds: 5
+        name: fluent-bit
+        ports:
+        - containerPort: 2020
+          name: http-metrics
+        readinessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 2020
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            add:
+            - CAP_FOWNER
+            drop:
+            - ALL
+          privileged: false
+        volumeMounts:
+        - mountPath: /fluent-bit/etc
+          name: config
+        - mountPath: /var/log
+          name: varlog
+        - mountPath: /var/lib/docker/containers
+          name: varlibdockercontainers
+          readOnly: true
+      serviceAccountName: observe-logs
+      terminationGracePeriodSeconds: 15
+      tolerations:
+      - operator: Exists
+      volumes:
+      - configMap:
+          name: observe-fluent-bit-config-2578t4974b
+        name: config
+      - hostPath:
+          path: /var/log
+        name: varlog
+      - hostPath:
+          path: /var/lib/docker/containers
+        name: varlibdockercontainers
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 20%
+    type: RollingUpdate
