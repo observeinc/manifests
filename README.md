@@ -12,6 +12,16 @@ Try it out by installing our kustomized stack:
 
 ```
 kubectl apply -k github.com/observeinc/manifests/stack
+```
+
+Alternatively, if you prefer using `kustomize` directly:
+```
+kustomize build github.com/observeinc/manifests/stack | kubectl apply -f -
+```
+
+After you have run either of the commands above, create the secret so that the agent can authenticate with Observe.
+
+```
 kubectl -n observe create secret generic credentials \
         --from-literal=OBSERVE_CUSTOMER=${OBSERVE_CUSTOMER?} \
         --from-literal=OBSERVE_TOKEN=${OBSERVE_TOKEN?}
@@ -76,6 +86,9 @@ configMapGenerator:
 EOF
 
 kubectl apply -k $EXAMPLE_DIR
+
+# Of if you prefer using kustomize directly...
+kustomize build $EXAMPLE_DIR | kubectl apply -f -
 ```
 
 You can version control your kustomized directory while tracking upstream changes through the use of branch tags.
@@ -87,12 +100,18 @@ All Kubernetes resources installed through this repo will have an
 
 ```
 kubectl apply -k github.com/observeinc/manifests/stack --prune -l observeinc.com/component
+
+# Of if you prefer using kustomize directly...
+kustomize build github.com/observeinc/manifests/stack | kubectl apply --prune -l observeinc.com/component -f -
 ```
 
 To delete an existing install, just use `delete -k`:
 
 ```
 kubectl delete -k github.com/observeinc/manifests/stack
+
+# Of if you prefer using kustomize directly...
+kustomize build github.com/observeinc/manifests/stack | kubectl delete -f -
 ```
 
 # Release cycle
