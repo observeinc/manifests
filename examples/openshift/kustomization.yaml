@@ -1,0 +1,10 @@
+---
+bases:
+  - ../../stack/m
+
+resources:
+  - constraints.yaml
+
+patchesStrategicMerge:
+  - patch-logs.yaml
+  - patch-events.yaml
