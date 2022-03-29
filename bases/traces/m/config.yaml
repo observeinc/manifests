@@ -1,7 +1,7 @@
 ---
 exporters:
   otlphttp:
-    endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/otel?clusterUid=${OBSERVE_CLUSTER}"
+    endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/otel"
     headers:
       authorization: "Bearer ${OBSERVE_CUSTOMER} ${OBSERVE_TOKEN}"
     sending_queue:
@@ -10,13 +10,18 @@ exporters:
     retry_on_failure:
       enabled: ${OTEL_RETRY_ON_FAILURE}
   prometheusremotewrite:
-    endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/otel?clusterUid=${OBSERVE_CLUSTER}"
+    endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/otel"
     headers:
       authorization: "Bearer ${OBSERVE_CUSTOMER} ${OBSERVE_TOKEN}"
 extensions:
   health_check: {}
   zpages: {}
 processors:
+  resource:
+    attributes:
+      - key: k8s.cluster.uid
+        value: ${OBSERVE_CLUSTER}
+        action: insert
   batch:
   memory_limiter:
     # 80% of maximum memory up to 2G
@@ -37,9 +42,9 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [memory_limiter, batch]
+      processors: [resource, memory_limiter, batch]
       exporters: [otlphttp]
     metrics:
       receivers: [otlp]
-      processors: [memory_limiter, batch]
+      processors: [resource, memory_limiter, batch]
       exporters: [prometheusremotewrite]
