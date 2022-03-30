@@ -2,8 +2,11 @@
 namePrefix: observe-
 
 resources:
+  - clusterrole.yaml
+  - clusterrolebinding.yaml
+  - daemonset.yaml
+  - serviceaccount.yaml
   - service.yaml
-  - deployment.yaml
 
 commonLabels:
   observeinc.com/component: 'traces'

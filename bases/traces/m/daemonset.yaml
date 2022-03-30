@@ -1,20 +1,32 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: traces
 spec:
-  minReadySeconds: 10
-  replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       name: traces
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: "20%"
   template:
     metadata:
       labels:
         name: traces
     spec:
+      serviceAccountName: traces
+      tolerations:
+        - operator: Exists
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - {key: observeinc.com/unschedulable, operator: DoesNotExist}
+                  - {key: eks.amazonaws.com/compute-type, operator: NotIn, values: [fargate]}
+      terminationGracePeriodSeconds: 15
       containers:
         - name: otel-collector
           image: otel/opentelemetry-collector-contrib
@@ -28,7 +40,6 @@ spec:
             - containerPort: 55679    # ZPages endpoint.
             - containerPort: 4317     # Default OpenTelemetry receiver port.
             - containerPort: 4318     # Default OpenTelemetry HTTP receiver port.
-            - containerPort: 55680    # Default Legacy OpenTelemetry receiver port.
             - containerPort: 58888    # Internal Prometheus Metrics.
           livenessProbe:
             httpGet:
@@ -40,11 +51,11 @@ spec:
               port: 13133     # Health Check extension default port.
           resources:
             limits:
-              cpu: 500m
-              memory: 500Mi
+              cpu: 250m
+              memory: 256Mi
             requests:
-              cpu: 100m
-              memory: 100Mi
+              cpu: 250m
+              memory: 256Mi
           env:
             - name: OBSERVE_CLUSTER
               valueFrom:
