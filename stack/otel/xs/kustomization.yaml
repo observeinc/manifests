@@ -1,0 +1,6 @@
+---
+namespace: observe
+
+bases:
+  - ../../xs
+  - ../../../bases/traces/xs

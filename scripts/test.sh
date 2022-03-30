@@ -10,7 +10,7 @@ R="[1;31m"
 B="[1;34m"
 r="[m"
 
-KUSTOMIZE_DIR="${KUSTOMIZE_DIR:=stack}"
+KUSTOMIZE_DIR="${KUSTOMIZE_DIR:=stack/otel}"
 CLUSTER_NAME="${CLUSTER_NAME:=unknown}"
 WAIT_TIMEOUT="${WAIT_TIMEOUT:=60s}"
 

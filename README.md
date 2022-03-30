@@ -62,6 +62,33 @@ Resource limits for each sizing is as follows:
 
 \* run as daemonset
 
+# Traces
+
+Support for trace collection is currently experimental. You can install
+OpenTelemetry support alongside our typical stack by running:
+
+```
+kubectl apply -k github.com/observeinc/manifests/stack/otel
+```
+
+You can also refer to different sizings:
+
+- `github.com/observeinc/manifests/stack/otel/xs`
+- `github.com/observeinc/manifests/stack/otel/m`
+- `github.com/observeinc/manifests/stack/otel/l`
+- `github.com/observeinc/manifests/stack/otel/xl`
+
+OpenTelemetry support is still nascent, so you can expect adjustments to our
+manifests as we tune them based on operational feedback.
+Our current limits are as follows:
+
+|          |      xs      |       m       |       l       |       xl      |
+|---------:|:------------:|:-------------:|:-------------:|:-------------:|
+|  traces* | 50m<br>128Mi | 250m<br>256Mi |   250m<br>256Mi |  250m<br>256Mi |
+
+Once installed, you can forward traces to the local collector over GRPC on 
+`observe-traces.observe.svc.cluster.local:4317`.
+
 # Configuration
 
 You can override any individual configuration element by creating a new
