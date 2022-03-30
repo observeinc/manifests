@@ -57,6 +57,10 @@ spec:
               cpu: 250m
               memory: 256Mi
           env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
             - name: OBSERVE_CLUSTER
               valueFrom:
                 configMapKeyRef:
