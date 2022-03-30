@@ -127,6 +127,8 @@ service:
         - otlphttp
       processors:
         - tail_sampling
+        - resource
+        - k8sattributes
         - memory_limiter
         - batch
       receivers:
