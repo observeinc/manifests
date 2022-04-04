@@ -42,6 +42,7 @@ processors:
     spike_limit_mib: ${OTEL_MEMORY_LIMITER_SPIKE_LIMIT_MIB}
     check_interval: "${OTEL_MEMORY_LIMITER_CHECK_INTERVAL}"
 receivers:
+  zipkin:
   otlp:
     protocols:
       grpc:
@@ -53,7 +54,7 @@ service:
   extensions: [health_check, zpages]
   pipelines:
     traces:
-      receivers: [otlp]
+      receivers: [otlp, zipkin]
       processors: [resource, k8sattributes, memory_limiter, batch]
       exporters: [otlphttp]
     metrics:

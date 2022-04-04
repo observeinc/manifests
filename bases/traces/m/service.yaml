@@ -11,3 +11,6 @@ spec:
     - port: 4318
       targetPort: 4318
       name: otlphttp
+    - port: 9411
+      targetPort: 9411
+      name: zipkin
