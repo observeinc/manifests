@@ -40,6 +40,7 @@ spec:
             - containerPort: 55679    # ZPages endpoint.
             - containerPort: 4317     # Default OpenTelemetry receiver port.
             - containerPort: 4318     # Default OpenTelemetry HTTP receiver port.
+            - containerPort: 9411     # Zipkin
             - containerPort: 58888    # Internal Prometheus Metrics.
               name: metrics
           livenessProbe:
