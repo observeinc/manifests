@@ -36,4 +36,4 @@ configMapGenerator:
 
 images:
   - name: otel/opentelemetry-collector-contrib
-    newTag: '0.47.0'
+    newTag: '0.48.0'
