@@ -1,3 +1,26 @@
+# [0.8.0](https://github.com/observeinc/manifests/compare/v0.7.1...v0.8.0) (2022-04-05)
+
+
+### Bug Fixes
+
+* add logging exporter ([#30](https://github.com/observeinc/manifests/issues/30)) ([04648fa](https://github.com/observeinc/manifests/commit/04648fa3f81f1b9a05f7986101a0685d8209fe1e))
+* bump otel-collector-contrib to 0.48.0 ([#29](https://github.com/observeinc/manifests/issues/29)) ([0c6c3d2](https://github.com/observeinc/manifests/commit/0c6c3d2b32d4d548e099b01ae7622200c81d6540))
+* move extras/openshift to examples/openshift ([#18](https://github.com/observeinc/manifests/issues/18)) ([f06361c](https://github.com/observeinc/manifests/commit/f06361c02f1bdde447a364930757aecd8ded3126))
+* **traces:** add clusterUid as resource attribute ([#22](https://github.com/observeinc/manifests/issues/22)) ([f9e3962](https://github.com/observeinc/manifests/commit/f9e3962369d6bafafafa6355d9d208f6f2388475))
+* **traces:** remove node filter for k8sattributesprocessor ([#31](https://github.com/observeinc/manifests/issues/31)) ([f32d6d3](https://github.com/observeinc/manifests/commit/f32d6d3027fd0abe89d7ffdc0422b91838d3734e))
+* update metrics limits to match docs. ([#27](https://github.com/observeinc/manifests/issues/27)) ([4e15b3e](https://github.com/observeinc/manifests/commit/4e15b3e107ec1b590b7471d17b2369f78c780234))
+
+
+### Features
+
+* add k8sattribute to otel-collector ([#25](https://github.com/observeinc/manifests/issues/25)) ([75e5086](https://github.com/observeinc/manifests/commit/75e508612b76cbda0dec8adb92afaab580608a12))
+* add zipkin handling to otel-collector ([#28](https://github.com/observeinc/manifests/issues/28)) ([deee5bb](https://github.com/observeinc/manifests/commit/deee5bbdeae9d14fcd77f58cba1b72d878d47e73))
+* migrate traces to use daemonset ([#24](https://github.com/observeinc/manifests/issues/24)) ([8d0514b](https://github.com/observeinc/manifests/commit/8d0514b3e9bae8aec68ca8b1035bf330219c87eb))
+* scrape otel-collector metrics ([#26](https://github.com/observeinc/manifests/issues/26)) ([8ef4dc5](https://github.com/observeinc/manifests/commit/8ef4dc5c7400a366509000e135657e53b746467d))
+* **traces:** bump otel-collector-contrib to 0.47.0 ([#23](https://github.com/observeinc/manifests/issues/23)) ([7b44396](https://github.com/observeinc/manifests/commit/7b443961ab3b647aa4e26c3d0bead094d4f14cf0))
+
+
+
 ## [0.7.1](https://github.com/observeinc/manifests/compare/v0.7.0...v0.7.1) (2022-03-18)
 
 
@@ -51,15 +74,6 @@
 * add traces base ([#9](https://github.com/observeinc/manifests/issues/9)) ([e381712](https://github.com/observeinc/manifests/commit/e381712d20a9606262818a17e8a9268511370281))
 * allow submitting to http ([#6](https://github.com/observeinc/manifests/issues/6)) ([872c849](https://github.com/observeinc/manifests/commit/872c849ef799cf3102f9d6758f50a0af94edd8ca))
 * bump fluent-bit to 1.8.13 ([#10](https://github.com/observeinc/manifests/issues/10)) ([22675b4](https://github.com/observeinc/manifests/commit/22675b44de45ed879c225993dd6d2715d62e22f3))
-
-
-
-## [0.5.1](https://github.com/observeinc/manifests/compare/v0.5.0...v0.5.1) (2022-02-22)
-
-
-### Bug Fixes
-
-* pin grafana-agent ([#4](https://github.com/observeinc/manifests/issues/4)) ([6c10d9e](https://github.com/observeinc/manifests/commit/6c10d9eb628fcaf731152e8fe4beb0e550eefa5e))
 
 
 
