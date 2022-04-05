@@ -26,8 +26,6 @@ processors:
         action: insert
   k8sattributes:
     passthrough: false
-    filter:
-      node_from_env_var: NODE_NAME
     extract:
       metadata:
         - k8s.pod.name
