@@ -1,5 +1,7 @@
 ---
 exporters:
+  logging:
+    loglevel: "${OTEL_LOG_LEVEL}"
   otlphttp:
     endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/otel"
     headers:
@@ -56,8 +58,8 @@ service:
     traces:
       receivers: [otlp, zipkin]
       processors: [resource, k8sattributes, memory_limiter, batch]
-      exporters: [otlphttp]
+      exporters: [otlphttp, logging]
     metrics:
       receivers: [otlp]
       processors: [resource, k8sattributes, memory_limiter, batch]
-      exporters: [prometheusremotewrite]
+      exporters: [prometheusremotewrite, logging]
