@@ -2,8 +2,8 @@
 namespace: observe
 
 bases:
-  - ../../bases/events/m
-  - ../../bases/logs/m
+  - ../../bases/events/xl
+  - ../../bases/logs/xl
   - ../../bases/metrics/xl
 
 resources:
