@@ -1,0 +1,5 @@
+bases:
+  - github.com/observeinc/manifests/stack/xl?ref=main
+
+patchesStrategicMerge:
+  - patch-grafana-agent.yaml
