@@ -39,7 +39,7 @@ do_apply() {
     DEBUG "$(kubectl cluster-info)"
 
     INFO "Applying kustomized directory"
-    RESULT=$(kubectl apply -k ${KUSTOMIZE_DIR})
+    RESULT=$(kubectl kustomize ${KUSTOMIZE_DIR} | grep -v "cpu:" | grep -v "memory:" | kubectl apply -f -)
     DEBUG "$RESULT"
 
     INFO "Annotating namespace"
