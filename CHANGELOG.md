@@ -1,3 +1,20 @@
+# [0.9.0](https://github.com/observeinc/manifests/compare/v0.8.1...v0.9.0) (2022-04-19)
+
+
+### Bug Fixes
+
+* add example for tweaking limits ([b989360](https://github.com/observeinc/manifests/commit/b9893604626d803932bb89218af555000dfed0ab))
+* adjust xl limits ([#33](https://github.com/observeinc/manifests/issues/33)) ([e8cfa26](https://github.com/observeinc/manifests/commit/e8cfa263c74dd8b30512c59df1da022fa07c063e))
+
+
+### Features
+
+* bump grafana-agent to v0.24.1 ([#34](https://github.com/observeinc/manifests/issues/34)) ([ce3f553](https://github.com/observeinc/manifests/commit/ce3f5530c679fc9e8ee4ae306b4baf770768b4ea))
+* bump kube-state-events to 0.8.0 ([#35](https://github.com/observeinc/manifests/issues/35)) ([a7da03a](https://github.com/observeinc/manifests/commit/a7da03abdfe73e2e1929dd5e423a257b609e5c2c))
+* **metrics:** allow signalling pod should not be scraped ([#36](https://github.com/observeinc/manifests/issues/36)) ([1bbd432](https://github.com/observeinc/manifests/commit/1bbd432a551b2f42cc4cb58fe84c9a1edbe95f63))
+
+
+
 ## [0.8.1](https://github.com/observeinc/manifests/compare/v0.8.0...v0.8.1) (2022-04-06)
 
 
@@ -52,18 +69,6 @@
 ### Features
 
 * add support for openshift ([#15](https://github.com/observeinc/manifests/issues/15)) ([a4246e2](https://github.com/observeinc/manifests/commit/a4246e258844a3316b528ee6e0922903d4432046))
-
-
-
-## [0.6.1](https://github.com/observeinc/manifests/compare/v0.6.0...v0.6.1) (2022-03-10)
-
-
-### Bug Fixes
-
-* add service account for observe-logs ([#14](https://github.com/observeinc/manifests/issues/14)) ([7714ad8](https://github.com/observeinc/manifests/commit/7714ad84d2b9331e665adfe3d9dc9d716e07f698))
-* adjust max unavailable in daemonsets ([#11](https://github.com/observeinc/manifests/issues/11)) ([9f9eac9](https://github.com/observeinc/manifests/commit/9f9eac99cbe2cd3c7e8b47df8d63faeb43cf23c1))
-* **logs:** adjust buffer limit ([#12](https://github.com/observeinc/manifests/issues/12)) ([9f9b18d](https://github.com/observeinc/manifests/commit/9f9b18d2d0a630347c64917afa6404d26d3318e5))
-* tighten security context ([#13](https://github.com/observeinc/manifests/issues/13)) ([749aff3](https://github.com/observeinc/manifests/commit/749aff3afa4f1022a1508f7a73c2007ad656640a))
 
 
 
