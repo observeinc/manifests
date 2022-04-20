@@ -38,6 +38,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: grafana-agent-env
+            - configMapRef:
+                name: grafana-agent-env-overrides
+                optional: true
+            - configMapRef:
+                name: env-overrides
+                optional: true
             - secretRef:
                 name: credentials
           env:
