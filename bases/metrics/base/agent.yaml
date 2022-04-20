@@ -155,6 +155,7 @@ metrics:
           kubernetes_sd_configs:
             - role: node
           relabel_configs:
+            - action: ${PROM_SCRAPE_CADVISOR_ACTION}
             - replacement: kubernetes.default.svc:443
               target_label: __address__
             - regex: (.+)
@@ -169,12 +170,12 @@ metrics:
               source_labels:
                 - __name__
                 - image
-            # the following metrics are exported with 0 values in default cadvisor installs
-            # see
-            # - https://github.com/kubernetes/kubernetes/issues/60279
-            # - https://github.com/google/cadvisor/issues/1672
             - action: drop
-              regex: container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
+              regex: ${PROM_SCRAPE_CADVISOR_METRIC_DROP_REGEX}
+              source_labels:
+                - __name__
+            - action: keep
+              regex: ${PROM_SCRAPE_CADVISOR_METRIC_KEEP_REGEX}
               source_labels:
                 - __name__
           scheme: https
