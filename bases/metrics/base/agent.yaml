@@ -38,7 +38,14 @@ metrics:
           kubernetes_sd_configs:
             - role: pod
           relabel_configs:
+            - action: ${PROM_SCRAPE_POD_ACTION}
             # Drop any endpoint whose pod port name does not end with metrics, or does not have an explicit prometheus port annotation.
+            - action: 'drop'
+              source_labels: ['__meta_kubernetes_namespace']
+              regex: ${PROM_SCRAPE_POD_NAMESPACE_DROP_REGEX}
+            - action: 'keep'
+              source_labels: ['__meta_kubernetes_namespace']
+              regex: ${PROM_SCRAPE_POD_NAMESPACE_KEEP_REGEX}
             - action: 'keep'
               source_labels: ['__meta_kubernetes_pod_container_port_name', '__meta_kubernetes_pod_annotation_prometheus_io_port']
               regex: '.*(metrics;|;\d+)'
@@ -109,6 +116,15 @@ metrics:
             - action: 'replace'
               source_labels: ['__meta_kubernetes_pod_node_name']
               target_label: 'node'
+          metric_relabel_configs:
+            - action: drop
+              regex: ${PROM_SCRAPE_POD_METRIC_DROP_REGEX}
+              source_labels:
+                - __name__
+            - action: keep
+              regex: ${PROM_SCRAPE_POD_METRIC_KEEP_REGEX}
+              source_labels:
+                - __name__
           tls_config:
             ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
             insecure_skip_verify: false
@@ -119,6 +135,7 @@ metrics:
           kubernetes_sd_configs:
             - role: node
           relabel_configs:
+            - action: ${PROM_SCRAPE_KUBELET_ACTION}
             - replacement: kubernetes.default.svc:443
               target_label: __address__
             - regex: (.+)
@@ -126,6 +143,15 @@ metrics:
               source_labels:
                 - __meta_kubernetes_node_name
               target_label: __metrics_path__
+          metric_relabel_configs:
+            - action: drop
+              regex: ${PROM_SCRAPE_KUBELET_METRIC_DROP_REGEX}
+              source_labels:
+                - __name__
+            - action: keep
+              regex: ${PROM_SCRAPE_KUBELET_METRIC_KEEP_REGEX}
+              source_labels:
+                - __name__
           scheme: https
           tls_config:
             ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
@@ -137,6 +163,7 @@ metrics:
           kubernetes_sd_configs:
             - role: node
           relabel_configs:
+            - action: ${PROM_SCRAPE_RESOURCE_ACTION}
             - replacement: kubernetes.default.svc:443
               target_label: __address__
             - regex: (.+)
@@ -144,6 +171,15 @@ metrics:
               source_labels:
                 - __meta_kubernetes_node_name
               target_label: __metrics_path__
+          metric_relabel_configs:
+            - action: drop
+              regex: ${PROM_SCRAPE_RESOURCE_METRIC_DROP_REGEX}
+              source_labels:
+                - __name__
+            - action: keep
+              regex: ${PROM_SCRAPE_RESOURCE_METRIC_KEEP_REGEX}
+              source_labels:
+                - __name__
           scheme: https
           tls_config:
             ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
@@ -155,6 +191,7 @@ metrics:
           kubernetes_sd_configs:
             - role: node
           relabel_configs:
+            - action: ${PROM_SCRAPE_CADVISOR_ACTION}
             - replacement: kubernetes.default.svc:443
               target_label: __address__
             - regex: (.+)
@@ -169,12 +206,12 @@ metrics:
               source_labels:
                 - __name__
                 - image
-            # the following metrics are exported with 0 values in default cadvisor installs
-            # see
-            # - https://github.com/kubernetes/kubernetes/issues/60279
-            # - https://github.com/google/cadvisor/issues/1672
             - action: drop
-              regex: container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
+              regex: ${PROM_SCRAPE_CADVISOR_METRIC_DROP_REGEX}
+              source_labels:
+                - __name__
+            - action: keep
+              regex: ${PROM_SCRAPE_CADVISOR_METRIC_KEEP_REGEX}
               source_labels:
                 - __name__
           scheme: https
