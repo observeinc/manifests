@@ -71,6 +71,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: otel-collector-env
+            - configMapRef:
+                name: otel-collector-env-overrides
+                optional: true
+            - configMapRef:
+                name: env-overrides
+                optional: true
             - secretRef:
                 name: credentials
           securityContext:

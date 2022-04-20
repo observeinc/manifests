@@ -91,6 +91,8 @@ Once installed, you can forward traces to the local collector over GRPC on
 
 # Configuration
 
+## Using kustomize
+
 You can override any individual configuration element by creating a new
 kustomized manifest with our kustomized directory as a base.
 
@@ -111,14 +113,39 @@ configMapGenerator:
     literals:
       - FB_DEBUG=true
 EOF
+```
 
+You can then apply this configuration directly from kubectl:
+
+```
 kubectl apply -k $EXAMPLE_DIR
+```
 
-# Of if you prefer using kustomize directly...
+or, alternatively, you can build using your specific `kustomize` version and apply:
+
+```
 kustomize build $EXAMPLE_DIR | kubectl apply -f -
 ```
 
 You can version control your kustomized directory while tracking upstream changes through the use of branch tags.
+
+## Using an override configMap
+
+Alternatively, you can create a configmap in the `observe` namespace containing
+overrides for each of our pods. Following the previous example:
+
+```
+echo "FB_DEBUG=true" >> example.env
+kubectl create configmap -n observe env-overrides --from-env-file example.env
+```
+
+Unlike the kustomize method, configuration changes are not picked up
+automatically. You must restart pods to pick up the new environment variables:
+
+```
+kubectl rollout restart -n observe daemonset
+kubectl rollout restart -n observe deployment
+```
 
 # Pruning and deletion
 

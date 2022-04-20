@@ -41,6 +41,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: kube-state-events-env
+            - configMapRef:
+                name: kube-state-events-env-overrides
+                optional: true
+            - configMapRef:
+                name: env-overrides
+                optional: true
             - secretRef:
                 name: credentials
           readinessProbe:
