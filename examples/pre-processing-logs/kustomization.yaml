@@ -1,0 +1,15 @@
+bases:
+  - ../../stack/xs
+
+configMapGenerator:
+  - name: fluent-bit-config
+    behavior: merge
+    files:
+      - fluent-bit-extra.conf
+      - scripts/process.lua
+
+  - name: fluent-bit-env
+    behavior: merge
+    literals:
+      # match all,
+      - CONTAINER_FILTER_REGEX=.*
