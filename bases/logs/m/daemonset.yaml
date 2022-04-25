@@ -36,14 +36,14 @@ spec:
           envFrom:
             - configMapRef:
                 name: fluent-bit-env
-            - configMapRef:
-                name: fluent-bit-env-overrides
-                optional: true
+            - secretRef:
+                name: credentials
             - configMapRef:
                 name: env-overrides
                 optional: true
-            - secretRef:
-                name: credentials
+            - configMapRef:
+                name: fluent-bit-env-overrides
+                optional: true
           env:
             - name: NODE
               valueFrom:

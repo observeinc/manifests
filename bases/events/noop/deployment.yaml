@@ -41,14 +41,14 @@ spec:
           envFrom:
             - configMapRef:
                 name: kube-state-events-env
-            - configMapRef:
-                name: kube-state-events-env-overrides
-                optional: true
+            - secretRef:
+                name: credentials
             - configMapRef:
                 name: env-overrides
                 optional: true
-            - secretRef:
-                name: credentials
+            - configMapRef:
+                name: kube-state-events-env-overrides
+                optional: true
           readinessProbe:
             httpGet:
               path: /healthz
