@@ -1,3 +1,19 @@
+# [0.10.0](https://github.com/observeinc/manifests/compare/v0.9.0...v0.10.0) (2022-04-26)
+
+
+### Bug Fixes
+
+* reorder envFrom ([#39](https://github.com/observeinc/manifests/issues/39)) ([f62eabe](https://github.com/observeinc/manifests/commit/f62eabe2e5073ea80a9d702bf40bb974b1271d76))
+
+
+### Features
+
+* allow overriding environment variables with configMap ([#38](https://github.com/observeinc/manifests/issues/38)) ([c06c41e](https://github.com/observeinc/manifests/commit/c06c41e96fe7ec04ec715a6b612aab1e2ea966b7))
+* drop unused cadvisor metrics, make configurable ([#37](https://github.com/observeinc/manifests/issues/37)) ([d40b22c](https://github.com/observeinc/manifests/commit/d40b22cf883549274b69982fe66807f8210c4d13))
+* **logs:** support wildcard matching in output ([#40](https://github.com/observeinc/manifests/issues/40)) ([3bba9c8](https://github.com/observeinc/manifests/commit/3bba9c852b83da616eaa4837979c5d3a8732933e))
+
+
+
 # [0.9.0](https://github.com/observeinc/manifests/compare/v0.8.1...v0.9.0) (2022-04-19)
 
 
@@ -53,22 +69,6 @@
 ### Bug Fixes
 
 * rollback fluent-bit to v1.8.12 ([#17](https://github.com/observeinc/manifests/issues/17)) ([c55b1ed](https://github.com/observeinc/manifests/commit/c55b1ed62a78a9b6c139a3259ab954b5db7c8756))
-
-
-
-# [0.7.0](https://github.com/observeinc/manifests/compare/v0.6.1...v0.7.0) (2022-03-11)
-
-
-### Bug Fixes
-
-* add audit log back in ([fec0471](https://github.com/observeinc/manifests/commit/fec047195d6f0fd3cbdfa7fcf819f37c6104405f))
-* add component label for openshift ([9c39616](https://github.com/observeinc/manifests/commit/9c3961602e472fc5b2d52a491e2d8bc284ea7d22))
-* default node logs off ([#16](https://github.com/observeinc/manifests/issues/16)) ([6e7fe60](https://github.com/observeinc/manifests/commit/6e7fe60dad112cc701544dfc554728e315aabbac))
-
-
-### Features
-
-* add support for openshift ([#15](https://github.com/observeinc/manifests/issues/15)) ([a4246e2](https://github.com/observeinc/manifests/commit/a4246e258844a3316b528ee6e0922903d4432046))
 
 
 
