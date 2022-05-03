@@ -1,3 +1,18 @@
+# [0.11.0](https://github.com/observeinc/manifests/compare/v0.10.0...v0.11.0) (2022-05-03)
+
+
+### Bug Fixes
+
+* **events:** bump kube-state-events to 0.8.1 ([#42](https://github.com/observeinc/manifests/issues/42)) ([1d818a7](https://github.com/observeinc/manifests/commit/1d818a78a18b45684e8f9e2c9c6a5de5c3afd9f0))
+
+
+### Features
+
+* **logs:** bump fluent-bit to 1.9.3 ([a139026](https://github.com/observeinc/manifests/commit/a139026451b457ac12bf86eaa2fe66571ec81b4a))
+* **traces:** bump otel-collector-contrib to 0.50.0 ([#41](https://github.com/observeinc/manifests/issues/41)) ([05924b1](https://github.com/observeinc/manifests/commit/05924b1b357d11afa2a2650b3cd781410e6c8301))
+
+
+
 # [0.10.0](https://github.com/observeinc/manifests/compare/v0.9.0...v0.10.0) (2022-04-26)
 
 
@@ -60,15 +75,6 @@
 * migrate traces to use daemonset ([#24](https://github.com/observeinc/manifests/issues/24)) ([8d0514b](https://github.com/observeinc/manifests/commit/8d0514b3e9bae8aec68ca8b1035bf330219c87eb))
 * scrape otel-collector metrics ([#26](https://github.com/observeinc/manifests/issues/26)) ([8ef4dc5](https://github.com/observeinc/manifests/commit/8ef4dc5c7400a366509000e135657e53b746467d))
 * **traces:** bump otel-collector-contrib to 0.47.0 ([#23](https://github.com/observeinc/manifests/issues/23)) ([7b44396](https://github.com/observeinc/manifests/commit/7b443961ab3b647aa4e26c3d0bead094d4f14cf0))
-
-
-
-## [0.7.1](https://github.com/observeinc/manifests/compare/v0.7.0...v0.7.1) (2022-03-18)
-
-
-### Bug Fixes
-
-* rollback fluent-bit to v1.8.12 ([#17](https://github.com/observeinc/manifests/issues/17)) ([c55b1ed](https://github.com/observeinc/manifests/commit/c55b1ed62a78a9b6c139a3259ab954b5db7c8756))
 
 
 
