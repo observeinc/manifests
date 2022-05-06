@@ -25,6 +25,7 @@ spec:
               - matchExpressions:
                   - {key: observeinc.com/unschedulable, operator: DoesNotExist}
                   - {key: eks.amazonaws.com/compute-type, operator: NotIn, values: [fargate]}
+                  - {key: kubernetes.io/os, operator: NotIn, values: [windows]}
       terminationGracePeriodSeconds: 15
       containers:
         - name: grafana-agent
