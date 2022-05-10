@@ -152,19 +152,23 @@ kubectl rollout restart -n observe deployment
 All Kubernetes resources installed through this repo will have an
 `observeinc.com/component` label. You can therefore use this label for pruning an existing install:
 
-```
+```bash
 kubectl apply -k github.com/observeinc/manifests/stack --prune -l observeinc.com/component
+```
 
-# Of if you prefer using kustomize directly...
+or if you prefer to use kustomize directly,
+```bash
 kustomize build github.com/observeinc/manifests/stack | kubectl apply --prune -l observeinc.com/component -f -
 ```
 
 To delete an existing install, just use `delete -k`:
 
-```
+```bash
 kubectl delete -k github.com/observeinc/manifests/stack
+```
 
-# Of if you prefer using kustomize directly...
+or if you prefer to use kustomize directly,
+```bash
 kustomize build github.com/observeinc/manifests/stack | kubectl delete -f -
 ```
 
