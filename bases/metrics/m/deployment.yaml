@@ -18,6 +18,13 @@ spec:
       labels:
         name: metrics
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - {key: observeinc.com/unschedulable, operator: DoesNotExist}
+                  - {key: kubernetes.io/os, operator: NotIn, values: [windows]}
       containers:
         - name: grafana-agent
           image: grafana/agent:latest
