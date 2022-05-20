@@ -1,0 +1,30 @@
+---
+resources:
+  - daemonset.yaml
+  - serviceaccount.yaml
+
+namePrefix: observe-
+
+commonLabels:
+  observeinc.com/component: 'winlogs'
+
+configMapGenerator:
+  - name: fluentd-config
+    literals:
+      - fluentd-extra.conf=
+    files:
+      - fluentd.conf
+  - name: fluentd-env
+    literals:
+      - FLUENTD_LOG_LEVEL=warn
+      - FLUENTD_NODE_LOG_INCLUDE_PATH=/var/log/kube-apiserver-audit.log
+      - FLUENTD_NODE_LOG_EXCLUDE_PATH=nomatch
+      - FLUENTD_READ_FROM_HEAD=true
+      - FLUENTD_REFRESH_INTERVAL=2
+      - FLUENTD_ROTATE_WAIT=5
+      - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
+      - OBSERVE_COLLECTOR_PORT=443
+      - OBSERVE_COLLECTOR_TLS=peer
+images:
+  - name: fluent/fluentd
+    newTag: 'v1.14.6-windows-ltsc2019-1.0'
