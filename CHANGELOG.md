@@ -1,3 +1,13 @@
+## [0.11.2](https://github.com/observeinc/manifests/compare/v0.11.1...v0.11.2) (2022-05-24)
+
+
+### Bug Fixes
+
+* bump kube-state-events to 0.8.2 ([#46](https://github.com/observeinc/manifests/issues/46)) ([84b1498](https://github.com/observeinc/manifests/commit/84b1498faa63358cade7a827f6401d5a91180d17))
+* **metrics:** bump grafana-agent to 0.24.2 ([#45](https://github.com/observeinc/manifests/issues/45)) ([859249e](https://github.com/observeinc/manifests/commit/859249e63d9431aa51ae1840a6d50ecbdcad894e))
+
+
+
 ## [0.11.1](https://github.com/observeinc/manifests/compare/v0.11.0...v0.11.1) (2022-05-17)
 
 
@@ -53,15 +63,6 @@
 * bump grafana-agent to v0.24.1 ([#34](https://github.com/observeinc/manifests/issues/34)) ([ce3f553](https://github.com/observeinc/manifests/commit/ce3f5530c679fc9e8ee4ae306b4baf770768b4ea))
 * bump kube-state-events to 0.8.0 ([#35](https://github.com/observeinc/manifests/issues/35)) ([a7da03a](https://github.com/observeinc/manifests/commit/a7da03abdfe73e2e1929dd5e423a257b609e5c2c))
 * **metrics:** allow signalling pod should not be scraped ([#36](https://github.com/observeinc/manifests/issues/36)) ([1bbd432](https://github.com/observeinc/manifests/commit/1bbd432a551b2f42cc4cb58fe84c9a1edbe95f63))
-
-
-
-## [0.8.1](https://github.com/observeinc/manifests/compare/v0.8.0...v0.8.1) (2022-04-06)
-
-
-### Bug Fixes
-
-* bump fluent-bit to 1.8.15 ([#32](https://github.com/observeinc/manifests/issues/32)) ([eb022ba](https://github.com/observeinc/manifests/commit/eb022ba334fcca410207331430e7cd077241f515))
 
 
 
