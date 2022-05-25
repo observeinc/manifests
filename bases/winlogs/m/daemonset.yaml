@@ -1,0 +1,113 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: winlogs
+spec:
+  selector:
+    matchLabels:
+      name: winlogs
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: "20%"
+  template:
+    metadata:
+      labels:
+        name: winlogs
+    spec:
+      serviceAccountName: winlogs
+      tolerations:
+        - operator: Exists
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - {key: observeinc.com/unschedulable, operator: DoesNotExist}
+                  - {key: eks.amazonaws.com/compute-type, operator: NotIn, values: [fargate]}
+      nodeSelector:
+        kubernetes.io/os: windows
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: fluentd
+          image: fluent/fluentd
+          envFrom:
+            - configMapRef:
+                name: fluentd-env
+            - secretRef:
+                name: credentials
+            - configMapRef:
+                name: env-overrides
+                optional: true
+            - configMapRef:
+                name: fluentd-env-overrides
+                optional: true
+          env:
+            - name: NODE
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: OBSERVE_CLUSTER
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-info
+                  key: id
+            - name: FLUENT_UID
+              value: "0"
+          ports:
+            - containerPort: 2020
+              name: http-metrics
+          command:
+            - cmd
+            - /k
+            - fluentd
+            - --config
+            - c:\\fluent\\etc\\fluentd.conf
+          resources:
+            limits:
+              cpu: 100m
+              memory: 768Mi
+            requests:
+              cpu: 100m
+              memory: 768Mi
+          volumeMounts:
+            - name: config
+              mountPath: c:\fluent\etc
+            - name: progdata
+              mountPath: c:\ProgramData\docker
+            - name: progdatadockercontainers
+              mountPath: c:\ProgramData\docker\containers
+              readOnly: true
+            - name: varlog
+              mountPath: c:\var\log
+            - name: varlibdockercontainers
+              mountPath: c:\var\log\containers
+              readOnly: true
+          securityContext:
+            privileged: false
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - CAP_FOWNER
+      volumes:
+        - name: config
+          configMap:
+            name: fluentd-config
+        - name: progdata
+          hostPath:
+            path: c:\ProgramData\docker
+        - name: progdatadockercontainers
+          hostPath:
+            path: c:\ProgramData\docker\containers
+        - name: varlog
+          hostPath:
+            path: c:\var\log
+        - name: varlibdockercontainers
+          hostPath:
+            path: c:\var\log\containers

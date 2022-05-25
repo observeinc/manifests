@@ -1,0 +1,9 @@
+---
+bases:
+  - ../m
+
+commonLabels:
+  observeinc.com/component: 'winlogs'
+
+patchesStrategicMerge:
+  - patch.yaml
