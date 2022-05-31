@@ -1,3 +1,12 @@
+# [0.12.0](https://github.com/observeinc/manifests/compare/v0.11.2...v0.12.0) (2022-05-31)
+
+
+### Features
+
+* **winlog:** adding Windows support ([582b250](https://github.com/observeinc/manifests/commit/582b250cdf563f8a29cd92f87a2f3febac5e7013))
+
+
+
 ## [0.11.2](https://github.com/observeinc/manifests/compare/v0.11.1...v0.11.2) (2022-05-24)
 
 
@@ -46,23 +55,6 @@
 * allow overriding environment variables with configMap ([#38](https://github.com/observeinc/manifests/issues/38)) ([c06c41e](https://github.com/observeinc/manifests/commit/c06c41e96fe7ec04ec715a6b612aab1e2ea966b7))
 * drop unused cadvisor metrics, make configurable ([#37](https://github.com/observeinc/manifests/issues/37)) ([d40b22c](https://github.com/observeinc/manifests/commit/d40b22cf883549274b69982fe66807f8210c4d13))
 * **logs:** support wildcard matching in output ([#40](https://github.com/observeinc/manifests/issues/40)) ([3bba9c8](https://github.com/observeinc/manifests/commit/3bba9c852b83da616eaa4837979c5d3a8732933e))
-
-
-
-# [0.9.0](https://github.com/observeinc/manifests/compare/v0.8.1...v0.9.0) (2022-04-19)
-
-
-### Bug Fixes
-
-* add example for tweaking limits ([b989360](https://github.com/observeinc/manifests/commit/b9893604626d803932bb89218af555000dfed0ab))
-* adjust xl limits ([#33](https://github.com/observeinc/manifests/issues/33)) ([e8cfa26](https://github.com/observeinc/manifests/commit/e8cfa263c74dd8b30512c59df1da022fa07c063e))
-
-
-### Features
-
-* bump grafana-agent to v0.24.1 ([#34](https://github.com/observeinc/manifests/issues/34)) ([ce3f553](https://github.com/observeinc/manifests/commit/ce3f5530c679fc9e8ee4ae306b4baf770768b4ea))
-* bump kube-state-events to 0.8.0 ([#35](https://github.com/observeinc/manifests/issues/35)) ([a7da03a](https://github.com/observeinc/manifests/commit/a7da03abdfe73e2e1929dd5e423a257b609e5c2c))
-* **metrics:** allow signalling pod should not be scraped ([#36](https://github.com/observeinc/manifests/issues/36)) ([1bbd432](https://github.com/observeinc/manifests/commit/1bbd432a551b2f42cc4cb58fe84c9a1edbe95f63))
 
 
 
