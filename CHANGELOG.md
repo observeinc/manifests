@@ -1,3 +1,18 @@
+# [0.13.0](https://github.com/observeinc/manifests/compare/v0.12.1...v0.13.0) (2022-06-21)
+
+
+### Bug Fixes
+
+* **logs:** bump fluent-bit to 1.9.4 ([#50](https://github.com/observeinc/manifests/issues/50)) ([798b446](https://github.com/observeinc/manifests/commit/798b4465addaa5913c95e25a02cf605cd0f59985))
+
+
+### Features
+
+* **metrics:** bump grafana-agent to 0.25.1 ([#49](https://github.com/observeinc/manifests/issues/49)) ([b2fd8d9](https://github.com/observeinc/manifests/commit/b2fd8d98d237ab2e4f7c702064bdd6c775f5665f))
+* **traces:** bump otel-collector-contrib to 0.53.0 ([f1a384b](https://github.com/observeinc/manifests/commit/f1a384b9b9181ac6df3575e0f0a09e518ded3f2c))
+
+
+
 ## [0.12.1](https://github.com/observeinc/manifests/compare/v0.12.0...v0.12.1) (2022-06-14)
 
 
@@ -33,21 +48,6 @@
 
 * avoid scheduling events and metrics on windows ([188ea60](https://github.com/observeinc/manifests/commit/188ea6007eb713c37ff7c089fee84a8b468e4a77))
 * avoid scheduling on windows nodes ([9ec0b17](https://github.com/observeinc/manifests/commit/9ec0b1790b41b97f61d6c5b0b42eaf899fb4072a))
-
-
-
-# [0.11.0](https://github.com/observeinc/manifests/compare/v0.10.0...v0.11.0) (2022-05-03)
-
-
-### Bug Fixes
-
-* **events:** bump kube-state-events to 0.8.1 ([#42](https://github.com/observeinc/manifests/issues/42)) ([1d818a7](https://github.com/observeinc/manifests/commit/1d818a78a18b45684e8f9e2c9c6a5de5c3afd9f0))
-
-
-### Features
-
-* **logs:** bump fluent-bit to 1.9.3 ([a139026](https://github.com/observeinc/manifests/commit/a139026451b457ac12bf86eaa2fe66571ec81b4a))
-* **traces:** bump otel-collector-contrib to 0.50.0 ([#41](https://github.com/observeinc/manifests/issues/41)) ([05924b1](https://github.com/observeinc/manifests/commit/05924b1b357d11afa2a2650b3cd781410e6c8301))
 
 
 
