@@ -1,0 +1,24 @@
+---
+bases:
+  - ../../../bases/events/noop
+
+namespace: observe
+
+namePrefix: observe-openshift-
+
+resources:
+  - constraints.yaml
+
+patchesJson6902:
+  - target:
+      version: v1
+      group: apps
+      kind: Deployment
+      name: events
+    path: deployment.yaml
+  - target:
+      version: v1
+      group: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: events
+    path: clusterrole.yaml
