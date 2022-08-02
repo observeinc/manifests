@@ -1,0 +1,19 @@
+---
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: observe-openshift-events
+allowPrivilegedContainer: false
+allowHostNetwork: false
+allowHostDirVolumePlugin: false
+allowHostPorts: false
+allowHostPID: false
+allowHostIPC: false
+readOnlyRootFilesystem: false
+runAsUser:
+  type: MustRunAs
+  uid: 65534
+seLinuxContext:
+  type: MustRunAs
+users:
+  - system:serviceaccount:observe:observe-openshift-events

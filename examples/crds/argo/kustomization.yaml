@@ -1,6 +1,6 @@
 ---
 bases:
-  - ../../bases/events/noop
+  - ../../../bases/events/noop
 
 namespace: observe
 

@@ -8,7 +8,7 @@ We assume our stack has already been installed, and therefore both the
 `observe` namespace and `credentials` configmap are in place. To install, run:
 
 ```
-kubectl apply -k github.com/observeinc/manifests/examples/argo
+kubectl apply -k github.com/observeinc/manifests/examples/crds/argo
 ```
 
 
