@@ -1,3 +1,18 @@
+# [0.14.0](https://github.com/observeinc/manifests/compare/v0.13.0...v0.14.0) (2022-08-09)
+
+
+### Bug Fixes
+
+* **logs:** bump fluent-bit to 1.9.6 ([#53](https://github.com/observeinc/manifests/issues/53)) ([1cdfa19](https://github.com/observeinc/manifests/commit/1cdfa19ef3271de01f15cc26c4146d21bd4b9bba))
+
+
+### Features
+
+* **metrics:** bump grafana-agent to 0.26.1 ([#52](https://github.com/observeinc/manifests/issues/52)) ([beaa64f](https://github.com/observeinc/manifests/commit/beaa64f21455746447228307dd4d80a232afe94a))
+* **openshift:** add default openshift CRD manifest ([b306aae](https://github.com/observeinc/manifests/commit/b306aae3efedc7f23503fb0660b88775b2574582))
+
+
+
 # [0.13.0](https://github.com/observeinc/manifests/compare/v0.12.1...v0.13.0) (2022-06-21)
 
 
@@ -38,16 +53,6 @@
 
 * bump kube-state-events to 0.8.2 ([#46](https://github.com/observeinc/manifests/issues/46)) ([84b1498](https://github.com/observeinc/manifests/commit/84b1498faa63358cade7a827f6401d5a91180d17))
 * **metrics:** bump grafana-agent to 0.24.2 ([#45](https://github.com/observeinc/manifests/issues/45)) ([859249e](https://github.com/observeinc/manifests/commit/859249e63d9431aa51ae1840a6d50ecbdcad894e))
-
-
-
-## [0.11.1](https://github.com/observeinc/manifests/compare/v0.11.0...v0.11.1) (2022-05-17)
-
-
-### Bug Fixes
-
-* avoid scheduling events and metrics on windows ([188ea60](https://github.com/observeinc/manifests/commit/188ea6007eb713c37ff7c089fee84a8b468e4a77))
-* avoid scheduling on windows nodes ([9ec0b17](https://github.com/observeinc/manifests/commit/9ec0b1790b41b97f61d6c5b0b42eaf899fb4072a))
 
 
 
