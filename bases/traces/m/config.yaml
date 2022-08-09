@@ -5,7 +5,7 @@ exporters:
   otlphttp:
     endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/otel"
     headers:
-      authorization: "Bearer ${OBSERVE_CUSTOMER} ${OBSERVE_TOKEN}"
+      authorization: "Bearer ${OBSERVE_TOKEN}"
     sending_queue:
       num_consumers: ${OTEL_SENDING_QUEUE}
       queue_size: ${OTEL_QUEUE_SIZE}
@@ -14,7 +14,7 @@ exporters:
   prometheusremotewrite:
     endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/otel"
     headers:
-      authorization: "Bearer ${OBSERVE_CUSTOMER} ${OBSERVE_TOKEN}"
+      authorization: "Bearer ${OBSERVE_TOKEN}"
 extensions:
   health_check: {}
   zpages: {}

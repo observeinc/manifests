@@ -21,6 +21,8 @@ jobs:
         env:
           OBSERVE_CUSTOMER: ${{ secrets.OBSERVE_CUSTOMER }}
           OBSERVE_TOKEN: ${{ secrets.OBSERVE_TOKEN }}
+          OBSERVE_DS_ID: ${{ secrets.OBSERVE_DS_ID }}
+          OBSERVE_DS_TOKEN_ID: ${{ secrets.OBSERVE_DS_TOKEN_ID }}
         run: make apply
       - name: Test delete
         run: make delete

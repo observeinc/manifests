@@ -19,8 +19,8 @@ metrics:
       remote_write:
         - url: ${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/prometheus
           basic_auth:
-            username: ${OBSERVE_CUSTOMER}
-            password: ${OBSERVE_TOKEN}
+            username: ${OBSERVE_DS_ID}
+            password: ${OBSERVE_DS_TOKEN_ID}
           remote_timeout: ${PROM_REMOTE_TIMEOUT}
           queue_config:
             batch_send_deadline: ${PROM_BATCH_SEND_DEADLINE}

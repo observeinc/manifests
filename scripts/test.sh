@@ -61,8 +61,8 @@ do_apply() {
             }
         },
         "data": {
-            "OBSERVE_CUSTOMER": "$(echo -n $OBSERVE_CUSTOMER | base64)",
-            "OBSERVE_TOKEN": "$(echo -n $OBSERVE_TOKEN | base64)"
+            "OBSERVE_DS_ID": "$(echo -n $OBSERVE_DS_ID | base64)",
+            "OBSERVE_DS_TOKEN_ID": "$(echo -n $OBSERVE_DS_TOKEN_ID | base64)"
         }
     }
 EOF
