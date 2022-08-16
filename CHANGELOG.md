@@ -1,3 +1,12 @@
+# [0.15.0](https://github.com/observeinc/manifests/compare/v0.14.0...v0.15.0) (2022-08-16)
+
+
+### Features
+
+* Migrate manifest to per-customer-id collect endpoint ([#55](https://github.com/observeinc/manifests/issues/55)) ([fc19f77](https://github.com/observeinc/manifests/commit/fc19f7770d28514bd83209413a2b8e1629127b37))
+
+
+
 # [0.14.0](https://github.com/observeinc/manifests/compare/v0.13.0...v0.14.0) (2022-08-09)
 
 
@@ -43,16 +52,6 @@
 ### Features
 
 * **winlog:** adding Windows support ([582b250](https://github.com/observeinc/manifests/commit/582b250cdf563f8a29cd92f87a2f3febac5e7013))
-
-
-
-## [0.11.2](https://github.com/observeinc/manifests/compare/v0.11.1...v0.11.2) (2022-05-24)
-
-
-### Bug Fixes
-
-* bump kube-state-events to 0.8.2 ([#46](https://github.com/observeinc/manifests/issues/46)) ([84b1498](https://github.com/observeinc/manifests/commit/84b1498faa63358cade7a827f6401d5a91180d17))
-* **metrics:** bump grafana-agent to 0.24.2 ([#45](https://github.com/observeinc/manifests/issues/45)) ([859249e](https://github.com/observeinc/manifests/commit/859249e63d9431aa51ae1840a6d50ecbdcad894e))
 
 
 
