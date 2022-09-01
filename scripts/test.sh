@@ -62,7 +62,8 @@ do_apply() {
         },
         "data": {
             "OBSERVE_CUSTOMER": "$(echo -n $OBSERVE_CUSTOMER | base64)",
-            "OBSERVE_TOKEN": "$(echo -n $OBSERVE_TOKEN | base64)"
+            "OBSERVE_TOKEN": "$(echo -n $OBSERVE_TOKEN | base64)",
+            "OBSERVE_COLLECTOR_HOST": "$(echo -n "$OBSERVE_CUSTOMER.collect.observeinc.com" | base64)"
         }
     }
 EOF
