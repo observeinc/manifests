@@ -12,6 +12,9 @@ spec:
       labels:
         name: events
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -73,9 +76,3 @@ spec:
             requests:
               cpu: 50m
               memory: 256Mi
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 65534
-            capabilities:
-              drop:
-                - all
