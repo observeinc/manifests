@@ -4,8 +4,6 @@ This repository contains kustomized Kubernetes manifests supported by Observe.
 These are intended as a way of quickly ingesting Kubernetes data into your
 Observe instance.
 
-> **WARNING**: we are still iterating towards a stable release. Feedback welcome.
-
 # Quick setup
 
 Try it out by installing our kustomized stack:
@@ -28,6 +26,20 @@ kubectl -n observe create secret generic credentials \
 ```
 
 This will create an `observe` namespace for you and start collecting Kubernetes state, logs and metrics.
+
+# Versioning
+
+Observe uses versioned manifests. To install or uninstall a specific version, add the version parameter to the URL, e.g:
+
+$ kubectl apply -k 'https://github.com/observeinc/manifests/stack?ref=v0.15.0'
+
+You can find the list of published versions on the
+[releases](https://github.com/observeinc/manifests/releases) page.
+
+Releases are automatically cut on a weekly basis on Tuesdays. Release tags
+follow [Semantic versioning](https://semver.org/). Bugfixes increment the patch
+version number, whereas new features increment the minor version. In the
+absence of bugfixes or features, no release is cut.
 
 # Components
 
@@ -172,9 +184,3 @@ or if you prefer to use kustomize directly,
 kustomize build github.com/observeinc/manifests/stack | kubectl delete -f -
 ```
 
-# Release cycle
-
-Releases are automatically cut on a weekly basis on Tuesdays. Release tags
-follow [Semantic versioning](https://semver.org/). Bugfixes increment the patch
-version number, whereas new features increment the minor version. In the
-absence of bugfixes or features, no release is cut.
