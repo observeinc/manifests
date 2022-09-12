@@ -6,18 +6,14 @@ Observe instance.
 
 # Quick setup
 
-Try it out by installing our kustomized stack:
+You can install our kustomize stack directly using `kubectl`:
 
 ```
-kubectl apply -k github.com/observeinc/manifests/stack
+kubectl apply -k github.com/observeinc/manifests//stack
 ```
 
-Alternatively, if you prefer using `kustomize` directly:
-```
-kustomize build github.com/observeinc/manifests/stack | kubectl apply -f -
-```
-
-After you have run either of the commands above, create the secret so that the agent can authenticate with Observe.
+This will create an `observe` namespace for you and start collecting Kubernetes state, logs and metrics.
+After you have applied the stack, you must create a secret containing your Observe credentials:
 
 ```
 kubectl -n observe create secret generic credentials \
@@ -25,7 +21,15 @@ kubectl -n observe create secret generic credentials \
         --from-literal=OBSERVE_TOKEN=${OBSERVE_TOKEN?}
 ```
 
-This will create an `observe` namespace for you and start collecting Kubernetes state, logs and metrics.
+The URL format used by kustomize is a `git clone` URL. Attempting to open it
+directly in a browser will result in a "page not found" error. If you would
+like to inspect the contents of our installation, you can either view the
+source on [github](https://github.com/observeinc/manifests/tree/main/stack), or
+generate the manifest locally:
+
+```
+kubectl kustomize github.com/observeinc/manifests//stack
+```
 
 # Versioning
 
@@ -59,10 +63,10 @@ By default, we attempt to choose defaults which have a wide operating
 range. However, some clusters will inevitably fall outside this range. We
 provide additional configurations that are more appropriate for these extremes:
 
-- `github.com/observeinc/stack/xs` - intended to run on small clusters such as development environments, where resources are scarce and reliability is less of a concern
-- `github.com/observeinc/stack/m` - the default sizing, intended to run on clusters with hundreds of pods. Start here and adjust up or down accordingly.
-- `github.com/observeinc/stack/l` - used for similar sized clusters as `m`, but with higher throughput in logs, metrics or events. This may be due to verbose logging, high cardinality metrics or frequent cluster reconfiguration.
-- `github.com/observeinc/stack/xl` - intended to run on large clusters with 100+ nodes. Collection is preferentially performed using daemonsets rather than deployments.
+- `github.com/observeinc//stack/xs` - intended to run on small clusters such as development environments, where resources are scarce and reliability is less of a concern
+- `github.com/observeinc//stack/m` - the default sizing, intended to run on clusters with hundreds of pods. Start here and adjust up or down accordingly.
+- `github.com/observeinc//stack/l` - used for similar sized clusters as `m`, but with higher throughput in logs, metrics or events. This may be due to verbose logging, high cardinality metrics or frequent cluster reconfiguration.
+- `github.com/observeinc//stack/xl` - intended to run on large clusters with 100+ nodes. Collection is preferentially performed using daemonsets rather than deployments.
 
 Resource limits for each sizing is as follows:
 
@@ -80,15 +84,15 @@ Support for trace collection is currently experimental. You can install
 OpenTelemetry support alongside our typical stack by running:
 
 ```
-kubectl apply -k github.com/observeinc/manifests/stack/otel
+kubectl apply -k github.com/observeinc/manifests//stack/otel
 ```
 
 You can also refer to different sizings:
 
-- `github.com/observeinc/manifests/stack/otel/xs`
-- `github.com/observeinc/manifests/stack/otel/m`
-- `github.com/observeinc/manifests/stack/otel/l`
-- `github.com/observeinc/manifests/stack/otel/xl`
+- `github.com/observeinc/manifests//stack/otel/xs`
+- `github.com/observeinc/manifests//stack/otel/m`
+- `github.com/observeinc/manifests//stack/otel/l`
+- `github.com/observeinc/manifests//stack/otel/xl`
 
 OpenTelemetry support is still nascent, so you can expect adjustments to our
 manifests as we tune them based on operational feedback.
@@ -117,7 +121,7 @@ EXAMPLE_DIR=$(mktemp -d)
 
 cat <<EOF >$EXAMPLE_DIR/kustomization.yaml
 bases:
-  - github.com/observeinc/manifests/stack?ref=main
+  - github.com/observeinc/manifests//stack?ref=main
 
 configMapGenerator:
   - name: fluent-bit-env
@@ -165,22 +169,12 @@ All Kubernetes resources installed through this repo will have an
 `observeinc.com/component` label. You can therefore use this label for pruning an existing install:
 
 ```bash
-kubectl apply -k github.com/observeinc/manifests/stack --prune -l observeinc.com/component
+kubectl kustomize github.com/observeinc/manifests//stack | kubectl apply --prune -l observeinc.com/component -f -
 ```
 
-or if you prefer to use kustomize directly,
-```bash
-kustomize build github.com/observeinc/manifests/stack | kubectl apply --prune -l observeinc.com/component -f -
-```
-
-To delete an existing install, just use `delete -k`:
+To delete an existing install, just use `kubectl delete`:
 
 ```bash
-kubectl delete -k github.com/observeinc/manifests/stack
-```
-
-or if you prefer to use kustomize directly,
-```bash
-kustomize build github.com/observeinc/manifests/stack | kubectl delete -f -
+kubectl kustomize github.com/observeinc/manifests//stack | kubectl delete -f -
 ```
 
