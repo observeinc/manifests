@@ -19,6 +19,9 @@ extensions:
   health_check: {}
   zpages: {}
 processors:
+  probabilistic_sampler:
+    hash_seed: ${OTEL_SAMPLER_HASH_SEED}
+    sampling_percentage: ${OTEL_SAMPLER_PERCENTAGE}
   resource:
     attributes:
       - key: k8s.cluster.uid
@@ -55,7 +58,7 @@ service:
   pipelines:
     traces:
       receivers: [otlp, zipkin]
-      processors: [resource, k8sattributes, memory_limiter, batch]
+      processors: [resource, probabilistic_sampler, k8sattributes, memory_limiter, batch]
       exporters: [otlphttp, logging]
     metrics:
       receivers: [otlp]

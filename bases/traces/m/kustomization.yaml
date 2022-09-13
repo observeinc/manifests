@@ -21,6 +21,8 @@ configMapGenerator:
       - OTEL_SENDING_QUEUE=4
       - OTEL_QUEUE_SIZE=100
       - OTEL_RETRY_ON_FAILURE=true
+      - OTEL_SAMPLER_HASH_SEED=22
+      - OTEL_SAMPLER_PERCENTAGE=100
       # 80% of maximum memory up to 2G
       - OTEL_MEMORY_LIMITER_LIMIT_MIB=400
       # 25% of limit up to 2G
