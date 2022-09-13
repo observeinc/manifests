@@ -1,3 +1,19 @@
+# [0.16.0](https://github.com/observeinc/manifests/compare/v0.15.0...v0.16.0) (2022-09-13)
+
+
+### Bug Fixes
+
+* **events:** bump kube-state-events to 0.8.3 ([#63](https://github.com/observeinc/manifests/issues/63)) ([56cc338](https://github.com/observeinc/manifests/commit/56cc338328959ddfd0b78a5ca7ce336e2590d3a0))
+* **events:** update security context for pod ([d49f87d](https://github.com/observeinc/manifests/commit/d49f87dff3a6e04da8844bbc45700032b8b0a1f3))
+* **logs:** bump fluent-bit to 1.9.8 ([#62](https://github.com/observeinc/manifests/issues/62)) ([507a9c7](https://github.com/observeinc/manifests/commit/507a9c75c775ea8a90519c45655154a342e6f564))
+
+
+### Features
+
+* **traces:** bump otel-collector-contrib to 0.59.0 ([#64](https://github.com/observeinc/manifests/issues/64)) ([2154392](https://github.com/observeinc/manifests/commit/2154392d7c60c728dcae5accc7b1ff33e98ec13f))
+
+
+
 # [0.15.0](https://github.com/observeinc/manifests/compare/v0.14.0...v0.15.0) (2022-08-16)
 
 
@@ -43,15 +59,6 @@
 ### Bug Fixes
 
 * **winlog:** change default OS ([2d0a4d3](https://github.com/observeinc/manifests/commit/2d0a4d3a8c19bf8b4330914a8856029f127274dd))
-
-
-
-# [0.12.0](https://github.com/observeinc/manifests/compare/v0.11.2...v0.12.0) (2022-05-31)
-
-
-### Features
-
-* **winlog:** adding Windows support ([582b250](https://github.com/observeinc/manifests/commit/582b250cdf563f8a29cd92f87a2f3febac5e7013))
 
 
 
