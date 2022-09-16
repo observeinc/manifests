@@ -19,6 +19,8 @@ configMapGenerator:
     literals:
       - FB_BUFFER_CHUNK_SIZE=32k
       - FB_BUFFER_MAX_SIZE=256k
+      - FB_DNS_MODE=UDP
+      - FB_DNS_RESOLVER=LEGACY
       - FB_DOCKER_MODE=On
       - FB_DOCKER_MODE_FLUSH=4
       - FB_FLUSH=2
