@@ -105,6 +105,8 @@ Our current limits are as follows:
 Once installed, you can forward traces to the local collector over GRPC on 
 `observe-traces.observe.svc.cluster.local:4317`.
 
+A default configuration is included for the [probabilistic sampling processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/probabilisticsamplerprocessor) at 100% sampling which will forward all trace data. In case of data volume concerns sampling can be enabled by lowering the `OTEL_SAMPLER_PERCENTAGE` configuration in https://github.com/observeinc/manifests/blob/main/bases/traces/m/kustomization.yaml
+
 # Configuration
 
 ## Using kustomize
