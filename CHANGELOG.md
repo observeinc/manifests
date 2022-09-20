@@ -1,3 +1,17 @@
+# [0.17.0](https://github.com/observeinc/manifests/compare/v0.16.0...v0.17.0) (2022-09-20)
+
+
+### Bug Fixes
+
+* **logs:** fallback to legacy DNS resolver ([#68](https://github.com/observeinc/manifests/issues/68)) ([9231edb](https://github.com/observeinc/manifests/commit/9231edb76c14677740f680dfbd5c78c9c491e0cd))
+
+
+### Features
+
+* **traces:** add probabilistic sampler ([#67](https://github.com/observeinc/manifests/issues/67)) ([5e8cac3](https://github.com/observeinc/manifests/commit/5e8cac3927db5e68a6f6f0c10ce78b3318e4cf04))
+
+
+
 # [0.16.0](https://github.com/observeinc/manifests/compare/v0.15.0...v0.16.0) (2022-09-13)
 
 
@@ -50,15 +64,6 @@
 
 * **metrics:** bump grafana-agent to 0.25.1 ([#49](https://github.com/observeinc/manifests/issues/49)) ([b2fd8d9](https://github.com/observeinc/manifests/commit/b2fd8d98d237ab2e4f7c702064bdd6c775f5665f))
 * **traces:** bump otel-collector-contrib to 0.53.0 ([f1a384b](https://github.com/observeinc/manifests/commit/f1a384b9b9181ac6df3575e0f0a09e518ded3f2c))
-
-
-
-## [0.12.1](https://github.com/observeinc/manifests/compare/v0.12.0...v0.12.1) (2022-06-14)
-
-
-### Bug Fixes
-
-* **winlog:** change default OS ([2d0a4d3](https://github.com/observeinc/manifests/commit/2d0a4d3a8c19bf8b4330914a8856029f127274dd))
 
 
 
