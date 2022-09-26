@@ -1,0 +1,25 @@
+---
+namespace: observe
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - serviceaccount.yaml
+
+namePrefix: observe-
+
+commonLabels:
+  observeinc.com/component: 'proxy'
+
+configMapGenerator:
+  - name: proxy-env
+    literals:
+      - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
+      - OBSERVE_COLLECTOR_PORT=443
+      - OBSERVE_COLLECTOR_SCHEME=https
+      - PROXY_PROGRESS_V=1
+      - PROXY_BUFFER_REQUEST_BODY_SIZE=25000
+
+images:
+  - name: observeinc/proxy
+    newTag: 'latest'

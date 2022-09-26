@@ -1,0 +1,73 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy
+  labels:
+    name: proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: proxy
+  template:
+    metadata:
+      labels:
+        name: proxy
+    spec:
+      serviceAccountName: proxy
+      containers:
+        - name: proxy
+          image: observeinc/proxy
+          args:
+            - -listen=:8080
+            - -healthz-bind-address=:8082
+            - -target=$(OBSERVE_COLLECTOR_SCHEME)://$(OBSERVE_CUSTOMER).$(OBSERVE_COLLECTOR_HOST):$(OBSERVE_COLLECTOR_PORT)
+            - -bearer-token=$(OBSERVE_TOKEN)
+            - -tag=clusterUid=$(OBSERVE_CLUSTER)
+            - -progress-v=$(PROXY_PROGRESS_V)
+            - -buffer-request-body-size=$(PROXY_BUFFER_REQUEST_BODY_SIZE)
+          ports:
+            - containerPort: 8080
+            - containerPort: 8082
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8082
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8082
+            timeoutSeconds: 5
+            failureThreshold: 10
+          envFrom:
+            - configMapRef:
+                name: proxy-env
+            - secretRef:
+                name: credentials
+            - configMapRef:
+                name: env-overrides
+                optional: true
+            - configMapRef:
+                name: proxy-env-overrides
+                optional: true
+          env:
+            - name: OBSERVE_CLUSTER
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-info
+                  key: id
+          resources:
+            limits:
+              cpu: 250m
+              memory: 2Gi
+            requests:
+              cpu: 250m
+              memory: 2Gi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            capabilities:
+              drop:
+                - all
+---
