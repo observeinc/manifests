@@ -36,6 +36,8 @@ configMapGenerator:
       - FB_REFRESH_INTERVAL=2
       - FB_RETRY_LIMIT=5
       - FB_ROTATE_WAIT=5
+      - FB_GREP_MATCH_TAG="nothing"
+      - FB_GREP_EXCLUDE="nomatch ^$"
       - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
       - OBSERVE_COLLECTOR_PORT=443
       - OBSERVE_COLLECTOR_TLS=on
