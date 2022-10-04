@@ -1,3 +1,19 @@
+# [0.18.0](https://github.com/observeinc/manifests/compare/v0.17.0...v0.18.0) (2022-10-04)
+
+
+### Bug Fixes
+
+* **metrics:** bump grafana-agent to 0.27.1 ([#61](https://github.com/observeinc/manifests/issues/61)) ([fec0eb5](https://github.com/observeinc/manifests/commit/fec0eb5587dccea3dd78709d19a1dc9ae2880ebb))
+
+
+### Features
+
+* add proxy example ([#70](https://github.com/observeinc/manifests/issues/70)) ([78d5c57](https://github.com/observeinc/manifests/commit/78d5c57f8e03fdacd180cbb0a9c966db2e3b80a2))
+* **events:** kube-state-events v0.9.0 ([5c6bf06](https://github.com/observeinc/manifests/commit/5c6bf06c0105e62f7b31180f04cc44e0bfbe0e23))
+* **logs:** add optional grep filter ([#66](https://github.com/observeinc/manifests/issues/66)) ([979eecb](https://github.com/observeinc/manifests/commit/979eecb44351b7aa2a5fa0cd91cd53c0f90b83d3))
+
+
+
 # [0.17.0](https://github.com/observeinc/manifests/compare/v0.16.0...v0.17.0) (2022-09-20)
 
 
@@ -49,21 +65,6 @@
 
 * **metrics:** bump grafana-agent to 0.26.1 ([#52](https://github.com/observeinc/manifests/issues/52)) ([beaa64f](https://github.com/observeinc/manifests/commit/beaa64f21455746447228307dd4d80a232afe94a))
 * **openshift:** add default openshift CRD manifest ([b306aae](https://github.com/observeinc/manifests/commit/b306aae3efedc7f23503fb0660b88775b2574582))
-
-
-
-# [0.13.0](https://github.com/observeinc/manifests/compare/v0.12.1...v0.13.0) (2022-06-21)
-
-
-### Bug Fixes
-
-* **logs:** bump fluent-bit to 1.9.4 ([#50](https://github.com/observeinc/manifests/issues/50)) ([798b446](https://github.com/observeinc/manifests/commit/798b4465addaa5913c95e25a02cf605cd0f59985))
-
-
-### Features
-
-* **metrics:** bump grafana-agent to 0.25.1 ([#49](https://github.com/observeinc/manifests/issues/49)) ([b2fd8d9](https://github.com/observeinc/manifests/commit/b2fd8d98d237ab2e4f7c702064bdd6c775f5665f))
-* **traces:** bump otel-collector-contrib to 0.53.0 ([f1a384b](https://github.com/observeinc/manifests/commit/f1a384b9b9181ac6df3575e0f0a09e518ded3f2c))
 
 
 
