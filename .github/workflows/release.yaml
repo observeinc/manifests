@@ -5,6 +5,12 @@ on:
   schedule:
     - cron: '0 19 * * 2'
 
+# to test new versions of kindest/node locally you need to do the following:
+# 1. update go version to at least 1.17
+# 2. go install sigs.k8s.io/kind@v0.16.0
+# 3. update Makefile and add something like '--image kindest/node:v1.16.15' to 'cluster'
+# 4. 'make cluster && make apply'
+# 5. 'make delete-cluster' to remove it
 jobs:
   integration-test:
     runs-on: ubuntu-latest
@@ -14,11 +20,11 @@ jobs:
         kubectl_version:
           - v1.25.2    # leading edge  (EOL 2023-10-27)
           - v1.22.1    # trailing edge (EOL 2022-10-28)
-          - v1.16.1    # laggard       (EOL 2020-04-11)
+          - v1.16.15   # laggard       (EOL 2020-04-11)
         node_version:
           - kindest/node:v1.25.2@sha256:9be91e9e9cdf116809841fc77ebdb8845443c4c72fe5218f3ae9eb57fdb4bace
           - kindest/node:v1.21.1@sha256:e0bf222d7dd1589075117c51740903017b328c59ffb0c3d97187a2b3de1f92b3
-          - kindest/node:v1.16.1@sha256:1b59f5d62b2f49c439ee29a9146d012b73255169e88f9acaca9e9ba610511380
+          - kindest/node:v1.16.15@sha256:64bac16b83b6adfd04ea3fbcf6c9b5b893277120f2b2cbf9f5fa3e5d4c2260cc
         kustomize_dir:
           - stack/m
           - stack/xs
