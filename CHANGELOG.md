@@ -1,3 +1,12 @@
+# [0.19.0](https://github.com/observeinc/manifests/compare/v0.18.0...v0.19.0) (2022-10-18)
+
+
+### Features
+
+* **traces:** bump otel-collector-contrib to 0.61.0 ([278dfb8](https://github.com/observeinc/manifests/commit/278dfb879e3d83c9f27ce355d4c0137f3c823cbf))
+
+
+
 # [0.18.0](https://github.com/observeinc/manifests/compare/v0.17.0...v0.18.0) (2022-10-04)
 
 
@@ -50,21 +59,6 @@
 ### Features
 
 * Migrate manifest to per-customer-id collect endpoint ([#55](https://github.com/observeinc/manifests/issues/55)) ([fc19f77](https://github.com/observeinc/manifests/commit/fc19f7770d28514bd83209413a2b8e1629127b37))
-
-
-
-# [0.14.0](https://github.com/observeinc/manifests/compare/v0.13.0...v0.14.0) (2022-08-09)
-
-
-### Bug Fixes
-
-* **logs:** bump fluent-bit to 1.9.6 ([#53](https://github.com/observeinc/manifests/issues/53)) ([1cdfa19](https://github.com/observeinc/manifests/commit/1cdfa19ef3271de01f15cc26c4146d21bd4b9bba))
-
-
-### Features
-
-* **metrics:** bump grafana-agent to 0.26.1 ([#52](https://github.com/observeinc/manifests/issues/52)) ([beaa64f](https://github.com/observeinc/manifests/commit/beaa64f21455746447228307dd4d80a232afe94a))
-* **openshift:** add default openshift CRD manifest ([b306aae](https://github.com/observeinc/manifests/commit/b306aae3efedc7f23503fb0660b88775b2574582))
 
 
 
