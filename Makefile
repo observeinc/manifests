@@ -18,3 +18,4 @@ delete:
 
 s3:
 	@TAG=$(TAG) scripts/mirror stack
+

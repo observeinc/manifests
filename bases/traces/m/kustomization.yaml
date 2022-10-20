@@ -23,8 +23,9 @@ configMapGenerator:
       - OTEL_RETRY_ON_FAILURE=true
       - OTEL_SAMPLER_HASH_SEED=22
       - OTEL_SAMPLER_PERCENTAGE=100
-      # 80% of maximum memory up to 2G
-      - OTEL_MEMORY_LIMITER_LIMIT_MIB=400
+      # 80% of maximum memory up to 2G.
+      # Must be less than the limit or gc will never run
+      - OTEL_MEMORY_LIMITER_LIMIT_MIB=192
       # 25% of limit up to 2G
       - OTEL_MEMORY_LIMITER_SPIKE_LIMIT_MIB=100
       - OTEL_MEMORY_LIMITER_CHECK_INTERVAL=5s
