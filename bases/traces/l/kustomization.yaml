@@ -1,6 +1,6 @@
 ---
 bases:
-  - ../daemonset
+  - ../deployment
 
 commonLabels:
   observeinc.com/component: 'traces'

@@ -1,12 +1,12 @@
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
-  name: traces
+  name: observe-opentelemetry-collector
 spec:
   template:
     spec:
       containers:
-        - name: otel-collector
+        - name: observe-traces
           resources:
             limits:
               cpu: 250m
