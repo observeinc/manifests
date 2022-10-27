@@ -1,0 +1,101 @@
+---
+# Source: opentelemetry-collector/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: observe-opentelemetry-collector
+  labels:
+    helm.sh/chart: opentelemetry-collector-0.37.2
+    app.kubernetes.io/name: opentelemetry-collector
+    app.kubernetes.io/instance: observe-traces
+    app.kubernetes.io/version: "0.62.1"
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: opentelemetry-collector
+      app.kubernetes.io/instance: observe-traces
+      component: standalone-collector
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        checksum/config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+
+      labels:
+        app.kubernetes.io/name: opentelemetry-collector
+        app.kubernetes.io/instance: observe-traces
+        component: standalone-collector
+
+    spec:
+
+      serviceAccountName: traces
+      securityContext:
+        {}
+      containers:
+        - name: observe-traces
+          command:
+            - "/otelcol-contrib"
+            - "--config=/etc/config/config.yaml"
+            - "--config=/etc/config/extra.yaml"
+            # for internal prometheus metrics
+            - "--set=service.telemetry.metrics.address=:58888"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            capabilities:
+              drop:
+                - all
+          image: "otel/opentelemetry-collector-contrib:0.62.1"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: zpages
+              containerPort: 55679
+            - name: metrics
+              containerPort: 58888
+            - name: otlp
+              containerPort: 4317
+              protocol: TCP
+            - name: otlp-http
+              containerPort: 4318
+              protocol: TCP
+            - name: zipkin
+              containerPort: 9411
+              protocol: TCP
+          env:
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+          envFrom:
+            - configMapRef:
+                name: otel-collector-env
+            - secretRef:
+                name: credentials
+            - configMapRef:
+                name: env-overrides
+                optional: true
+            - configMapRef:
+                name: otel-collector-env-overrides
+                optional: true
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 13133
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 13133
+          resources:
+            limits:
+              cpu: 100m
+              memory: 200M
+          volumeMounts:
+            - mountPath: /etc/config
+              name: otel-collector
+      volumes:
+        - name: otel-collector
+          configMap:
+            name: otel-collector

@@ -1,9 +1,10 @@
 ---
 bases:
-  - ../daemonset
+  - ../base
+
+resources:
+  - deployment.yaml
 
 commonLabels:
   observeinc.com/component: 'traces'
 
-patchesStrategicMerge:
-  - patch.yaml
