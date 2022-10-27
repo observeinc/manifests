@@ -1,0 +1,41 @@
+---
+namePrefix: observe-
+
+resources:
+  - clusterrole.yaml
+  - clusterrolebinding.yaml
+  - serviceaccount.yaml
+  - service.yaml
+
+commonLabels:
+  observeinc.com/component: 'traces'
+
+configMapGenerator:
+  - name: otel-collector-env
+    literals:
+      - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
+      - OBSERVE_COLLECTOR_PORT=443
+      - OBSERVE_COLLECTOR_SCHEME=https
+      - OBSERVE_COLLECTOR_INSECURE=off
+      - OTEL_SENDING_QUEUE=4
+      - OTEL_QUEUE_SIZE=100
+      - OTEL_RETRY_ON_FAILURE=true
+      - OTEL_SAMPLER_HASH_SEED=22
+      - OTEL_SAMPLER_PERCENTAGE=100
+      # 80% of maximum memory up to 2G. 
+      # Must be less than limit or gc will never run
+      - OTEL_MEMORY_LIMITER_LIMIT_MIB=192
+      # 25% of limit up to 2G
+      - OTEL_MEMORY_LIMITER_SPIKE_LIMIT_MIB=100
+      - OTEL_MEMORY_LIMITER_CHECK_INTERVAL=5s
+      # known to not work: https://github.com/open-telemetry/opentelemetry-collector/issues/4328
+      - OTEL_LOG_LEVEL=info
+  - name: otel-collector
+    literals:
+      - extra.yaml=
+    files:
+      - config.yaml
+
+images:
+  - name: otel/opentelemetry-collector-contrib
+    newTag: '0.61.0'
