@@ -3,4 +3,4 @@ namespace: observe
 
 bases:
   - ../../xl
-  - ../../../bases/traces/xl
+  - ../../../bases/traces/l
