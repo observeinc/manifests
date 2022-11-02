@@ -83,27 +83,38 @@ Resource limits for each sizing is as follows:
 Support for trace collection is currently experimental. You can install
 OpenTelemetry support alongside our typical stack by running:
 
+This is a standard deployment of opentelementry adapted from [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector/examples)
+
+This stack also includes the required opentelemetry-collector resources:
+  Clusterrolebinding
+  ClusterRole
+  ConfigMap for config.yaml
+  
+For general application you can use our Kustomize manifests to use a medium daemonset instance of opentelemetry-collector
 ```
-kubectl apply -k github.com/observeinc/manifests//stack/otel
+kubectl apply -k github.com/observeinc/manifests/stack/otel
 ```
 
-You can also refer to different sizings:
+You can also use specific sizings:
 
-- `github.com/observeinc/manifests//stack/otel/xs`
-- `github.com/observeinc/manifests//stack/otel/m`
-- `github.com/observeinc/manifests//stack/otel/l`
-- `github.com/observeinc/manifests//stack/otel/xl`
+- `kubectl apply -k github.com/observeinc/manifests/stack/otel/xs`
+- `kubectl apply -k github.com/observeinc/manifests/stack/otel/m`
+- `kubectl apply -k github.com/observeinc/manifests/stack/otel/l`
+- `kubectl apply -k github.com/observeinc/manifests/stack/otel/xl`
 
-OpenTelemetry support is still nascent, so you can expect adjustments to our
-manifests as we tune them based on operational feedback.
-Our current limits are as follows:
+The respective opentelemetry-collector continaer for each size:
 
-|          |      xs      |       m       |       l       |       xl      |
-|---------:|:------------:|:-------------:|:-------------:|:-------------:|
-|  traces* | 50m<br>128Mi | 250m<br>256Mi |   250m<br>256Mi |  250m<br>256Mi |
+|         |             xs              |              m               |                     l                      |      xl       |
+|--------:|:---------------------------:|:----------------------------:|:------------------------------------------:|:-------------:|
+| traces* | 50m<br>128Mi<br>(Daemonset) | 250m<br>256Mi<br>(Daemonset) | 250m<br>256Mi<br>(deployment replicas: 10) | 250m<br>256Mi | points to l 
 
 Once installed, you can forward traces to the local collector over GRPC on 
 `observe-traces.observe.svc.cluster.local:4317`.
+
+**NOTE** When migrating from _s_ or _m_ to _l_, ensure that you remove the previous opentelemetry-collector daesmonset
+```
+$ kubectl -n observe delete daemonset.apps traces
+```
 
 # Configuration
 
