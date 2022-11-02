@@ -79,10 +79,10 @@ spec:
           resources:
             limits:
               cpu: 100m
-              memory: 128Mi
+              memory: 192Mi
             requests:
               cpu: 100m
-              memory: 128Mi
+              memory: 192Mi
           volumeMounts:
             - name: config
               mountPath: /fluent-bit/etc
