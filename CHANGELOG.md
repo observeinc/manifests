@@ -1,3 +1,17 @@
+# [0.20.0](https://github.com/observeinc/manifests/compare/v0.19.0...v0.20.0) (2022-11-08)
+
+
+### Bug Fixes
+
+* **traces:** xl stack now points to bases/traces/otel/l for traces ([c3d1dd2](https://github.com/observeinc/manifests/commit/c3d1dd2fbfbd7cdcb66f0dd016c20d97eb2dcb5c))
+
+
+### Features
+
+* **traces:** add deployment for stack/otel/l ([76d6226](https://github.com/observeinc/manifests/commit/76d6226852393fa1f37eb4db89b21a31304d9e15))
+
+
+
 # [0.19.0](https://github.com/observeinc/manifests/compare/v0.18.0...v0.19.0) (2022-10-18)
 
 
@@ -50,15 +64,6 @@
 ### Features
 
 * **traces:** bump otel-collector-contrib to 0.59.0 ([#64](https://github.com/observeinc/manifests/issues/64)) ([2154392](https://github.com/observeinc/manifests/commit/2154392d7c60c728dcae5accc7b1ff33e98ec13f))
-
-
-
-# [0.15.0](https://github.com/observeinc/manifests/compare/v0.14.0...v0.15.0) (2022-08-16)
-
-
-### Features
-
-* Migrate manifest to per-customer-id collect endpoint ([#55](https://github.com/observeinc/manifests/issues/55)) ([fc19f77](https://github.com/observeinc/manifests/commit/fc19f7770d28514bd83209413a2b8e1629127b37))
 
 
 
