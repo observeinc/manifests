@@ -1,21 +1,25 @@
 # Observe kustomize manifests
 
-This repository contains kustomized Kubernetes manifests supported by Observe.
-These are intended as a way of quickly ingesting Kubernetes data into your
-Observe instance.
+This repository contains _kustomized_ Kubernetes manifests supported by [Observe](https://www.observeinc.com/)
+These are intended as a way of quickly start ingesting data into Observe.
 
 # Quick setup
 
-You can install our kustomize stack directly using `kubectl`:
+You can install our kustomize stack directly using `kubectl`: Kustomize is built into kubectl, from version 1.14.[*](https://cloud.google.com/anthos-config-management/docs/concepts/kustomize)
+<!-- TODO: Support Version <1.14 we have to -->
+
+## Observe Stack
 
 ```
 kubectl apply -k github.com/observeinc/manifests//stack
 ```
 
 This will create an `observe` namespace for you and start collecting Kubernetes state, logs and metrics.
-After you have applied the stack, you must create a secret containing your Observe credentials:
+To send data to Observe you must create a secret containing your an Observe Datastream token. A token can be generated from from an Observe app or [datastream](https://docs.observeinc.com/en/latest/content/data-ingestion/datastreams.html#create-a-token).
 
 ```
+OBSERVE_CUSTOMER='observe_customer_id'
+OBSERVE_TOKEN='some_token'
 kubectl -n observe create secret generic credentials \
         --from-literal=OBSERVE_CUSTOMER=${OBSERVE_CUSTOMER?} \
         --from-literal=OBSERVE_TOKEN=${OBSERVE_TOKEN?}
@@ -30,6 +34,8 @@ generate the manifest locally:
 ```
 kubectl kustomize github.com/observeinc/manifests//stack
 ```
+
+## Next: [Install Otel](#traces)
 
 # Versioning
 
@@ -70,29 +76,44 @@ provide additional configurations that are more appropriate for these extremes:
 
 Resource limits for each sizing is as follows:
 
-|         |      xs      |       m       |       l       |       xl      |
+|         |     `xs`     |      `m`      |      `l`      |     `xl`      |
 |--------:|:------------:|:-------------:|:-------------:|:-------------:|
-|  events |  20m<br>64Mi |  50m<br>256Mi |   200m<br>1Gi |   400m<br>2Gi |
-|   logs* |  10m<br>64Mi | 100m<br>128Mi | 200m<br>192Mi | 500m<br>256Mi |
-| metrics | 50m<br>256Mi |   250m<br>2Gi | 500m<br>4Gi   |  200m*<br>1Gi |
+|  events | 20m<br>64Mi  | 50m<br>256Mi  |  200m<br>1Gi  |  400m<br>2Gi  |
+|   logs* | 10m<br>64Mi  | 100m<br>128Mi | 200m<br>192Mi | 500m<br>256Mi |
+| metrics | 50m<br>256Mi |  250m<br>2Gi  |  500m<br>4Gi  | 200m*<br>1Gi  |
 
 \* run as daemonset
 
 # Traces
 
-Support for trace collection is currently experimental. You can install
-OpenTelemetry support alongside our typical stack by running:
+Support for trace collection is available with the OpenTelemetry App installed in your Observe account. After installing the App, you will need to configure an otel-collector 'gateway' to send data to Observe. 
 
-This is a standard deployment of opentelementry adapted from [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector/examples)
+Observe provides an `otel` Kustomize stack to streamline creating the resources needed to report your spans to Observe. The Daemonset and Deployments for these are are based on standard deployment of opentelementry adapted from [OpenTelemetry-helm-charts](https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector/examples)
+## App Token Secret
 
-This stack also includes the required opentelemetry-collector resources:
-  Clusterrolebinding
-  ClusterRole
-  ConfigMap for config.yaml
-  
-For general application you can use our Kustomize manifests to use a medium daemonset instance of opentelemetry-collector
+Observe's OpenTelemetry Collector requires an OBSERVE_TOKEN and OBSERVE_CUSTOMER environment variables provided by the credentials secret that is created as part of the [OpenTelemetry Observe App](https://docs.observeinc.com/en/latest/content/integrations/otel/opentelemetry.html). For more information on how this token works, please consider [Observe's Datastream Documentation](https://docs.observeinc.com/en/latest/content/data-ingestion/datastreams.html#create-a-token)
+
+**It's strongly recommended use a different 'Bearer' token than the one created for the credentials in [Observe Stack](#observe-stack).** After you Generate a new OBSERVE_TOKEN for the OpenTelemetry App you need to add it as a k8s secret resource called `otel-credentials`
+
 ```
-kubectl apply -k github.com/observeinc/manifests/stack/otel
+OBSERVE_CUSTOMER='observe_customer_id'
+OBSERVE_TOKEN='connection_token_for_otel_app'
+kubectl -n observe create secret generic otel-credentials \
+        --from-literal=OBSERVE_CUSTOMER=${OBSERVE_CUSTOMER?} \
+        --from-literal=OBSERVE_TOKEN=${OBSERVE_TOKEN?}
+```
+
+**Note:** OpenTelemetry Collector Pods will not start without expected secret
+
+### Update Note:
+
+Updating from this manifest after _November 11, 2022_ will *Change the secret mounted by the collector* from `credentials` to `otel-credentials`. This _**Requires**_ an observe token from the OpenTelemetry Observe App to prevent large Cost Spike and undefined behavior.
+
+## Otel stack
+For general application you can use the default Observe Kustomize manifests which provides a daemonset instance of opentelemetry-collector designed for small (<100 nodes) clusters
+
+```
+kubectl apply -k github.com/observeinc/manifests//stack/otel
 ```
 
 You can also use specific sizings:
@@ -102,23 +123,22 @@ You can also use specific sizings:
 - `kubectl apply -k github.com/observeinc/manifests/stack/otel/l`
 - `kubectl apply -k github.com/observeinc/manifests/stack/otel/xl`
 
-The respective opentelemetry-collector continaer for each size:
+The respective opentelemetry-collector container for each size:
 
-|         |             xs              |              m               |                     l                      |      xl       |
-|--------:|:---------------------------:|:----------------------------:|:------------------------------------------:|:-------------:|
+|     | `xs`  | `m` | `l` | `xl` |
+| --: | :---: | :-: | :-: | :--: |
 | traces* | 50m<br>128Mi<br>(Daemonset) | 250m<br>256Mi<br>(Daemonset) | 250m<br>256Mi<br>(deployment replicas: 10) | 250m<br>256Mi | points to l 
 
-Once installed, you can forward traces to the local collector over GRPC on 
+Once installed, traces can be sent to the local collector running in k8s over GRPC on 
 `observe-traces.observe.svc.cluster.local:4317`.
 
-**NOTE** When migrating from _s_ or _m_ to _l_, ensure that you remove the previous opentelemetry-collector daesmonset
+**NOTE** When migrating from _s_ or _m_ to _l_, ensure that you remove the previous opentelemetry-collector daemonset
+
 ```
 $ kubectl -n observe delete daemonset.apps traces
 ```
 
-# Configuration
-
-## Using kustomize
+## Inherit from Kustomize Observe stack manifests
 
 You can override any individual configuration element by creating a new
 kustomized manifest with our kustomized directory as a base.
@@ -143,23 +163,22 @@ EOF
 ```
 
 You can then apply this configuration directly from kubectl:
-
 ```
 kubectl apply -k $EXAMPLE_DIR
 ```
 
-or, alternatively, you can build using your specific `kustomize` version and apply:
+or, alternatively, you can build using your specific `kustomize` version:
 
 ```
-kustomize build $EXAMPLE_DIR | kubectl apply -f -
+kustomize build $EXAMPLE_DIR
 ```
 
-You can version control your kustomized directory while tracking upstream changes through the use of branch tags.
+It's recommended you version control your kustomized directory while tracking upstream changes through the use of branch tags.
 
 ## Using an override configMap
 
 Alternatively, you can create a configmap in the `observe` namespace containing
-overrides for each of our pods. Following the previous example:
+overrides for each pod. Similar to the previous example, you can override the environment for _all Observe pods_ by creating an `env-overrides` files.
 
 ```
 echo "FB_DEBUG=true" >> example.env
@@ -167,7 +186,7 @@ kubectl create configmap -n observe env-overrides --from-env-file example.env
 ```
 
 Unlike the kustomize method, configuration changes are not picked up
-automatically. You must restart pods to pick up the new environment variables:
+automatically. You must restart the relevant pods to pick up the new environment variables. You can do this by restarting the daemonset(s) and deployment(s) in the `observe` namespace
 
 ```
 kubectl rollout restart -n observe daemonset
