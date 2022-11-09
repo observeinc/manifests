@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: observe-opentelemetry-collector
+  name: traces
   labels:
     helm.sh/chart: opentelemetry-collector-0.37.2
     app.kubernetes.io/name: opentelemetry-collector
@@ -34,7 +34,7 @@ spec:
       securityContext:
         {}
       containers:
-        - name: observe-traces
+        - name: otel-collector
           command:
             - "/otelcol-contrib"
             - "--config=/etc/config/config.yaml"

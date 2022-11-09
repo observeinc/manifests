@@ -4,4 +4,3 @@ bases:
 
 commonLabels:
   observeinc.com/component: 'traces'
-
