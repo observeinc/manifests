@@ -2,9 +2,10 @@
 bases:
   - ../base
 
+namePrefix: observe-
+
 commonLabels:
   observeinc.com/component: 'traces'
 
 resources:
   - daemonset.yaml
-
