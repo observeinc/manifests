@@ -66,7 +66,29 @@ do_apply() {
         }
     }
 EOF
-)
+    )
+    INFO "Creating otel secret"
+    # this is an arcane way of doing things, but it allows overwriting existing secret without
+    # relying on kubectl --dry-run semantics, which is version dependent
+    RESULT=$(kubectl apply -f - << EOF
+    {
+        "kind": "Secret",
+        "apiVersion": "v1",
+        "metadata": {
+            "name": "otel-credentials",
+            "namespace": "observe",
+            "annotations": {
+                "kubectl.kubernetes.io/last-applied-configuration": ""
+            }
+        },
+        "data": {
+            "OBSERVE_CUSTOMER": "$(echo -n $OBSERVE_CUSTOMER | base64)",
+            "OBSERVE_TOKEN": "$(echo -n $OBSERVE_TOKEN | base64)"
+        }
+    }
+EOF
+    )
+
     DEBUG "$RESULT"
 
     INFO "Waiting on pods to be ready"
