@@ -1,6 +1,4 @@
 ---
-namePrefix: observe-
-
 resources:
   - clusterrole.yaml
   - clusterrolebinding.yaml
