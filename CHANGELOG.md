@@ -1,3 +1,18 @@
+# [0.21.0](https://github.com/observeinc/manifests/compare/v0.20.0...v0.21.0) (2022-11-15)
+
+
+### Bug Fixes
+
+* **traces:** reintroduce observe- prefix ([#84](https://github.com/observeinc/manifests/issues/84)) ([094cd2a](https://github.com/observeinc/manifests/commit/094cd2a1e2b6d2880f67a2caea097a41658d0d78))
+* **traces:** remove superfluous prefixing ([#86](https://github.com/observeinc/manifests/issues/86)) ([073ab25](https://github.com/observeinc/manifests/commit/073ab258e5439f410183a8cabcda758416e013b5)), closes [#84](https://github.com/observeinc/manifests/issues/84)
+
+
+### Features
+
+* **metrics:** bump grafana-agent to 0.28.1 ([#85](https://github.com/observeinc/manifests/issues/85)) ([e517434](https://github.com/observeinc/manifests/commit/e5174347e4d27113c3d4b8ea73d7cd004fd3af45))
+
+
+
 # [0.20.0](https://github.com/observeinc/manifests/compare/v0.19.0...v0.20.0) (2022-11-08)
 
 
@@ -48,22 +63,6 @@
 ### Features
 
 * **traces:** add probabilistic sampler ([#67](https://github.com/observeinc/manifests/issues/67)) ([5e8cac3](https://github.com/observeinc/manifests/commit/5e8cac3927db5e68a6f6f0c10ce78b3318e4cf04))
-
-
-
-# [0.16.0](https://github.com/observeinc/manifests/compare/v0.15.0...v0.16.0) (2022-09-13)
-
-
-### Bug Fixes
-
-* **events:** bump kube-state-events to 0.8.3 ([#63](https://github.com/observeinc/manifests/issues/63)) ([56cc338](https://github.com/observeinc/manifests/commit/56cc338328959ddfd0b78a5ca7ce336e2590d3a0))
-* **events:** update security context for pod ([d49f87d](https://github.com/observeinc/manifests/commit/d49f87dff3a6e04da8844bbc45700032b8b0a1f3))
-* **logs:** bump fluent-bit to 1.9.8 ([#62](https://github.com/observeinc/manifests/issues/62)) ([507a9c7](https://github.com/observeinc/manifests/commit/507a9c75c775ea8a90519c45655154a342e6f564))
-
-
-### Features
-
-* **traces:** bump otel-collector-contrib to 0.59.0 ([#64](https://github.com/observeinc/manifests/issues/64)) ([2154392](https://github.com/observeinc/manifests/commit/2154392d7c60c728dcae5accc7b1ff33e98ec13f))
 
 
 
