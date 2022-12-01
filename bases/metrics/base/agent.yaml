@@ -14,9 +14,10 @@ metrics:
       wal_truncate_frequency: ${PROM_WAL_TRUNCATE_FREQUENCY}
       remote_flush_deadline: ${PROM_REMOTE_FLUSH_DEADLINE}
       remote_write:
-        - url: ${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_CUSTOMER}.${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/prometheus
-          authorization:
-            credentials: ${OBSERVE_TOKEN}
+        - url: ${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/prometheus
+          basic_auth:
+            username: ${OBSERVE_CUSTOMER}
+            password: ${OBSERVE_TOKEN}
           remote_timeout: ${PROM_REMOTE_TIMEOUT}
           queue_config:
             batch_send_deadline: ${PROM_BATCH_SEND_DEADLINE}

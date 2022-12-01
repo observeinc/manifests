@@ -37,7 +37,7 @@ spec:
           args:
             - -healthz-addr=:5171
             - -metrics-addr=:9090
-            - -o=$(OBSERVE_COLLECTOR_SCHEME)://$(OBSERVE_TOKEN)@$(OBSERVE_CUSTOMER).$(OBSERVE_COLLECTOR_HOST):$(OBSERVE_COLLECTOR_PORT)/v1/http/kubernetes/events?clusterUid=$(OBSERVE_CLUSTER)
+            - -o=$(OBSERVE_COLLECTOR_SCHEME)://$(OBSERVE_CUSTOMER):$(OBSERVE_TOKEN)@$(OBSERVE_COLLECTOR_HOST):$(OBSERVE_COLLECTOR_PORT)/v1/http/kubernetes/events?clusterUid=$(OBSERVE_CLUSTER)
           ports:
             - containerPort: 5171
             - containerPort: 9090
