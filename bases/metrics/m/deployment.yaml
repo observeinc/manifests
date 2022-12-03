@@ -30,6 +30,7 @@ spec:
           image: grafana/agent:latest
           imagePullPolicy: IfNotPresent
           args:
+            - -server.http.address=0.0.0.0:12345
             - -config.file=/etc/agent/agent.yaml
             - -config.expand-env
             - -disable-reporting
