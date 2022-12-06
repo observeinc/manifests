@@ -19,12 +19,12 @@ jobs:
       matrix:
         kubectl_version:
           - v1.25.2    # leading edge  (EOL 2023-10-27)
-          - v1.22.1    # trailing edge (EOL 2022-10-28)
-          - v1.16.15   # laggard       (EOL 2020-04-11)
+          - v1.23.12   # trailing edge (EOL 2023-02-23)
+          - v1.19.16   # laggard       (EOL 2021-10-28)
         node_version:
           - kindest/node:v1.25.2@sha256:9be91e9e9cdf116809841fc77ebdb8845443c4c72fe5218f3ae9eb57fdb4bace
-          - kindest/node:v1.21.1@sha256:e0bf222d7dd1589075117c51740903017b328c59ffb0c3d97187a2b3de1f92b3
-          - kindest/node:v1.16.15@sha256:64bac16b83b6adfd04ea3fbcf6c9b5b893277120f2b2cbf9f5fa3e5d4c2260cc
+          - kindest/node:v1.23.12@sha256:9402cf1330bbd3a0d097d2033fa489b2abe40d479cc5ef47d0b6a6960613148a
+          - kindest/node:v1.19.16@sha256:a146f9819fece706b337d34125bbd5cb8ae4d25558427bf2fa3ee8ad231236f2
         kustomize_dir:
           - stack/m
           - stack/xs
