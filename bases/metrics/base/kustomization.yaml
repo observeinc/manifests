@@ -29,6 +29,7 @@ configMapGenerator:
       - PROM_REMOTE_FLUSH_DEADLINE=1m
       - PROM_SCRAPE_INTERVAL=15s
       - PROM_SCRAPE_TIMEOUT=10s
+      - PROM_SCRAPE_BODY_SIZE_LIMIT=50MB
       - PROM_SCRAPE_CADVISOR_ACTION=keep
       # the following metrics are exported with 0 values in default cadvisor installs
       # see
@@ -48,4 +49,5 @@ configMapGenerator:
       - PROM_SCRAPE_RESOURCE_ACTION=keep
       - PROM_SCRAPE_RESOURCE_METRIC_DROP_REGEX=
       - PROM_SCRAPE_RESOURCE_METRIC_KEEP_REGEX=(.*)
+      - PROM_SCRAPE_SAMPLE_LIMIT=100000
       - PROM_WAL_TRUNCATE_FREQUENCY=30m

@@ -31,6 +31,8 @@ metrics:
       scrape_configs:
         - job_name: "integrations/kubernetes/pods"
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+          sample_limit: ${PROM_SCRAPE_SAMPLE_LIMIT}
+          body_size_limit: ${PROM_SCRAPE_BODY_SIZE_LIMIT}
           kubernetes_sd_configs:
             - role: pod
           relabel_configs:
@@ -128,6 +130,8 @@ metrics:
 
         - job_name: "integrations/kubernetes/kubelet"
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+          sample_limit: ${PROM_SCRAPE_SAMPLE_LIMIT}
+          body_size_limit: ${PROM_SCRAPE_BODY_SIZE_LIMIT}
           kubernetes_sd_configs:
             - role: node
           relabel_configs:
@@ -156,6 +160,8 @@ metrics:
 
         - job_name: "integrations/kubernetes/resource"
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+          sample_limit: ${PROM_SCRAPE_SAMPLE_LIMIT}
+          body_size_limit: ${PROM_SCRAPE_BODY_SIZE_LIMIT}
           kubernetes_sd_configs:
             - role: node
           relabel_configs:
@@ -184,6 +190,8 @@ metrics:
 
         - job_name: "integrations/kubernetes/cadvisor"
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+          sample_limit: ${PROM_SCRAPE_SAMPLE_LIMIT}
+          body_size_limit: ${PROM_SCRAPE_BODY_SIZE_LIMIT}
           kubernetes_sd_configs:
             - role: node
           relabel_configs:
