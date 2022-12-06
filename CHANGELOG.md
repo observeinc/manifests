@@ -1,3 +1,19 @@
+# [0.22.0](https://github.com/observeinc/manifests/compare/v0.21.0...v0.22.0) (2022-12-06)
+
+
+### Bug Fixes
+
+* **logs:** bump fluentbit to 1.9.10 ([#87](https://github.com/observeinc/manifests/issues/87)) ([a2ddecf](https://github.com/observeinc/manifests/commit/a2ddecfe168ba072b78f253bbf13fd99490c57b9))
+* **metrics:** export prom metrics from grafana-agent ([#88](https://github.com/observeinc/manifests/issues/88)) ([9a3c33f](https://github.com/observeinc/manifests/commit/9a3c33faab57a48c73e495eed65aceb308d6b0eb))
+
+
+### Features
+
+* **logs:** allow disabling inotify_watcher ([#91](https://github.com/observeinc/manifests/issues/91)) ([ff3ecfc](https://github.com/observeinc/manifests/commit/ff3ecfcfde96e2db436bc6175a05f3ebf90874e5))
+* **metrics:** protect against cardinality explosion ([#89](https://github.com/observeinc/manifests/issues/89)) ([fa12f7a](https://github.com/observeinc/manifests/commit/fa12f7a1cf474e35aae75fe0da35847f2a45e743))
+
+
+
 # [0.21.0](https://github.com/observeinc/manifests/compare/v0.20.0...v0.21.0) (2022-11-15)
 
 
@@ -49,20 +65,6 @@
 * add proxy example ([#70](https://github.com/observeinc/manifests/issues/70)) ([78d5c57](https://github.com/observeinc/manifests/commit/78d5c57f8e03fdacd180cbb0a9c966db2e3b80a2))
 * **events:** kube-state-events v0.9.0 ([5c6bf06](https://github.com/observeinc/manifests/commit/5c6bf06c0105e62f7b31180f04cc44e0bfbe0e23))
 * **logs:** add optional grep filter ([#66](https://github.com/observeinc/manifests/issues/66)) ([979eecb](https://github.com/observeinc/manifests/commit/979eecb44351b7aa2a5fa0cd91cd53c0f90b83d3))
-
-
-
-# [0.17.0](https://github.com/observeinc/manifests/compare/v0.16.0...v0.17.0) (2022-09-20)
-
-
-### Bug Fixes
-
-* **logs:** fallback to legacy DNS resolver ([#68](https://github.com/observeinc/manifests/issues/68)) ([9231edb](https://github.com/observeinc/manifests/commit/9231edb76c14677740f680dfbd5c78c9c491e0cd))
-
-
-### Features
-
-* **traces:** add probabilistic sampler ([#67](https://github.com/observeinc/manifests/issues/67)) ([5e8cac3](https://github.com/observeinc/manifests/commit/5e8cac3927db5e68a6f6f0c10ce78b3318e4cf04))
 
 
 
