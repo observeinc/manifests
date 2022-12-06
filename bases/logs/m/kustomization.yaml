@@ -45,4 +45,4 @@ configMapGenerator:
 
 images:
   - name: fluent/fluent-bit
-    newTag: '1.9.8'
+    newTag: '1.9.10'
