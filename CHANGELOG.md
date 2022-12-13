@@ -1,3 +1,12 @@
+# [0.23.0](https://github.com/observeinc/manifests/compare/v0.22.0...v0.23.0) (2022-12-13)
+
+
+### Features
+
+* **events:** upgrade kube-state-events to v0.9.1 ([#93](https://github.com/observeinc/manifests/issues/93)) ([5af20b9](https://github.com/observeinc/manifests/commit/5af20b9da76ab465e5e8ddae75de2abf89a53b12))
+
+
+
 # [0.22.0](https://github.com/observeinc/manifests/compare/v0.21.0...v0.22.0) (2022-12-06)
 
 
@@ -49,22 +58,6 @@
 ### Features
 
 * **traces:** bump otel-collector-contrib to 0.61.0 ([278dfb8](https://github.com/observeinc/manifests/commit/278dfb879e3d83c9f27ce355d4c0137f3c823cbf))
-
-
-
-# [0.18.0](https://github.com/observeinc/manifests/compare/v0.17.0...v0.18.0) (2022-10-04)
-
-
-### Bug Fixes
-
-* **metrics:** bump grafana-agent to 0.27.1 ([#61](https://github.com/observeinc/manifests/issues/61)) ([fec0eb5](https://github.com/observeinc/manifests/commit/fec0eb5587dccea3dd78709d19a1dc9ae2880ebb))
-
-
-### Features
-
-* add proxy example ([#70](https://github.com/observeinc/manifests/issues/70)) ([78d5c57](https://github.com/observeinc/manifests/commit/78d5c57f8e03fdacd180cbb0a9c966db2e3b80a2))
-* **events:** kube-state-events v0.9.0 ([5c6bf06](https://github.com/observeinc/manifests/commit/5c6bf06c0105e62f7b31180f04cc44e0bfbe0e23))
-* **logs:** add optional grep filter ([#66](https://github.com/observeinc/manifests/issues/66)) ([979eecb](https://github.com/observeinc/manifests/commit/979eecb44351b7aa2a5fa0cd91cd53c0f90b83d3))
 
 
 
