@@ -1,3 +1,12 @@
+## [0.23.1](https://github.com/observeinc/manifests/compare/v0.23.0...v0.23.1) (2023-01-12)
+
+
+### Bug Fixes
+
+* **traces:** Update trace deployment to include environment k8s attributes ([d36505e](https://github.com/observeinc/manifests/commit/d36505e8834ccb4c9b4053b25187d3682b4b4543))
+
+
+
 # [0.23.0](https://github.com/observeinc/manifests/compare/v0.22.0...v0.23.0) (2022-12-13)
 
 
@@ -49,15 +58,6 @@
 ### Features
 
 * **traces:** add deployment for stack/otel/l ([76d6226](https://github.com/observeinc/manifests/commit/76d6226852393fa1f37eb4db89b21a31304d9e15))
-
-
-
-# [0.19.0](https://github.com/observeinc/manifests/compare/v0.18.0...v0.19.0) (2022-10-18)
-
-
-### Features
-
-* **traces:** bump otel-collector-contrib to 0.61.0 ([278dfb8](https://github.com/observeinc/manifests/commit/278dfb879e3d83c9f27ce355d4c0137f3c823cbf))
 
 
 
