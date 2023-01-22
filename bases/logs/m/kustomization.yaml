@@ -39,6 +39,7 @@ configMapGenerator:
       - FB_GREP_MATCH_TAG="nothing"
       - FB_GREP_EXCLUDE="nomatch ^$"
       - FB_INOTIFY_WATCHER=true
+      - FB_MULTILINE_PARSER="cri"
       - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
       - OBSERVE_COLLECTOR_PORT=443
       - OBSERVE_COLLECTOR_TLS=on
