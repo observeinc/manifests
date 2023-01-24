@@ -1,3 +1,12 @@
+## [0.23.2](https://github.com/observeinc/manifests/compare/v0.23.1...v0.23.2) (2023-01-24)
+
+
+### Bug Fixes
+
+* fix two timeouts on make apply ([acf66e6](https://github.com/observeinc/manifests/commit/acf66e63cc79e61c1f2882532f9121804c6bb690))
+
+
+
 ## [0.23.1](https://github.com/observeinc/manifests/compare/v0.23.0...v0.23.1) (2023-01-12)
 
 
@@ -44,20 +53,6 @@
 ### Features
 
 * **metrics:** bump grafana-agent to 0.28.1 ([#85](https://github.com/observeinc/manifests/issues/85)) ([e517434](https://github.com/observeinc/manifests/commit/e5174347e4d27113c3d4b8ea73d7cd004fd3af45))
-
-
-
-# [0.20.0](https://github.com/observeinc/manifests/compare/v0.19.0...v0.20.0) (2022-11-08)
-
-
-### Bug Fixes
-
-* **traces:** xl stack now points to bases/traces/otel/l for traces ([c3d1dd2](https://github.com/observeinc/manifests/commit/c3d1dd2fbfbd7cdcb66f0dd016c20d97eb2dcb5c))
-
-
-### Features
-
-* **traces:** add deployment for stack/otel/l ([76d6226](https://github.com/observeinc/manifests/commit/76d6226852393fa1f37eb4db89b21a31304d9e15))
 
 
 
