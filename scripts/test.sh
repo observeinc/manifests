@@ -12,7 +12,7 @@ r="[m"
 
 KUSTOMIZE_DIR="${KUSTOMIZE_DIR:=stack/otel}"
 CLUSTER_NAME="${CLUSTER_NAME:=unknown}"
-WAIT_TIMEOUT="${WAIT_TIMEOUT:=60s}"
+WAIT_TIMEOUT="${WAIT_TIMEOUT:=120s}"
 
 usage() {
     echo "${B}$0 [-hv] <command>${r}"
@@ -37,6 +37,10 @@ do_apply() {
     check_context
 
     DEBUG "$(kubectl cluster-info)"
+
+    INFO "Ensuring nodes are ready"
+    RESULT=$(kubectl wait --for=condition=Ready nodes --all --timeout=60s)
+    DEBUG "$RESULT"
 
     INFO "Applying kustomized directory"
     RESULT=$(kubectl kustomize ${KUSTOMIZE_DIR} | grep -v "cpu:" | grep -v "memory:" | kubectl apply -f -)
@@ -92,6 +96,17 @@ EOF
     )
 
     DEBUG "$RESULT"
+
+    # if pods are not yet scheduled, the following kubectl wait command will fail
+    INFO "Waiting on pods to be scheduled"
+    for t in 2 4 8 16
+    do
+        if kubectl get pods -n observe 2>&1 | grep -q 'No resources found'; then
+            sleep $t
+        else
+            break
+        fi
+    done
 
     INFO "Waiting on pods to be ready"
     if kubectl wait pods -n observe --for=condition=Ready --all --timeout=${WAIT_TIMEOUT}; then
