@@ -1,3 +1,12 @@
+# [0.24.0](https://github.com/observeinc/manifests/compare/v0.23.2...v0.24.0) (2023-01-31)
+
+
+### Features
+
+* allow enabling of storage metrics ([#98](https://github.com/observeinc/manifests/issues/98)) ([3356dae](https://github.com/observeinc/manifests/commit/3356dae94f137d7a3e32d1bdee8bbdbcb0aa6c2b))
+
+
+
 ## [0.23.2](https://github.com/observeinc/manifests/compare/v0.23.1...v0.23.2) (2023-01-24)
 
 
@@ -38,21 +47,6 @@
 
 * **logs:** allow disabling inotify_watcher ([#91](https://github.com/observeinc/manifests/issues/91)) ([ff3ecfc](https://github.com/observeinc/manifests/commit/ff3ecfcfde96e2db436bc6175a05f3ebf90874e5))
 * **metrics:** protect against cardinality explosion ([#89](https://github.com/observeinc/manifests/issues/89)) ([fa12f7a](https://github.com/observeinc/manifests/commit/fa12f7a1cf474e35aae75fe0da35847f2a45e743))
-
-
-
-# [0.21.0](https://github.com/observeinc/manifests/compare/v0.20.0...v0.21.0) (2022-11-15)
-
-
-### Bug Fixes
-
-* **traces:** reintroduce observe- prefix ([#84](https://github.com/observeinc/manifests/issues/84)) ([094cd2a](https://github.com/observeinc/manifests/commit/094cd2a1e2b6d2880f67a2caea097a41658d0d78))
-* **traces:** remove superfluous prefixing ([#86](https://github.com/observeinc/manifests/issues/86)) ([073ab25](https://github.com/observeinc/manifests/commit/073ab258e5439f410183a8cabcda758416e013b5)), closes [#84](https://github.com/observeinc/manifests/issues/84)
-
-
-### Features
-
-* **metrics:** bump grafana-agent to 0.28.1 ([#85](https://github.com/observeinc/manifests/issues/85)) ([e517434](https://github.com/observeinc/manifests/commit/e5174347e4d27113c3d4b8ea73d7cd004fd3af45))
 
 
 
