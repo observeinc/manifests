@@ -95,8 +95,11 @@ The `integrations/kubernetes/pods` job uses service discovery to determine what 
      annotations:
        prometheus.io/port: "9999"
     ```
-- expose the metrics endpoint through a port with a name ending with metrics. For example:
+- expose the metrics endpoint through a port with a name matching a configured regex (`.*metrics` by default). For example:
+    ```yaml
+    - PROM_SCRAPE_POD_PORT_KEEP_REGEX=.*metrics
     ```
+    ```yaml
     ports:
     - containerPort: 9999
       name: metrics

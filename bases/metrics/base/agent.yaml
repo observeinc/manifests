@@ -37,16 +37,18 @@ metrics:
             - role: pod
           relabel_configs:
             - action: ${PROM_SCRAPE_POD_ACTION}
-            # Drop any endpoint whose pod port name does not end with metrics, or does not have an explicit prometheus port annotation.
+            # Drop anything matching the configured namespace.
             - action: 'drop'
               source_labels: ['__meta_kubernetes_namespace']
               regex: ${PROM_SCRAPE_POD_NAMESPACE_DROP_REGEX}
+            # Drop anything not matching the configured namespace.
             - action: 'keep'
               source_labels: ['__meta_kubernetes_namespace']
               regex: ${PROM_SCRAPE_POD_NAMESPACE_KEEP_REGEX}
+            # Drop endpoints without one of: a port name suffixed with the configured regex, or an explicit prometheus port annotation.
             - action: 'keep'
               source_labels: ['__meta_kubernetes_pod_container_port_name', '__meta_kubernetes_pod_annotation_prometheus_io_port']
-              regex: '.*(metrics;|;\d+)'
+              regex: '(${PROM_SCRAPE_POD_PORT_KEEP_REGEX};|.*;\d+)'
             # Drop pods without a name label.
             # - action: 'drop'
             #   regex: ''
