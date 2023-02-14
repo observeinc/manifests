@@ -1,3 +1,12 @@
+# [0.25.0](https://github.com/observeinc/manifests/compare/v0.24.0...v0.25.0) (2023-02-14)
+
+
+### Features
+
+* **metrics:** make metrics endpoint port name matching configurable ([91b435a](https://github.com/observeinc/manifests/commit/91b435a76139d6a1ee2b1ba3da3cbc9cc82e44ba))
+
+
+
 # [0.24.0](https://github.com/observeinc/manifests/compare/v0.23.2...v0.24.0) (2023-01-31)
 
 
@@ -31,22 +40,6 @@
 ### Features
 
 * **events:** upgrade kube-state-events to v0.9.1 ([#93](https://github.com/observeinc/manifests/issues/93)) ([5af20b9](https://github.com/observeinc/manifests/commit/5af20b9da76ab465e5e8ddae75de2abf89a53b12))
-
-
-
-# [0.22.0](https://github.com/observeinc/manifests/compare/v0.21.0...v0.22.0) (2022-12-06)
-
-
-### Bug Fixes
-
-* **logs:** bump fluentbit to 1.9.10 ([#87](https://github.com/observeinc/manifests/issues/87)) ([a2ddecf](https://github.com/observeinc/manifests/commit/a2ddecfe168ba072b78f253bbf13fd99490c57b9))
-* **metrics:** export prom metrics from grafana-agent ([#88](https://github.com/observeinc/manifests/issues/88)) ([9a3c33f](https://github.com/observeinc/manifests/commit/9a3c33faab57a48c73e495eed65aceb308d6b0eb))
-
-
-### Features
-
-* **logs:** allow disabling inotify_watcher ([#91](https://github.com/observeinc/manifests/issues/91)) ([ff3ecfc](https://github.com/observeinc/manifests/commit/ff3ecfcfde96e2db436bc6175a05f3ebf90874e5))
-* **metrics:** protect against cardinality explosion ([#89](https://github.com/observeinc/manifests/issues/89)) ([fa12f7a](https://github.com/observeinc/manifests/commit/fa12f7a1cf474e35aae75fe0da35847f2a45e743))
 
 
 
