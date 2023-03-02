@@ -1,4 +1,7 @@
 ---
+server:
+  log_level: ${PROM_LOG_LEVEL}
+
 metrics:
   wal_directory: /tmp/grafana-agent-wal
   global:
