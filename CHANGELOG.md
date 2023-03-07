@@ -1,3 +1,12 @@
+# [0.26.0](https://github.com/observeinc/manifests/compare/v0.25.0...v0.26.0) (2023-03-07)
+
+
+### Features
+
+* **metrics:** allow configuration of agent log level ([#100](https://github.com/observeinc/manifests/issues/100)) ([5795381](https://github.com/observeinc/manifests/commit/579538110bd91bc0b23746e46db63d7ea6eafe03))
+
+
+
 # [0.25.0](https://github.com/observeinc/manifests/compare/v0.24.0...v0.25.0) (2023-02-14)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * **traces:** Update trace deployment to include environment k8s attributes ([d36505e](https://github.com/observeinc/manifests/commit/d36505e8834ccb4c9b4053b25187d3682b4b4543))
-
-
-
-# [0.23.0](https://github.com/observeinc/manifests/compare/v0.22.0...v0.23.0) (2022-12-13)
-
-
-### Features
-
-* **events:** upgrade kube-state-events to v0.9.1 ([#93](https://github.com/observeinc/manifests/issues/93)) ([5af20b9](https://github.com/observeinc/manifests/commit/5af20b9da76ab465e5e8ddae75de2abf89a53b12))
 
 
 
