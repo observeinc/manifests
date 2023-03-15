@@ -41,7 +41,7 @@ kubectl kustomize github.com/observeinc/manifests//stack
 
 Observe uses versioned manifests. To install or uninstall a specific version, add the version parameter to the URL, e.g:
 
-$ kubectl apply -k 'https://github.com/observeinc/manifests/stack?ref=v0.15.0'
+$ kubectl apply -k 'https://github.com/observeinc/manifests/stack?ref=v0.25.0'
 
 You can find the list of published versions on the
 [releases](https://github.com/observeinc/manifests/releases) page.
@@ -69,10 +69,10 @@ By default, we attempt to choose defaults which have a wide operating
 range. However, some clusters will inevitably fall outside this range. We
 provide additional configurations that are more appropriate for these extremes:
 
-- `github.com/observeinc//stack/xs` - intended to run on small clusters such as development environments, where resources are scarce and reliability is less of a concern
-- `github.com/observeinc//stack/m` - the default sizing, intended to run on clusters with hundreds of pods. Start here and adjust up or down accordingly.
-- `github.com/observeinc//stack/l` - used for similar sized clusters as `m`, but with higher throughput in logs, metrics or events. This may be due to verbose logging, high cardinality metrics or frequent cluster reconfiguration.
-- `github.com/observeinc//stack/xl` - intended to run on large clusters with 100+ nodes. Collection is preferentially performed using daemonsets rather than deployments.
+- `github.com/observeinc/manifests//stack/xs` - intended to run on small clusters such as development environments, where resources are scarce and reliability is less of a concern
+- `github.com/observeinc/manifests//stack/m` - the default sizing, intended to run on clusters with hundreds of pods. Start here and adjust up or down accordingly.
+- `github.com/observeinc/manifests//stack/l` - used for similar sized clusters as `m`, but with higher throughput in logs, metrics or events. This may be due to verbose logging, high cardinality metrics or frequent cluster reconfiguration.
+- `github.com/observeinc/manifests//stack/xl` - intended to run on large clusters with 100+ nodes. Collection is preferentially performed using daemonsets rather than deployments.
 
 Resource limits for each sizing is as follows:
 
