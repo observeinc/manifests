@@ -34,10 +34,9 @@ processors:
         - k8s.pod.name
         - k8s.namespace.name
     pod_association:
-      - sources:
-        - from: resource_attribute
-          name: k8s.pod.ip
-        - from: connection
+      - from: resource_attribute
+        name: k8s.pod.ip
+      - from: connection
   batch:
   memory_limiter:
     # 80% of maximum memory up to 2G
