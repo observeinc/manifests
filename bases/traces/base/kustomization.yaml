@@ -33,7 +33,3 @@ configMapGenerator:
       - extra.yaml=
     files:
       - config.yaml
-
-images:
-  - name: otel/opentelemetry-collector-contrib
-    newTag: '0.61.0'

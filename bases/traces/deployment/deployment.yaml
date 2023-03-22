@@ -8,7 +8,6 @@ metadata:
     helm.sh/chart: opentelemetry-collector-0.37.2
     app.kubernetes.io/name: opentelemetry-collector
     app.kubernetes.io/instance: observe-traces
-    app.kubernetes.io/version: "0.62.1"
 spec:
   replicas: 10
   selector:
@@ -29,7 +28,6 @@ spec:
         component: standalone-collector
 
     spec:
-
       serviceAccountName: traces
       securityContext:
         {}
@@ -47,7 +45,7 @@ spec:
             capabilities:
               drop:
                 - all
-          image: "otel/opentelemetry-collector-contrib:0.62.1"
+          image: "otel/opentelemetry-collector-contrib"
           imagePullPolicy: IfNotPresent
           ports:
             - name: zpages
