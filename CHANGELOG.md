@@ -1,3 +1,13 @@
+## [0.26.2](https://github.com/observeinc/manifests/compare/v0.26.1...v0.26.2) (2023-04-11)
+
+
+### Bug Fixes
+
+* **winlogs:** pass token in query parameter ([#106](https://github.com/observeinc/manifests/issues/106)) ([02c1ce8](https://github.com/observeinc/manifests/commit/02c1ce8cceffedc42d05c9dd7c79b4d08d707db8))
+* **winlogs:** record node name in logs ([#105](https://github.com/observeinc/manifests/issues/105)) ([67a12d9](https://github.com/observeinc/manifests/commit/67a12d9ec6b6ec79e43b2106aaa6dcf2d432d843))
+
+
+
 ## [0.26.1](https://github.com/observeinc/manifests/compare/v0.26.0...v0.26.1) (2023-03-28)
 
 
@@ -32,15 +42,6 @@
 ### Features
 
 * allow enabling of storage metrics ([#98](https://github.com/observeinc/manifests/issues/98)) ([3356dae](https://github.com/observeinc/manifests/commit/3356dae94f137d7a3e32d1bdee8bbdbcb0aa6c2b))
-
-
-
-## [0.23.2](https://github.com/observeinc/manifests/compare/v0.23.1...v0.23.2) (2023-01-24)
-
-
-### Bug Fixes
-
-* fix two timeouts on make apply ([acf66e6](https://github.com/observeinc/manifests/commit/acf66e63cc79e61c1f2882532f9121804c6bb690))
 
 
 
