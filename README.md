@@ -57,7 +57,7 @@ We provide four "base" components:
 
 - `bases/events` - responsible for collecting Kubernetes state using `kube-state-events`
 - `bases/logs` - responsible for collecting container logs using `fluent-bit`
-- `bases/metrics` - responsible for collecting container logs using `grafana-agent`
+- `bases/metrics` - responsible for collecting metrics using `grafana-agent`
 - `bases/traces` - responsible for collecting traces using `otel-collector`
 
 We compose these base layers into overlays. Our default `stack` overlay
