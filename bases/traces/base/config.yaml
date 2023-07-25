@@ -11,10 +11,6 @@ exporters:
       queue_size: ${OTEL_QUEUE_SIZE}
     retry_on_failure:
       enabled: ${OTEL_RETRY_ON_FAILURE}
-  prometheusremotewrite:
-    endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_CUSTOMER}.${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/prometheus"
-    headers:
-      authorization: "Bearer ${OBSERVE_TOKEN}"
 extensions:
   health_check: {}
   zpages: {}
@@ -63,4 +59,4 @@ service:
     metrics:
       receivers: [otlp]
       processors: [resource, k8sattributes, memory_limiter, batch]
-      exporters: [prometheusremotewrite, logging]
+      exporters: [otlphttp, logging]
