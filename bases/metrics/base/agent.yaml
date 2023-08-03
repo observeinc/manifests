@@ -7,8 +7,6 @@ metrics:
   global:
     scrape_interval: ${PROM_SCRAPE_INTERVAL}
     scrape_timeout: ${PROM_SCRAPE_TIMEOUT}
-    external_labels:
-      clusterUid: ${OBSERVE_CLUSTER}
   configs:
     - name: integrations
       host_filter: ${PROM_HOST_FILTER}
@@ -17,7 +15,7 @@ metrics:
       wal_truncate_frequency: ${PROM_WAL_TRUNCATE_FREQUENCY}
       remote_flush_deadline: ${PROM_REMOTE_FLUSH_DEADLINE}
       remote_write:
-        - url: ${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_CUSTOMER}.${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/prometheus
+        - url: ${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_CUSTOMER}.${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/prometheus?clusterUid=${OBSERVE_CLUSTER}
           authorization:
             credentials: ${OBSERVE_TOKEN}
           remote_timeout: ${PROM_REMOTE_TIMEOUT}
