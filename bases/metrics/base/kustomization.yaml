@@ -32,13 +32,13 @@ configMapGenerator:
       - PROM_SCRAPE_TIMEOUT=10s
       - PROM_SCRAPE_BODY_SIZE_LIMIT=50MB
       - PROM_SCRAPE_CADVISOR_ACTION=keep
-      # the following metrics are exported with 0 values in default cadvisor installs
-      # see
+      # The following metrics are exported with 0 values in default cadvisor installs. See:
       # - https://github.com/kubernetes/kubernetes/issues/60279
       # - https://github.com/google/cadvisor/issues/1672
       - PROM_SCRAPE_CADVISOR_METRIC_DROP_REGEX=container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
-      # these are the metrics we use for our default boards
-      - PROM_SCRAPE_CADVISOR_METRIC_KEEP_REGEX=container_(cpu_cfs_.*|spec_.*|cpu_cores|cpu_usage_seconds_total|memory_working_set_bytes|memory_usage_bytes|network_transmit_.*|network_receive_.*|fs_writes_total|fs_reads_total|file_descriptors)|machine_(cpu_cores|memory_bytes)
+      - PROM_SCRAPE_CADVISOR_METRIC_KEEP_REGEX=container_(cpu_.*|spec_.*|memory_.*|network_.*|fs_.*|file_descriptors)|machine_(cpu_cores|memory_bytes)
+      # The following regex matches the default Kubernetes board metrics:
+      # - PROM_SCRAPE_CADVISOR_METRIC_KEEP_REGEX=container_(cpu_cfs_.*|spec_.*|cpu_cores|cpu_usage_seconds_total|memory_working_set_bytes|memory_usage_bytes|network_transmit_.*|network_receive_.*|fs_writes_total|fs_reads_total|file_descriptors)|machine_(cpu_cores|memory_bytes)
       - PROM_SCRAPE_KUBELET_ACTION=drop
       - PROM_SCRAPE_KUBELET_METRIC_DROP_REGEX=
       - PROM_SCRAPE_KUBELET_METRIC_KEEP_REGEX=(.*)

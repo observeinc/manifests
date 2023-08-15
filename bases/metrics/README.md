@@ -45,6 +45,12 @@ This variable determines whether we collect any data for the job. We can either 
 
 For each job, we allow users to provide an exclusion and inclusion regex on metric names.
 
+Note that each of the "drop" and "keep" actions are performed for each set
+of metrics. For a metric to be included, it must both *not* match the
+"drop" regex, as well as match the "keep" regex.
+
+See https://prometheus.io/docs/prometheus/latest/configuration/configuration for details.
+
 The exact relabeling magic is contained here:
 
 ```yaml
@@ -63,8 +69,7 @@ The defaults for each job are as follows:
 
 ```bash
 - PROM_SCRAPE_CADVISOR_METRIC_DROP_REGEX=container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
-# these are the metrics we use for our default boards
-- PROM_SCRAPE_CADVISOR_METRIC_KEEP_REGEX=container_(cpu_cfs_.*|spec_.*|cpu_cores|cpu_usage_seconds_total|memory_working_set_bytes|memory_usage_bytes|network_transmit_.*|network_receive_.*|fs_writes_total|fs_reads_total|file_descriptors)|machine_(cpu_cores|memory_bytes)
+- PROM_SCRAPE_CADVISOR_METRIC_KEEP_REGEX=container_(cpu_.*|spec_.*|memory_.*|network_.*|fs_.*|file_descriptors)|machine_(cpu_cores|memory_bytes)
 - PROM_SCRAPE_KUBELET_METRIC_DROP_REGEX=
 - PROM_SCRAPE_KUBELET_METRIC_KEEP_REGEX=(.*)
 - PROM_SCRAPE_POD_METRIC_DROP_REGEX=.*bucket
@@ -73,7 +78,8 @@ The defaults for each job are as follows:
 - PROM_SCRAPE_RESOURCE_METRIC_KEEP_REGEX=(.*)
 ```
 
-For CAdvisor we started by having an exclusion regex, and then added an inclusion regex to be more restrictive. For Pod Metrics we dropped histogram data because they represent a large proportion of metrics which historically we could not make use of. These defaults may be revisited.
+To restrict CAdvisor metrics to the set used by the default Kubernetes board, see the commented line in kustomization.yaml.
+For Pod Metrics we drop histogram data because they represent a large proportion of metrics which historically we could not make use of. These defaults may be revisited.
 
 ### PROM_SCRAPE_POD_NAMESPACE_{ACTION}_REGEX
 
