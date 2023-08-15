@@ -1,3 +1,12 @@
+## [0.26.3](https://github.com/observeinc/manifests/compare/v0.26.2...v0.26.3) (2023-08-15)
+
+
+### Bug Fixes
+
+* add clusteruid to prometheus endpoint ([f25119c](https://github.com/observeinc/manifests/commit/f25119c5f30323ff9ce34b27077fd8f65e8305f6))
+
+
+
 ## [0.26.2](https://github.com/observeinc/manifests/compare/v0.26.1...v0.26.2) (2023-04-11)
 
 
@@ -33,15 +42,6 @@
 ### Features
 
 * **metrics:** make metrics endpoint port name matching configurable ([91b435a](https://github.com/observeinc/manifests/commit/91b435a76139d6a1ee2b1ba3da3cbc9cc82e44ba))
-
-
-
-# [0.24.0](https://github.com/observeinc/manifests/compare/v0.23.2...v0.24.0) (2023-01-31)
-
-
-### Features
-
-* allow enabling of storage metrics ([#98](https://github.com/observeinc/manifests/issues/98)) ([3356dae](https://github.com/observeinc/manifests/commit/3356dae94f137d7a3e32d1bdee8bbdbcb0aa6c2b))
 
 
 
