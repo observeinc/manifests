@@ -1,3 +1,12 @@
+# [0.27.0](https://github.com/observeinc/manifests/compare/v0.26.3...v0.27.0) (2023-08-22)
+
+
+### Features
+
+* **metrics:** update default cadvisor keep regex ([5602fff](https://github.com/observeinc/manifests/commit/5602fff8e3f6a8dcbcc92c9b49bde9ee6857b93e))
+
+
+
 ## [0.26.3](https://github.com/observeinc/manifests/compare/v0.26.2...v0.26.3) (2023-08-15)
 
 
@@ -33,15 +42,6 @@
 ### Features
 
 * **metrics:** allow configuration of agent log level ([#100](https://github.com/observeinc/manifests/issues/100)) ([5795381](https://github.com/observeinc/manifests/commit/579538110bd91bc0b23746e46db63d7ea6eafe03))
-
-
-
-# [0.25.0](https://github.com/observeinc/manifests/compare/v0.24.0...v0.25.0) (2023-02-14)
-
-
-### Features
-
-* **metrics:** make metrics endpoint port name matching configurable ([91b435a](https://github.com/observeinc/manifests/commit/91b435a76139d6a1ee2b1ba3da3cbc9cc82e44ba))
 
 
 
