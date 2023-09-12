@@ -35,7 +35,7 @@ spec:
             - -config.expand-env
             - -disable-reporting
           command:
-            - /bin/agent
+            - /bin/grafana-agent
           envFrom:
             - configMapRef:
                 name: grafana-agent-env
