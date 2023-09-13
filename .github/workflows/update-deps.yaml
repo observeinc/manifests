@@ -18,7 +18,10 @@ jobs:
         uses: updatecli/updatecli-action@v2
 
       - name: Run updatecli
-        run: updatecli apply --config updatecli/
+        run: |
+          for config in updatecli/*.yaml; do
+            updatecli apply --config $config
+          done
         env:
           UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
