@@ -35,5 +35,5 @@ targets:
       key: "images[0].newTag"
     sourceid: FluentBitRelease
     transformers:
-      - addprefix: "'"
+      - addprefix: "'v"
       - addsuffix: "'"
