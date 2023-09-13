@@ -24,14 +24,14 @@ conditions:
     name: "Check if there is a difference in version"
     kind: shell
     spec:
-      command: sh -c '! grep -q {{ source `FluentBitRelease` }} bases/metrics/m/kustomization.yaml'
+      command: sh -c '! grep -q {{ source `FluentBitRelease` }} bases/logs/m/kustomization.yaml'
 
 targets:
   updateKustomizationFile:
     name: "Update kustomization.yaml"
     kind: yaml
     spec:
-      file: "bases/metrics/m/kustomization.yaml"
+      file: "bases/logs/m/kustomization.yaml"
       key: "images[0].newTag"
     sourceid: FluentBitRelease
     transformers:
