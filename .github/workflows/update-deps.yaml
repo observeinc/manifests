@@ -11,7 +11,7 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Install and run updatecli
       - name: Setup updatecli
@@ -27,7 +27,7 @@ jobs:
 
       # Use Peter Evans Pull Request Action to create a pull request
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore(deps): Update dependencies"
