@@ -1,3 +1,12 @@
+## [0.28.1](https://github.com/observeinc/manifests/compare/v0.28.0...v0.28.1) (2023-09-26)
+
+
+### Bug Fixes
+
+* **traces:** use otel metrics ([#110](https://github.com/observeinc/manifests/issues/110)) ([c6be492](https://github.com/observeinc/manifests/commit/c6be4926362a36cda00ed1dbe272f4e648d25bf5))
+
+
+
 # [0.28.0](https://github.com/observeinc/manifests/compare/v0.27.0...v0.28.0) (2023-09-13)
 
 
@@ -38,16 +47,6 @@
 
 * **winlogs:** pass token in query parameter ([#106](https://github.com/observeinc/manifests/issues/106)) ([02c1ce8](https://github.com/observeinc/manifests/commit/02c1ce8cceffedc42d05c9dd7c79b4d08d707db8))
 * **winlogs:** record node name in logs ([#105](https://github.com/observeinc/manifests/issues/105)) ([67a12d9](https://github.com/observeinc/manifests/commit/67a12d9ec6b6ec79e43b2106aaa6dcf2d432d843))
-
-
-
-## [0.26.1](https://github.com/observeinc/manifests/compare/v0.26.0...v0.26.1) (2023-03-28)
-
-
-### Bug Fixes
-
-* revert otel pod_association config change ([ab24d04](https://github.com/observeinc/manifests/commit/ab24d0409f34791852deb4e61a0b3df6af5c4b11))
-* uniformly apply otel-collector image version and fix pod_association config format ([#103](https://github.com/observeinc/manifests/issues/103)) ([7bfbc96](https://github.com/observeinc/manifests/commit/7bfbc969c03f84140f286f09df0b8ebbd9bae171))
 
 
 
