@@ -1,3 +1,12 @@
+# [0.29.0](https://github.com/observeinc/manifests/compare/v0.28.1...v0.29.0) (2023-10-03)
+
+
+### Features
+
+* bump kube-state-events from v0.9.1 to v0.10.0 ([#119](https://github.com/observeinc/manifests/issues/119)) ([5f7a848](https://github.com/observeinc/manifests/commit/5f7a8482eb0802dc9e7da596662b199bb13e01f4))
+
+
+
 ## [0.28.1](https://github.com/observeinc/manifests/compare/v0.28.0...v0.28.1) (2023-09-26)
 
 
@@ -37,16 +46,6 @@
 ### Bug Fixes
 
 * add clusteruid to prometheus endpoint ([f25119c](https://github.com/observeinc/manifests/commit/f25119c5f30323ff9ce34b27077fd8f65e8305f6))
-
-
-
-## [0.26.2](https://github.com/observeinc/manifests/compare/v0.26.1...v0.26.2) (2023-04-11)
-
-
-### Bug Fixes
-
-* **winlogs:** pass token in query parameter ([#106](https://github.com/observeinc/manifests/issues/106)) ([02c1ce8](https://github.com/observeinc/manifests/commit/02c1ce8cceffedc42d05c9dd7c79b4d08d707db8))
-* **winlogs:** record node name in logs ([#105](https://github.com/observeinc/manifests/issues/105)) ([67a12d9](https://github.com/observeinc/manifests/commit/67a12d9ec6b6ec79e43b2106aaa6dcf2d432d843))
 
 
 
