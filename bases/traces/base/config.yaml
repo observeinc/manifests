@@ -60,3 +60,7 @@ service:
       receivers: [otlp]
       processors: [resource, k8sattributes, memory_limiter, batch]
       exporters: [otlphttp, logging]
+    logs:
+      receivers: [otlp]
+      processors: [resource, k8sattributes, memory_limiter, batch]
+      exporters: [otlphttp, logging]
