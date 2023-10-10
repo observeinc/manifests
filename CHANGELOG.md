@@ -1,3 +1,13 @@
+# [0.30.0](https://github.com/observeinc/manifests/compare/v0.29.0...v0.30.0) (2023-10-10)
+
+
+### Features
+
+* bump fluent-bit from 1.9.10 to 2.1.10 ([#121](https://github.com/observeinc/manifests/issues/121)) ([20aa172](https://github.com/observeinc/manifests/commit/20aa172d11bc7de0da9734c81f2c1cffefd3ff23))
+* **traces:** collect and ingest open-telemetry logs ([91931ed](https://github.com/observeinc/manifests/commit/91931edc97b6d4b5b21890144e81809bf2e560cf))
+
+
+
 # [0.29.0](https://github.com/observeinc/manifests/compare/v0.28.1...v0.29.0) (2023-10-03)
 
 
@@ -37,15 +47,6 @@
 ### Features
 
 * **metrics:** update default cadvisor keep regex ([5602fff](https://github.com/observeinc/manifests/commit/5602fff8e3f6a8dcbcc92c9b49bde9ee6857b93e))
-
-
-
-## [0.26.3](https://github.com/observeinc/manifests/compare/v0.26.2...v0.26.3) (2023-08-15)
-
-
-### Bug Fixes
-
-* add clusteruid to prometheus endpoint ([f25119c](https://github.com/observeinc/manifests/commit/f25119c5f30323ff9ce34b27077fd8f65e8305f6))
 
 
 
