@@ -1,15 +1,11 @@
 ---
 bases:
   - ../base
-
 resources:
   - deployment.yaml
-
 namePrefix: observe-
-
 commonLabels:
   observeinc.com/component: 'metrics'
-
 images:
   - name: grafana/agent
-    newTag: 'v0.36.1'
+    newTag: 'v0.37.2'
