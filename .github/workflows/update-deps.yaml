@@ -34,5 +34,14 @@ jobs:
           title: 'chore(deps): Update dependencies'
           body: |
             Updates dependencies using `updatecli`.
+
+            To force github actions to run add an empty commit to this branch
+
+            ```
+            git fetch
+            git checkout branch_name
+            git commit --allow-empty -m "Trigger GitHub Actions"
+            git push origin branch_name
+            ```
           labels: automated-pr, update
           draft: false
