@@ -34,6 +34,5 @@ jobs:
           title: 'chore(deps): Update dependencies'
           body: |
             Updates dependencies using `updatecli`.
-          branch: automated-update-${{ github.run_number }}
           labels: automated-pr, update
           draft: false
