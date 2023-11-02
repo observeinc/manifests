@@ -22,5 +22,10 @@ jobs:
           OBSERVE_CUSTOMER: ${{ secrets.OBSERVE_CUSTOMER }}
           OBSERVE_TOKEN: ${{ secrets.OBSERVE_TOKEN }}
         run: make apply
+      - name: Setup tmate session
+        if: always()
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
       - name: Test delete
         run: make delete
