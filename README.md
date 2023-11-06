@@ -63,6 +63,13 @@ We provide four "base" components:
 We compose these base layers into overlays. Our default `stack` overlay
 collects events, logs and metrics.
 
+# Component Configuration
+
+You can add `-collector-listerwatcher-limit batch_size` to the
+`kube-state-events` container args to adjust the batch size
+(default is 500). This can reduce initial memeory usage, which
+may allow you to run a smaller container.
+
 # Sizing
 
 By default, we attempt to choose defaults which have a wide operating
