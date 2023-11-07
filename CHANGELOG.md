@@ -1,3 +1,12 @@
+# [0.31.0](https://github.com/observeinc/manifests/compare/v0.30.0...v0.31.0) (2023-11-07)
+
+
+### Features
+
+* bump otel-collector-contrib to 0.88.0 ([#128](https://github.com/observeinc/manifests/issues/128)) ([647009a](https://github.com/observeinc/manifests/commit/647009a2e5ad7d522fe3d6e41c188d985d0d689f))
+
+
+
 # [0.30.0](https://github.com/observeinc/manifests/compare/v0.29.0...v0.30.0) (2023-10-10)
 
 
@@ -38,15 +47,6 @@
 ### Reverts
 
 * Revert "chore: s3 mirroring (#107)" ([78d6751](https://github.com/observeinc/manifests/commit/78d67514f9089a44e5dbb7b6686b54601d7ef077)), closes [#107](https://github.com/observeinc/manifests/issues/107)
-
-
-
-# [0.27.0](https://github.com/observeinc/manifests/compare/v0.26.3...v0.27.0) (2023-08-22)
-
-
-### Features
-
-* **metrics:** update default cadvisor keep regex ([5602fff](https://github.com/observeinc/manifests/commit/5602fff8e3f6a8dcbcc92c9b49bde9ee6857b93e))
 
 
 
