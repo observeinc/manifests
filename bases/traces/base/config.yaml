@@ -18,17 +18,15 @@ processors:
   probabilistic_sampler:
     hash_seed: ${OTEL_SAMPLER_HASH_SEED}
     sampling_percentage: ${OTEL_SAMPLER_PERCENTAGE}
-  resource:
-    attributes:
-      - key: k8s.cluster.uid
-        value: ${OBSERVE_CLUSTER}
-        action: insert
   k8sattributes:
     passthrough: false
+    filter:
+      node_from_env_var: FILTER_NODE_NAME
     extract:
       metadata:
         - k8s.pod.name
         - k8s.namespace.name
+        - k8s.cluster.uid
     pod_association:
       - sources:
           - from: resource_attribute
@@ -55,13 +53,13 @@ service:
   pipelines:
     traces:
       receivers: [otlp, zipkin]
-      processors: [resource, probabilistic_sampler, k8sattributes, memory_limiter, batch]
+      processors: [probabilistic_sampler, k8sattributes, memory_limiter, batch]
       exporters: [otlphttp, logging]
     metrics:
       receivers: [otlp]
-      processors: [resource, k8sattributes, memory_limiter, batch]
+      processors: [k8sattributes, memory_limiter, batch]
       exporters: [otlphttp, logging]
     logs:
       receivers: [otlp]
-      processors: [resource, k8sattributes, memory_limiter, batch]
+      processors: [k8sattributes, memory_limiter, batch]
       exporters: [otlphttp, logging]

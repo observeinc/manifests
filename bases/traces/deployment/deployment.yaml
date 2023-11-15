@@ -61,16 +61,6 @@ spec:
             - name: zipkin
               containerPort: 9411
               protocol: TCP
-          env:
-            - name: NODE_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: spec.nodeName
-            - name: OBSERVE_CLUSTER
-              valueFrom:
-                configMapKeyRef:
-                  name: cluster-info
-                  key: id
           envFrom:
             - configMapRef:
                 name: otel-collector-env

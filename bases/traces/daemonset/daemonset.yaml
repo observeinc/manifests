@@ -60,15 +60,10 @@ spec:
               cpu: 250m
               memory: 256Mi
           env:
-            - name: NODE_NAME
+            - name: FILTER_NODE_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-            - name: OBSERVE_CLUSTER
-              valueFrom:
-                configMapKeyRef:
-                  name: cluster-info
-                  key: id
           envFrom:
             - configMapRef:
                 name: otel-collector-env
