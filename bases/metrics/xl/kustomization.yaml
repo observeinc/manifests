@@ -8,4 +8,4 @@ commonLabels:
   observeinc.com/component: 'metrics'
 images:
   - name: grafana/agent
-    newTag: 'v0.37.3'
+    newTag: 'v0.37.4'
