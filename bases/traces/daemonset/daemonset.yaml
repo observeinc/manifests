@@ -59,11 +59,6 @@ spec:
             requests:
               cpu: 250m
               memory: 256Mi
-          env:
-            - name: FILTER_NODE_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: spec.nodeName
           envFrom:
             - configMapRef:
                 name: otel-collector-env
