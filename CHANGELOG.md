@@ -1,3 +1,13 @@
+## [0.31.1](https://github.com/observeinc/manifests/compare/v0.31.0...v0.31.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* **traces:** extract k8s.cluster.uid through k8sattributes ([9f385e9](https://github.com/observeinc/manifests/commit/9f385e927e56a45202912b27d1800d2c4bf17bf4))
+* **traces:** split pod_association rules and remove node filtering in k8sattributes processor ([66b73b0](https://github.com/observeinc/manifests/commit/66b73b02cf693a4559226b56e0183c3ddf3295fc))
+
+
+
 # [0.31.0](https://github.com/observeinc/manifests/compare/v0.30.0...v0.31.0) (2023-11-07)
 
 
@@ -32,21 +42,6 @@
 ### Bug Fixes
 
 * **traces:** use otel metrics ([#110](https://github.com/observeinc/manifests/issues/110)) ([c6be492](https://github.com/observeinc/manifests/commit/c6be4926362a36cda00ed1dbe272f4e648d25bf5))
-
-
-
-# [0.28.0](https://github.com/observeinc/manifests/compare/v0.27.0...v0.28.0) (2023-09-13)
-
-
-### Features
-
-* upgrade grafana agent 0.36.1 ([#114](https://github.com/observeinc/manifests/issues/114)) ([1aec053](https://github.com/observeinc/manifests/commit/1aec053ffdf1b21a5635c190bb4b12c1d8c4d496))
-* upgrade grafana-agent to 0.36.1 ([3512b39](https://github.com/observeinc/manifests/commit/3512b397b280570fa01410b2fb53b5487f6505ba))
-
-
-### Reverts
-
-* Revert "chore: s3 mirroring (#107)" ([78d6751](https://github.com/observeinc/manifests/commit/78d67514f9089a44e5dbb7b6686b54601d7ef077)), closes [#107](https://github.com/observeinc/manifests/issues/107)
 
 
 
