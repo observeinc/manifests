@@ -25,7 +25,7 @@ The quickest way of providing overrides is creating a `env-overrides` configmap 
 ```bash
 echo "FB_DEBUG=true" >> example.env
 kubectl create configmap -n observe env-overrides --from-env-file example.env
-kubectl restart rollout -n observe deployment observe-metrics
+kubectl rollout restart -n observe deployment observe-metrics
 ```
 
 The following environment variables are available for controlling collection:
