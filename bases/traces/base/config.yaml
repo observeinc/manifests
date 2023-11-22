@@ -34,10 +34,10 @@ processors:
           - from: connection
   batch:
   memory_limiter:
-    # 80% of maximum memory up to 2G
     limit_mib: ${OTEL_MEMORY_LIMITER_LIMIT_MIB}
-    # 25% of limit up to 2G
     spike_limit_mib: ${OTEL_MEMORY_LIMITER_SPIKE_LIMIT_MIB}
+    limit_percentage: ${OTEL_MEMORY_LIMITER_LIMIT_PERCENTAGE}
+    spike_limit_percentage: ${OTEL_MEMORY_LIMITER_SPIKE_LIMIT_PERCENTAGE}
     check_interval: "${OTEL_MEMORY_LIMITER_CHECK_INTERVAL}"
 receivers:
   zipkin:
