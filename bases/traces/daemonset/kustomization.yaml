@@ -8,4 +8,4 @@ resources:
   - daemonset.yaml
 images:
   - name: otel/opentelemetry-collector-contrib
-    newTag: '0.88.0'
+    newTag: '0.89.0'
