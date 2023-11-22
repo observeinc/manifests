@@ -1,3 +1,12 @@
+# [0.32.0](https://github.com/observeinc/manifests/compare/v0.31.1...v0.32.0) (2023-11-22)
+
+
+### Features
+
+* **traces:** use memory limiter percentages ([#135](https://github.com/observeinc/manifests/issues/135)) ([dd01030](https://github.com/observeinc/manifests/commit/dd010306abb772d9606185aeea683c49825af5db))
+
+
+
 ## [0.31.1](https://github.com/observeinc/manifests/compare/v0.31.0...v0.31.1) (2023-11-16)
 
 
@@ -33,15 +42,6 @@
 ### Features
 
 * bump kube-state-events from v0.9.1 to v0.10.0 ([#119](https://github.com/observeinc/manifests/issues/119)) ([5f7a848](https://github.com/observeinc/manifests/commit/5f7a8482eb0802dc9e7da596662b199bb13e01f4))
-
-
-
-## [0.28.1](https://github.com/observeinc/manifests/compare/v0.28.0...v0.28.1) (2023-09-26)
-
-
-### Bug Fixes
-
-* **traces:** use otel metrics ([#110](https://github.com/observeinc/manifests/issues/110)) ([c6be492](https://github.com/observeinc/manifests/commit/c6be4926362a36cda00ed1dbe272f4e648d25bf5))
 
 
 
