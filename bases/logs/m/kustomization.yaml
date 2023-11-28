@@ -2,9 +2,12 @@
 resources:
   - daemonset.yaml
   - serviceaccount.yaml
+
 namePrefix: observe-
+
 commonLabels:
   observeinc.com/component: 'logs'
+
 configMapGenerator:
   - name: fluent-bit-config
     literals:
@@ -40,6 +43,7 @@ configMapGenerator:
       - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
       - OBSERVE_COLLECTOR_PORT=443
       - OBSERVE_COLLECTOR_TLS=on
+
 images:
   - name: fluent/fluent-bit
     newTag: '2.2.0'

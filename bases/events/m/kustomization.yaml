@@ -1,5 +1,5 @@
 ---
-bases:
+resources:
   - ../noop
 
 namePrefix: observe-
@@ -7,7 +7,7 @@ namePrefix: observe-
 commonLabels:
   observeinc.com/component: 'events'
 
-patchesJson6902:
+patches:
   - target:
       version: v1
       group: apps

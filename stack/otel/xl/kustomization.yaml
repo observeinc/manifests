@@ -1,6 +1,6 @@
 ---
 namespace: observe
 
-bases:
+resources:
   - ../../xl
   - ../../../bases/traces/l

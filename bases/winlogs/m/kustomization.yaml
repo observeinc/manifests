@@ -25,6 +25,7 @@ configMapGenerator:
       - OBSERVE_COLLECTOR_HOST=collect.observeinc.com
       - OBSERVE_COLLECTOR_PORT=443
       - OBSERVE_COLLECTOR_TLS=peer
+
 images:
   - name: fluent/fluentd
     newTag: 'v1.14.6-windows-20H2-1.0'

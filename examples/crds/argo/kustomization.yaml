@@ -1,12 +1,12 @@
 ---
-bases:
+resources:
   - ../../../bases/events/noop
 
 namespace: observe
 
 namePrefix: observe-argo-
 
-patchesJson6902:
+patches:
   - target:
       version: v1
       group: apps
