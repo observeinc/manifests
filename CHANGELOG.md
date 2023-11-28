@@ -1,3 +1,12 @@
+# [0.33.0](https://github.com/observeinc/manifests/compare/v0.32.0...v0.33.0) (2023-11-28)
+
+
+### Features
+
+* **deps:** update grafana-agent to 0.38.0 ([#136](https://github.com/observeinc/manifests/issues/136)) ([e0da7d4](https://github.com/observeinc/manifests/commit/e0da7d466a42e1c20dbf4732562304500d21e8b3))
+
+
+
 # [0.32.0](https://github.com/observeinc/manifests/compare/v0.31.1...v0.32.0) (2023-11-22)
 
 
@@ -33,15 +42,6 @@
 
 * bump fluent-bit from 1.9.10 to 2.1.10 ([#121](https://github.com/observeinc/manifests/issues/121)) ([20aa172](https://github.com/observeinc/manifests/commit/20aa172d11bc7de0da9734c81f2c1cffefd3ff23))
 * **traces:** collect and ingest open-telemetry logs ([91931ed](https://github.com/observeinc/manifests/commit/91931edc97b6d4b5b21890144e81809bf2e560cf))
-
-
-
-# [0.29.0](https://github.com/observeinc/manifests/compare/v0.28.1...v0.29.0) (2023-10-03)
-
-
-### Features
-
-* bump kube-state-events from v0.9.1 to v0.10.0 ([#119](https://github.com/observeinc/manifests/issues/119)) ([5f7a848](https://github.com/observeinc/manifests/commit/5f7a8482eb0802dc9e7da596662b199bb13e01f4))
 
 
 
