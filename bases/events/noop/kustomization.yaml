@@ -1,7 +1,4 @@
 ---
-commonLabels:
-  observeinc.com/component: 'events'
-
 resources:
   - clusterrole.yaml
   - clusterrolebinding.yaml
@@ -9,6 +6,9 @@ resources:
   - role.yaml
   - rolebinding.yaml
   - serviceaccount.yaml
+
+commonLabels:
+  observeinc.com/component: 'events'
 
 configMapGenerator:
   - name: kube-state-events-env

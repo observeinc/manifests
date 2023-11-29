@@ -158,7 +158,7 @@ configmap:
 EXAMPLE_DIR=$(mktemp -d)
 
 cat <<EOF >$EXAMPLE_DIR/kustomization.yaml
-bases:
+resources:
   - github.com/observeinc/manifests//stack?ref=main
 
 configMapGenerator:

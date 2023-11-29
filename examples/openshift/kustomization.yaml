@@ -1,8 +1,6 @@
 ---
-bases:
-  - ../../stack/m
-
 resources:
+  - ../../stack/m
   - constraints.yaml
 
 patchesStrategicMerge:

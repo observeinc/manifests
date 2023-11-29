@@ -1,11 +1,11 @@
 ---
-commonLabels:
-  observeinc.com/component: 'metrics'
-
 resources:
   - clusterrole.yaml
   - clusterrolebinding.yaml
   - serviceaccount.yaml
+
+commonLabels:
+  observeinc.com/component: 'metrics'
 
 configMapGenerator:
   - name: grafana-agent

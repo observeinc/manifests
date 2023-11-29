@@ -1,11 +1,13 @@
 ---
-bases:
+resources:
   - ../base
+  - daemonset.yaml
+
 namePrefix: observe-
+
 commonLabels:
   observeinc.com/component: 'traces'
-resources:
-  - daemonset.yaml
+
 images:
   - name: otel/opentelemetry-collector-contrib
     newTag: '0.89.0'

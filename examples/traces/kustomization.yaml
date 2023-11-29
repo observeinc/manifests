@@ -1,7 +1,7 @@
 ---
 namespace: observe
 
-bases:
+resources:
   - ../../bases/traces/m
 
 configMapGenerator:

@@ -1,4 +1,4 @@
-bases:
+resources:
   - github.com/observeinc/manifests/stack/xl?ref=main
 
 patchesStrategicMerge:
