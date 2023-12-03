@@ -2,12 +2,9 @@
 resources:
   - ../base
   - deployment.yaml
-
 namePrefix: observe-
-
 commonLabels:
   observeinc.com/component: 'traces'
-
 images:
   - name: otel/opentelemetry-collector-contrib
-    newTag: '0.89.0'
+    newTag: '0.90.1'
