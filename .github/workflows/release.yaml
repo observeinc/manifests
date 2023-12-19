@@ -20,11 +20,11 @@ jobs:
         kubectl_version:
           - v1.28.0    # leading edge  (EOL 2024-10-28)
           - v1.26.6    # trailing edge (EOL 2024-02-28)
-          - v1.20.15   # laggard       (EOL 2022-01-19)
+          - v1.21.14   # laggard       (EOL 2022-06-22)
         node_version:
           - kindest/node:v1.28.0@sha256:9f3ff58f19dcf1a0611d11e8ac989fdb30a28f40f236f59f0bea31fb956ccf5c
           - kindest/node:v1.26.6@sha256:5e5d789e90c1512c8c480844e0985bc3b4da4ba66179cc5b540fe5b785ca97b5
-          - kindest/node:v1.20.15@sha256:cceb1bfeb9fe7c65e344a6372ef6ef4a349d6d7aefba621b822f44cff0070cfd
+          - kindest/node:v1.21.14@sha256:0ffd370ba816b2214f407877784ef596344047ce4505b6aa227c74317027b88b
         kustomize_dir:
           - stack/m
           - stack/xs
