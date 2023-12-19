@@ -1,3 +1,21 @@
+# [0.34.0](https://github.com/observeinc/manifests/compare/v0.33.0...v0.34.0) (2023-12-19)
+
+
+### Bug Fixes
+
+* **traces:** remove inadvertent commit ([5c0668c](https://github.com/observeinc/manifests/commit/5c0668c62e3335fa6be83b008510e8290d0c19fd))
+* **traces:** update otlphttp endpoint to v2 ([ae7f51d](https://github.com/observeinc/manifests/commit/ae7f51d3b05cdf9ad9294de190ffb75a0f9a3cfa))
+
+
+### Features
+
+* bump grafana-agent, otel-collector-contrib ([#140](https://github.com/observeinc/manifests/issues/140)) ([c4ae170](https://github.com/observeinc/manifests/commit/c4ae17008535fca0a28f68dac3c928ae9147955f))
+* bump test versions ([#138](https://github.com/observeinc/manifests/issues/138)) ([af2758f](https://github.com/observeinc/manifests/commit/af2758f5296c0f39b73903cc60746802b4771f93))
+* cleanup deprecated references in kustomize ([#137](https://github.com/observeinc/manifests/issues/137)) ([54523e9](https://github.com/observeinc/manifests/commit/54523e96b5e8c4bb842428f641fb96ce3dab1d01))
+* **metrics:** per job scrape interval, tweak defaults. ([#139](https://github.com/observeinc/manifests/issues/139)) ([26c8327](https://github.com/observeinc/manifests/commit/26c8327d8d74f03f38cba255c7c552cf99072be3))
+
+
+
 # [0.33.0](https://github.com/observeinc/manifests/compare/v0.32.0...v0.33.0) (2023-11-28)
 
 
@@ -32,16 +50,6 @@
 ### Features
 
 * bump otel-collector-contrib to 0.88.0 ([#128](https://github.com/observeinc/manifests/issues/128)) ([647009a](https://github.com/observeinc/manifests/commit/647009a2e5ad7d522fe3d6e41c188d985d0d689f))
-
-
-
-# [0.30.0](https://github.com/observeinc/manifests/compare/v0.29.0...v0.30.0) (2023-10-10)
-
-
-### Features
-
-* bump fluent-bit from 1.9.10 to 2.1.10 ([#121](https://github.com/observeinc/manifests/issues/121)) ([20aa172](https://github.com/observeinc/manifests/commit/20aa172d11bc7de0da9734c81f2c1cffefd3ff23))
-* **traces:** collect and ingest open-telemetry logs ([91931ed](https://github.com/observeinc/manifests/commit/91931edc97b6d4b5b21890144e81809bf2e560cf))
 
 
 
