@@ -1,3 +1,18 @@
+# [0.35.0](https://github.com/observeinc/manifests/compare/v0.34.0...v0.35.0) (2023-12-21)
+
+
+### Bug Fixes
+
+* bump kube-state-events to 0.11.1 ([#143](https://github.com/observeinc/manifests/issues/143)) ([570249f](https://github.com/observeinc/manifests/commit/570249f2268b6b75facfd381a896ee90f4c0d264))
+* **traces:** update otlphttp endpoint to v2 ([#141](https://github.com/observeinc/manifests/issues/141)) ([6e3a091](https://github.com/observeinc/manifests/commit/6e3a09185d9c052dc4a8729cbd5d798c61519c52))
+
+
+### Features
+
+* **traces:** update otel-collector-contrib to 0.91.0 ([cffe059](https://github.com/observeinc/manifests/commit/cffe059a898a7104b8b0327521f4efa78d0ddc78))
+
+
+
 # [0.34.0](https://github.com/observeinc/manifests/compare/v0.33.0...v0.34.0) (2023-12-19)
 
 
@@ -41,15 +56,6 @@
 
 * **traces:** extract k8s.cluster.uid through k8sattributes ([9f385e9](https://github.com/observeinc/manifests/commit/9f385e927e56a45202912b27d1800d2c4bf17bf4))
 * **traces:** split pod_association rules and remove node filtering in k8sattributes processor ([66b73b0](https://github.com/observeinc/manifests/commit/66b73b02cf693a4559226b56e0183c3ddf3295fc))
-
-
-
-# [0.31.0](https://github.com/observeinc/manifests/compare/v0.30.0...v0.31.0) (2023-11-07)
-
-
-### Features
-
-* bump otel-collector-contrib to 0.88.0 ([#128](https://github.com/observeinc/manifests/issues/128)) ([647009a](https://github.com/observeinc/manifests/commit/647009a2e5ad7d522fe3d6e41c188d985d0d689f))
 
 
 
