@@ -3,7 +3,7 @@ exporters:
   logging:
     loglevel: "${OTEL_LOG_LEVEL}"
   otlphttp:
-    endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_CUSTOMER}.${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/v1/otel"
+    endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_CUSTOMER}.${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/${OBSERVE_COLLECTOR_OTEL_VERSION}/otel"
     headers:
       authorization: "Bearer ${OBSERVE_TOKEN}"
     sending_queue:
