@@ -1,3 +1,12 @@
+## [0.35.1](https://github.com/observeinc/manifests/compare/v0.35.0...v0.35.1) (2024-01-02)
+
+
+### Bug Fixes
+
+* **logs:** bump fluent-bit to 2.2.1 ([a287540](https://github.com/observeinc/manifests/commit/a287540f959cafd233f4edc823ec2dd03e151687))
+
+
+
 # [0.35.0](https://github.com/observeinc/manifests/compare/v0.34.0...v0.35.0) (2023-12-21)
 
 
@@ -46,16 +55,6 @@
 ### Features
 
 * **traces:** use memory limiter percentages ([#135](https://github.com/observeinc/manifests/issues/135)) ([dd01030](https://github.com/observeinc/manifests/commit/dd010306abb772d9606185aeea683c49825af5db))
-
-
-
-## [0.31.1](https://github.com/observeinc/manifests/compare/v0.31.0...v0.31.1) (2023-11-16)
-
-
-### Bug Fixes
-
-* **traces:** extract k8s.cluster.uid through k8sattributes ([9f385e9](https://github.com/observeinc/manifests/commit/9f385e927e56a45202912b27d1800d2c4bf17bf4))
-* **traces:** split pod_association rules and remove node filtering in k8sattributes processor ([66b73b0](https://github.com/observeinc/manifests/commit/66b73b02cf693a4559226b56e0183c3ddf3295fc))
 
 
 
