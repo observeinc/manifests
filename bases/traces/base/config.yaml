@@ -39,15 +39,13 @@ processors:
     limit_percentage: ${OTEL_MEMORY_LIMITER_LIMIT_PERCENTAGE}
     spike_limit_percentage: ${OTEL_MEMORY_LIMITER_SPIKE_LIMIT_PERCENTAGE}
     check_interval: "${OTEL_MEMORY_LIMITER_CHECK_INTERVAL}"
-
-  # truncate to ensure the msg is under the limit accepted by the collector
+  # truncate individual strings under certain keys to try to avoid hitting the record size limit at observe collector
   transform/truncate:
     trace_statements:
       - context: span
         statements:
           - truncate_all(attributes, 10240)
           - truncate_all(resource.attributes, 10240)
-    
 receivers:
   zipkin:
   otlp:
@@ -62,7 +60,7 @@ service:
   pipelines:
     traces:
       receivers: [otlp, zipkin]
-      processors: [probabilistic_sampler, k8sattributes, memory_limiter, transform/truncate, batch]
+      processors: [probabilistic_sampler, transform/truncate, k8sattributes, memory_limiter, batch]
       exporters: [otlphttp, logging]
     metrics:
       receivers: [otlp]
