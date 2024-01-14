@@ -33,12 +33,24 @@ processors:
       - sources:
           - from: connection
   batch:
+    send_batch_max_size: ${OTEL_SEND_BATCH_MAX_SIZE}
   memory_limiter:
     limit_mib: ${OTEL_MEMORY_LIMITER_LIMIT_MIB}
     spike_limit_mib: ${OTEL_MEMORY_LIMITER_SPIKE_LIMIT_MIB}
     limit_percentage: ${OTEL_MEMORY_LIMITER_LIMIT_PERCENTAGE}
     spike_limit_percentage: ${OTEL_MEMORY_LIMITER_SPIKE_LIMIT_PERCENTAGE}
     check_interval: "${OTEL_MEMORY_LIMITER_CHECK_INTERVAL}"
+  # truncate individual strings under certain keys to try to avoid hitting the record size limit at observe collector
+  transform/truncate:
+    trace_statements:
+      - context: span
+        statements:
+          - truncate_all(attributes, ${OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT})
+          - truncate_all(resource.attributes, ${OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT})
+      - context: spanevent
+        statements:
+          - truncate_all(attributes, ${OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT})
+          - truncate_all(resource.attributes, ${OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT})
 receivers:
   zipkin:
   otlp:
@@ -53,7 +65,7 @@ service:
   pipelines:
     traces:
       receivers: [otlp, zipkin]
-      processors: [probabilistic_sampler, k8sattributes, memory_limiter, batch]
+      processors: [probabilistic_sampler, transform/truncate, k8sattributes, memory_limiter, batch]
       exporters: [otlphttp, logging]
     metrics:
       receivers: [otlp]

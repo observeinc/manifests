@@ -26,6 +26,8 @@ configMapGenerator:
       - OTEL_MEMORY_LIMITER_CHECK_INTERVAL=5s
       # known to not work: https://github.com/open-telemetry/opentelemetry-collector/issues/4328
       - OTEL_LOG_LEVEL=info
+      - OTEL_SEND_BATCH_MAX_SIZE=0
+      - OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT=10240
   - name: otel-collector
     literals:
       - extra.yaml=
