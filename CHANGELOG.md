@@ -1,3 +1,12 @@
+## [0.35.2](https://github.com/observeinc/manifests/compare/v0.35.1...v0.35.2) (2024-01-16)
+
+
+### Bug Fixes
+
+* bump grafana agent and otel versions ([72f8608](https://github.com/observeinc/manifests/commit/72f8608231f73736e4f8d9fd728f2bcc2404ac46))
+
+
+
 ## [0.35.1](https://github.com/observeinc/manifests/compare/v0.35.0...v0.35.1) (2024-01-02)
 
 
@@ -46,15 +55,6 @@
 ### Features
 
 * **deps:** update grafana-agent to 0.38.0 ([#136](https://github.com/observeinc/manifests/issues/136)) ([e0da7d4](https://github.com/observeinc/manifests/commit/e0da7d466a42e1c20dbf4732562304500d21e8b3))
-
-
-
-# [0.32.0](https://github.com/observeinc/manifests/compare/v0.31.1...v0.32.0) (2023-11-22)
-
-
-### Features
-
-* **traces:** use memory limiter percentages ([#135](https://github.com/observeinc/manifests/issues/135)) ([dd01030](https://github.com/observeinc/manifests/commit/dd010306abb772d9606185aeea683c49825af5db))
 
 
 
