@@ -33,6 +33,7 @@ spec:
             - -server.http.address=0.0.0.0:12345
             - -config.file=/etc/agent/agent.yaml
             - -config.expand-env
+            - -metrics.wal-directory=/wal
             - -disable-reporting
           command:
             - /bin/grafana-agent
@@ -70,6 +71,9 @@ spec:
           volumeMounts:
             - mountPath: /etc/agent
               name: grafana-agent
+            - mountPath: /wal
+              name: wal-storage
+
           securityContext:
             runAsNonRoot: true
             runAsUser: 65534
@@ -81,3 +85,5 @@ spec:
         - name: grafana-agent
           configMap:
             name: grafana-agent
+        - name: wal-storage
+          emptyDir: {}

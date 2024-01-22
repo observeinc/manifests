@@ -3,7 +3,6 @@ server:
   log_level: ${PROM_LOG_LEVEL}
 
 metrics:
-  wal_directory: /tmp/grafana-agent-wal
   global:
     scrape_interval: ${PROM_SCRAPE_INTERVAL}
     scrape_timeout: ${PROM_SCRAPE_TIMEOUT}
