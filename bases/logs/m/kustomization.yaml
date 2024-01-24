@@ -42,4 +42,4 @@ configMapGenerator:
       - OBSERVE_COLLECTOR_TLS=on
 images:
   - name: fluent/fluent-bit
-    newTag: '2.2.1'
+    newTag: '2.2.2'
