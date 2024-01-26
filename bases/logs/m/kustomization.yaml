@@ -25,6 +25,7 @@ configMapGenerator:
       - FB_HC_ERRORS_COUNT=5
       - FB_HC_RETRY_FAILURE_COUNT=5
       - FB_HC_PERIOD=10
+      - FB_IGNORE_OLDER=2d
       - FB_LOG_LEVEL=warning
       - FB_MEM_BUF_LIMIT=10MB
       - FB_NODE_LOG_INCLUDE_PATH=/var/log/kube-apiserver-audit.log
