@@ -32,7 +32,7 @@ configMapGenerator:
       - PROM_SCRAPE_TIMEOUT=10s
       - PROM_SCRAPE_BODY_SIZE_LIMIT=50MB
       - PROM_SCRAPE_CADVISOR_ACTION=keep
-      - PROM_SCRAPE_CADVISOR_INTERVAL=
+      - PROM_SCRAPE_CADVISOR_INTERVAL=60s
       # The following metrics are exported with 0 values in default cadvisor installs. See:
       # - https://github.com/kubernetes/kubernetes/issues/60279
       # - https://github.com/google/cadvisor/issues/1672
