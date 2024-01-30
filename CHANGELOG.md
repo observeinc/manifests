@@ -1,3 +1,15 @@
+## [0.35.3](https://github.com/observeinc/manifests/compare/v0.35.2...v0.35.3) (2024-01-30)
+
+
+### Bug Fixes
+
+* **deps:** Update fluenbit and grafana agent ([#147](https://github.com/observeinc/manifests/issues/147)) ([ff19f22](https://github.com/observeinc/manifests/commit/ff19f2271e2e3016907ff1fbd0c365268a07d387))
+* **logs:** add FB_IGNORE_OLDER ([#150](https://github.com/observeinc/manifests/issues/150)) ([daa2eee](https://github.com/observeinc/manifests/commit/daa2eee14595d7dc2e38d5b60181f8b9f48b8446))
+* **metrics:** bump cadvisor interval to 60s ([#148](https://github.com/observeinc/manifests/issues/148)) ([8646829](https://github.com/observeinc/manifests/commit/8646829b76127c076ee861cb7ab9373cbc8f3fc9))
+* **traces:** bump otel-collector-contrib to 0.93.0 ([07c222e](https://github.com/observeinc/manifests/commit/07c222ebb6088480308688c199723f314098892f))
+
+
+
 ## [0.35.2](https://github.com/observeinc/manifests/compare/v0.35.1...v0.35.2) (2024-01-16)
 
 
@@ -46,15 +58,6 @@
 * bump test versions ([#138](https://github.com/observeinc/manifests/issues/138)) ([af2758f](https://github.com/observeinc/manifests/commit/af2758f5296c0f39b73903cc60746802b4771f93))
 * cleanup deprecated references in kustomize ([#137](https://github.com/observeinc/manifests/issues/137)) ([54523e9](https://github.com/observeinc/manifests/commit/54523e96b5e8c4bb842428f641fb96ce3dab1d01))
 * **metrics:** per job scrape interval, tweak defaults. ([#139](https://github.com/observeinc/manifests/issues/139)) ([26c8327](https://github.com/observeinc/manifests/commit/26c8327d8d74f03f38cba255c7c552cf99072be3))
-
-
-
-# [0.33.0](https://github.com/observeinc/manifests/compare/v0.32.0...v0.33.0) (2023-11-28)
-
-
-### Features
-
-* **deps:** update grafana-agent to 0.38.0 ([#136](https://github.com/observeinc/manifests/issues/136)) ([e0da7d4](https://github.com/observeinc/manifests/commit/e0da7d466a42e1c20dbf4732562304500d21e8b3))
 
 
 
