@@ -34,6 +34,7 @@ metrics:
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
           scrape_interval: ${PROM_SCRAPE_POD_INTERVAL}
           sample_limit: ${PROM_SCRAPE_SAMPLE_LIMIT}
+          honor_labels: ${PROM_SCRAPE_HONOR_LABELS}
           body_size_limit: ${PROM_SCRAPE_BODY_SIZE_LIMIT}
           kubernetes_sd_configs:
             - role: pod
