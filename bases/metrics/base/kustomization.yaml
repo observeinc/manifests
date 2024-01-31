@@ -36,7 +36,7 @@ configMapGenerator:
       # The following metrics are exported with 0 values in default cadvisor installs. See:
       # - https://github.com/kubernetes/kubernetes/issues/60279
       # - https://github.com/google/cadvisor/issues/1672
-      - PROM_SCRAPE_CADVISOR_METRIC_DROP_REGEX=
+      - PROM_SCRAPE_CADVISOR_METRIC_DROP_REGEX=container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
       - PROM_SCRAPE_CADVISOR_METRIC_KEEP_REGEX=container_(cpu_.*|spec_.*|memory_.*|network_.*|file_descriptors)|machine_(cpu_cores|memory_bytes)
       # The following regex matches the default Kubernetes board metrics:
       # - PROM_SCRAPE_CADVISOR_METRIC_KEEP_REGEX=container_(cpu_cfs_.*|spec_.*|cpu_cores|cpu_usage_seconds_total|memory_working_set_bytes|memory_usage_bytes|network_transmit_.*|network_receive_.*|fs_writes_total|fs_reads_total|file_descriptors)|machine_(cpu_cores|memory_bytes)
