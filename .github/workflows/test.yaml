@@ -11,8 +11,8 @@ jobs:
       - name: Create k8s Kind Cluster
         uses: helm/kind-action@main
         with:
-          kubectl_version: v1.28.3    # leading edge  (EOL 2024-10-28)
-          node_image: kindest/node:v1.28.0@sha256:b7a4cad12c197af3ba43202d3efe03246b3f0793f162afb40a33c923952d5b31
+          kubectl_version: v1.29.0    # leading edge  (EOL 2025-02-28)
+          node_image: kindest/node:v1.29.0@sha256:54a50c9354f11ce0aa56a85d2cacb1b950f85eab3fe1caf988826d1f89bf37eb
         env:
           KUBE_CONFIG: .kubeconfig
       - name: Label check
