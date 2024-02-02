@@ -1,10 +1,15 @@
 ---
+namePrefix: observe-
+
 resources:
   - daemonset.yaml
   - serviceaccount.yaml
-namePrefix: observe-
-commonLabels:
-  observeinc.com/component: 'logs'
+
+labels:
+  - includeSelectors: true
+    pairs:
+      observeinc.com/component: logs
+
 configMapGenerator:
   - name: fluent-bit-config
     literals:
