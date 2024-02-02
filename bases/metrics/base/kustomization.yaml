@@ -28,11 +28,11 @@ configMapGenerator:
       - PROM_MIN_WAL_TIME=15s
       - PROM_REMOTE_TIMEOUT=30s
       - PROM_REMOTE_FLUSH_DEADLINE=1m
-      - PROM_SCRAPE_INTERVAL=15s
+      - PROM_SCRAPE_INTERVAL=60s
       - PROM_SCRAPE_TIMEOUT=10s
       - PROM_SCRAPE_BODY_SIZE_LIMIT=50MB
       - PROM_SCRAPE_CADVISOR_ACTION=keep
-      - PROM_SCRAPE_CADVISOR_INTERVAL=60s
+      - PROM_SCRAPE_CADVISOR_INTERVAL=
       # The following metrics are exported with 0 values in default cadvisor installs. See:
       # - https://github.com/kubernetes/kubernetes/issues/60279
       # - https://github.com/google/cadvisor/issues/1672
@@ -45,7 +45,7 @@ configMapGenerator:
       - PROM_SCRAPE_KUBELET_METRIC_DROP_REGEX=
       - PROM_SCRAPE_KUBELET_METRIC_KEEP_REGEX=(.*)
       - PROM_SCRAPE_POD_ACTION=keep
-      - PROM_SCRAPE_POD_INTERVAL=60s
+      - PROM_SCRAPE_POD_INTERVAL=
       - PROM_SCRAPE_POD_NAMESPACE_DROP_REGEX=(.*istio.*|.*ingress.*|kube-system)
       - PROM_SCRAPE_POD_NAMESPACE_KEEP_REGEX=(.*)
       - PROM_SCRAPE_POD_PORT_KEEP_REGEX=.*metrics
