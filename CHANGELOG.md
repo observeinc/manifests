@@ -1,3 +1,21 @@
+# [1.0.0](https://github.com/observeinc/manifests/compare/v0.35.3...v1.0.0) (2024-02-05)
+
+
+### Bug Fixes
+
+* **metrics:** bump global scrape interval to 60s ([90864a9](https://github.com/observeinc/manifests/commit/90864a931918a6f6ad7c7125d2e6046681061abb))
+
+
+* fix(metrics)!: Stop collecting container_fs_xxx metrics to reduce a data volume and make the data collection opted-in ([a530c66](https://github.com/observeinc/manifests/commit/a530c6641b6a3a4cce7c798970218459def324a5))
+
+
+### BREAKING CHANGES
+
+* PROM_SCRAPE_POD_ACTION was previously set to keep but is changed to drop to reduce a data volume and make the data collection of pod metrics opted-in.
+https://docs.observeinc.com/en/latest/content/integrations/kubernetes/collecting_pod_metrics_cadvisor_metrics.html
+
+
+
 ## [0.35.3](https://github.com/observeinc/manifests/compare/v0.35.2...v0.35.3) (2024-01-30)
 
 
@@ -40,24 +58,6 @@
 ### Features
 
 * **traces:** update otel-collector-contrib to 0.91.0 ([cffe059](https://github.com/observeinc/manifests/commit/cffe059a898a7104b8b0327521f4efa78d0ddc78))
-
-
-
-# [0.34.0](https://github.com/observeinc/manifests/compare/v0.33.0...v0.34.0) (2023-12-19)
-
-
-### Bug Fixes
-
-* **traces:** remove inadvertent commit ([5c0668c](https://github.com/observeinc/manifests/commit/5c0668c62e3335fa6be83b008510e8290d0c19fd))
-* **traces:** update otlphttp endpoint to v2 ([ae7f51d](https://github.com/observeinc/manifests/commit/ae7f51d3b05cdf9ad9294de190ffb75a0f9a3cfa))
-
-
-### Features
-
-* bump grafana-agent, otel-collector-contrib ([#140](https://github.com/observeinc/manifests/issues/140)) ([c4ae170](https://github.com/observeinc/manifests/commit/c4ae17008535fca0a28f68dac3c928ae9147955f))
-* bump test versions ([#138](https://github.com/observeinc/manifests/issues/138)) ([af2758f](https://github.com/observeinc/manifests/commit/af2758f5296c0f39b73903cc60746802b4771f93))
-* cleanup deprecated references in kustomize ([#137](https://github.com/observeinc/manifests/issues/137)) ([54523e9](https://github.com/observeinc/manifests/commit/54523e96b5e8c4bb842428f641fb96ce3dab1d01))
-* **metrics:** per job scrape interval, tweak defaults. ([#139](https://github.com/observeinc/manifests/issues/139)) ([26c8327](https://github.com/observeinc/manifests/commit/26c8327d8d74f03f38cba255c7c552cf99072be3))
 
 
 
