@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/observeinc/manifests/compare/v1.0.0...v1.0.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* **deps:** bump grafana-agent and otel-collector-contrib ([2df306a](https://github.com/observeinc/manifests/commit/2df306a2083216580c1fc2b23139808144bde40c))
+
+
+
 # [1.0.0](https://github.com/observeinc/manifests/compare/v0.35.3...v1.0.0) (2024-02-05)
 
 
@@ -43,21 +52,6 @@ https://docs.observeinc.com/en/latest/content/integrations/kubernetes/collecting
 ### Bug Fixes
 
 * **logs:** bump fluent-bit to 2.2.1 ([a287540](https://github.com/observeinc/manifests/commit/a287540f959cafd233f4edc823ec2dd03e151687))
-
-
-
-# [0.35.0](https://github.com/observeinc/manifests/compare/v0.34.0...v0.35.0) (2023-12-21)
-
-
-### Bug Fixes
-
-* bump kube-state-events to 0.11.1 ([#143](https://github.com/observeinc/manifests/issues/143)) ([570249f](https://github.com/observeinc/manifests/commit/570249f2268b6b75facfd381a896ee90f4c0d264))
-* **traces:** update otlphttp endpoint to v2 ([#141](https://github.com/observeinc/manifests/issues/141)) ([6e3a091](https://github.com/observeinc/manifests/commit/6e3a09185d9c052dc4a8729cbd5d798c61519c52))
-
-
-### Features
-
-* **traces:** update otel-collector-contrib to 0.91.0 ([cffe059](https://github.com/observeinc/manifests/commit/cffe059a898a7104b8b0327521f4efa78d0ddc78))
 
 
 
