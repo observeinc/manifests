@@ -203,7 +203,7 @@ kubectl rollout restart -n observe deployment
 ## Using v2 of OpenTelemetry collection endpoint
 
 If you are using the 1.0.0 release of the OpenTelemetry Observe app or newer, you should use the v2 collection endpoint which
-provides a more efficient representation of trace observations in the datastream. For that you'll need to override the evnironment variable value `OBSERVE_COLLECTOR_OTEL_VERSION=v2` as described above (Using an override configMap)
+provides a more efficient representation of trace observations in the datastream. For that you'll need to override the environment variable value `OBSERVE_COLLECTOR_OTEL_VERSION=v2` as described above (Using an override configMap)
 
 # Pruning and deletion
 
