@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/observeinc/manifests/compare/v1.0.1...v1.1.0) (2024-03-12)
+
+
+### Features
+
+* update grafana-agent, fluent-bit ([#162](https://github.com/observeinc/manifests/issues/162)) ([5bbee29](https://github.com/observeinc/manifests/commit/5bbee29b954759ea15ca8051bcafa30393d98c91))
+
+
+
 ## [1.0.1](https://github.com/observeinc/manifests/compare/v1.0.0...v1.0.1) (2024-02-27)
 
 
@@ -43,15 +52,6 @@ https://docs.observeinc.com/en/latest/content/integrations/kubernetes/collecting
 ### Bug Fixes
 
 * bump grafana agent and otel versions ([72f8608](https://github.com/observeinc/manifests/commit/72f8608231f73736e4f8d9fd728f2bcc2404ac46))
-
-
-
-## [0.35.1](https://github.com/observeinc/manifests/compare/v0.35.0...v0.35.1) (2024-01-02)
-
-
-### Bug Fixes
-
-* **logs:** bump fluent-bit to 2.2.1 ([a287540](https://github.com/observeinc/manifests/commit/a287540f959cafd233f4edc823ec2dd03e151687))
 
 
 
