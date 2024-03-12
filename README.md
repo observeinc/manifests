@@ -93,7 +93,7 @@ Resource limits for each sizing is as follows:
 
 # Traces
 
-Support for trace collection is available with the OpenTelemetry App installed in your Observe account. After installing the App, you will need to configure an otel-collector 'gateway' to send data to Observe. 
+Support for trace collection is available with the OpenTelemetry App installed in your Observe account. After installing the App, you will need to configure an otel-collector 'gateway' to send data to Observe.
 
 Observe provides an `otel` Kustomize stack to streamline creating the resources needed to report your spans to Observe. The Daemonset and Deployments for these are are based on standard deployment of opentelementry adapted from [OpenTelemetry-helm-charts](https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector/examples)
 ## App Token Secret
@@ -134,9 +134,9 @@ The respective opentelemetry-collector container for each size:
 
 |     | `xs`  | `m` | `l` | `xl` |
 | --: | :---: | :-: | :-: | :--: |
-| traces* | 50m<br>128Mi<br>(Daemonset) | 250m<br>256Mi<br>(Daemonset) | 250m<br>256Mi<br>(deployment replicas: 10) | 250m<br>256Mi | points to l 
+| traces* | 50m<br>128Mi<br>(Daemonset) | 250m<br>256Mi<br>(Daemonset) | 250m<br>256Mi<br>(deployment replicas: 10) | 250m<br>256Mi | points to l
 
-Once installed, traces can be sent to the local collector running in k8s over GRPC on 
+Once installed, traces can be sent to the local collector running in k8s over GRPC on
 `observe-traces.observe.svc.cluster.local:4317`.
 
 **NOTE** When migrating from _s_ or _m_ to _l_, ensure that you remove the previous opentelemetry-collector daemonset
@@ -199,6 +199,11 @@ automatically. You must restart the relevant pods to pick up the new environment
 kubectl rollout restart -n observe daemonset
 kubectl rollout restart -n observe deployment
 ```
+
+## Using v2 of OpenTelemetry collection endpoint
+
+If you are using the 1.0.0 release of the OpenTelemetry Observe app or newer, you should use the v2 collection endpoint which
+provides a more efficient representation of trace observations in the datastream. For that you'll need to override the evnironment variable value `OBSERVE_COLLECTOR_OTEL_VERSION=v2` as described above (Using an override configMap)
 
 # Pruning and deletion
 
