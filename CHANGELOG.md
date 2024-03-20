@@ -1,3 +1,12 @@
+## [1.1.2](https://github.com/observeinc/manifests/compare/v1.1.1...v1.1.2) (2024-03-20)
+
+
+### Bug Fixes
+
+* **metrics:** only scrape init containers if port set ([#165](https://github.com/observeinc/manifests/issues/165)) ([e794a3e](https://github.com/observeinc/manifests/commit/e794a3e285e5bf16e260ab6c126bbd0a829a2d91))
+
+
+
 ## [1.1.1](https://github.com/observeinc/manifests/compare/v1.1.0...v1.1.1) (2024-03-19)
 
 
@@ -40,18 +49,6 @@
 
 * PROM_SCRAPE_POD_ACTION was previously set to keep but is changed to drop to reduce a data volume and make the data collection of pod metrics opted-in.
 https://docs.observeinc.com/en/latest/content/integrations/kubernetes/collecting_pod_metrics_cadvisor_metrics.html
-
-
-
-## [0.35.3](https://github.com/observeinc/manifests/compare/v0.35.2...v0.35.3) (2024-01-30)
-
-
-### Bug Fixes
-
-* **deps:** Update fluenbit and grafana agent ([#147](https://github.com/observeinc/manifests/issues/147)) ([ff19f22](https://github.com/observeinc/manifests/commit/ff19f2271e2e3016907ff1fbd0c365268a07d387))
-* **logs:** add FB_IGNORE_OLDER ([#150](https://github.com/observeinc/manifests/issues/150)) ([daa2eee](https://github.com/observeinc/manifests/commit/daa2eee14595d7dc2e38d5b60181f8b9f48b8446))
-* **metrics:** bump cadvisor interval to 60s ([#148](https://github.com/observeinc/manifests/issues/148)) ([8646829](https://github.com/observeinc/manifests/commit/8646829b76127c076ee861cb7ab9373cbc8f3fc9))
-* **traces:** bump otel-collector-contrib to 0.93.0 ([07c222e](https://github.com/observeinc/manifests/commit/07c222ebb6088480308688c199723f314098892f))
 
 
 
