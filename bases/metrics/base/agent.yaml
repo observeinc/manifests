@@ -59,6 +59,9 @@ metrics:
             - action: 'drop'
               regex: 'Succeeded|Failed'
               source_labels: ['__meta_kubernetes_pod_phase']
+            - action: 'drop'
+              regex: 'true;'
+              source_labels: ['__meta_kubernetes_pod_container_init', '__meta_kubernetes_pod_container_port_name']
             # Drop anything annotated with 'prometheus.io.scrape=false'.
             - action: 'drop'
               regex: 'false'
