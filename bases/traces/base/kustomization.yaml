@@ -28,6 +28,7 @@ configMapGenerator:
       - OTEL_LOG_LEVEL=info
       - OTEL_SEND_BATCH_MAX_SIZE=0
       - OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT=1048576
+      - OTEL_SERVICE_VERSION_LABEL_KEY_REGEX=(pod-template-hash|controller-revision-hash|job-name)
   - name: otel-collector
     literals:
       - extra.yaml=
