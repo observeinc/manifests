@@ -26,12 +26,24 @@ processors:
         - k8s.pod.name
         - k8s.namespace.name
         - k8s.cluster.uid
+      labels:
+        - tag_name: fallback.service.version
+          key_regex: ${OTEL_SERVICE_VERSION_LABEL_KEY_REGEX}
+        - tag_name: $$1
+          key_regex: opentelemetry.observeinc.com/(.*)
     pod_association:
       - sources:
           - from: resource_attribute
             name: k8s.pod.ip
       - sources:
           - from: connection
+  resource:
+    attributes:
+      - key: service.version
+        from_attribute: fallback.service.version
+        action: insert
+      - key: fallback.service.version
+        action: delete
   batch:
     send_batch_max_size: ${OTEL_SEND_BATCH_MAX_SIZE}
   memory_limiter:
@@ -65,7 +77,7 @@ service:
   pipelines:
     traces:
       receivers: [otlp, zipkin]
-      processors: [probabilistic_sampler, transform/truncate, k8sattributes, memory_limiter, batch]
+      processors: [probabilistic_sampler, transform/truncate, k8sattributes, resource, memory_limiter, batch]
       exporters: [otlphttp, logging]
     metrics:
       receivers: [otlp]
