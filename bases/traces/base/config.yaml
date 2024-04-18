@@ -44,6 +44,9 @@ processors:
         action: insert
       - key: fallback.service.version
         action: delete
+      - key: k8s.cluster.uid
+        value: ${OBSERVE_CLUSTER}
+        action: ${OTEL_OBSERVE_CLUSTER_ACTION}
   batch:
     send_batch_max_size: ${OTEL_SEND_BATCH_MAX_SIZE}
   memory_limiter:

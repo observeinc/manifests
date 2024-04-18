@@ -29,6 +29,8 @@ configMapGenerator:
       - OTEL_SEND_BATCH_MAX_SIZE=0
       - OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT=1048576
       - OTEL_SERVICE_VERSION_LABEL_KEY_REGEX=(pod-template-hash|controller-revision-hash|job-name)
+      # must be modified to `upsert` in order to override default cluster UID
+      - OTEL_OBSERVE_CLUSTER_ACTION=insert
   - name: otel-collector
     literals:
       - extra.yaml=
