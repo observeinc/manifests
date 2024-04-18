@@ -84,9 +84,9 @@ service:
       exporters: [otlphttp, logging]
     metrics:
       receivers: [otlp]
-      processors: [k8sattributes, memory_limiter, batch]
+      processors: [k8sattributes, resource, memory_limiter, batch]
       exporters: [otlphttp, logging]
     logs:
       receivers: [otlp]
-      processors: [k8sattributes, memory_limiter, batch]
+      processors: [k8sattributes, resource, memory_limiter, batch]
       exporters: [otlphttp, logging]
