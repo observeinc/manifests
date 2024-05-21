@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/observeinc/manifests/compare/v1.3.0...v1.4.0) (2024-05-21)
+
+
+### Bug Fixes
+
+* **deps:** Update dependencies ([#170](https://github.com/observeinc/manifests/issues/170)) ([7bf5724](https://github.com/observeinc/manifests/commit/7bf5724c0283f92bf147988791ee765219619575))
+
+
+### Features
+
+* **deps:** update dependencies ([#166](https://github.com/observeinc/manifests/issues/166)) ([af77711](https://github.com/observeinc/manifests/commit/af777110b2c0c750053a5b2436331eda02ea9d55))
+
+
+
 # [1.3.0](https://github.com/observeinc/manifests/compare/v1.2.0...v1.3.0) (2024-04-23)
 
 
@@ -36,15 +50,6 @@
 ### Bug Fixes
 
 * **deps:** Update dependencies ([#163](https://github.com/observeinc/manifests/issues/163)) ([593c34f](https://github.com/observeinc/manifests/commit/593c34feb41c74cc810f3244f78ad888db6d1ac8))
-
-
-
-# [1.1.0](https://github.com/observeinc/manifests/compare/v1.0.1...v1.1.0) (2024-03-12)
-
-
-### Features
-
-* update grafana-agent, fluent-bit ([#162](https://github.com/observeinc/manifests/issues/162)) ([5bbee29](https://github.com/observeinc/manifests/commit/5bbee29b954759ea15ca8051bcafa30393d98c91))
 
 
 
