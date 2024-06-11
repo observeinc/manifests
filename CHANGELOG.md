@@ -1,3 +1,12 @@
+## [1.4.1](https://github.com/observeinc/manifests/compare/v1.4.0...v1.4.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* **metrics:** update grafana-agent and sync securityContext with upstream ([44adafa](https://github.com/observeinc/manifests/commit/44adafaf27457eb3497d252c04c1a3a7e9eb348b))
+
+
+
 # [1.4.0](https://github.com/observeinc/manifests/compare/v1.3.0...v1.4.0) (2024-05-21)
 
 
@@ -41,15 +50,6 @@
 ### Bug Fixes
 
 * **metrics:** only scrape init containers if port set ([#165](https://github.com/observeinc/manifests/issues/165)) ([e794a3e](https://github.com/observeinc/manifests/commit/e794a3e285e5bf16e260ab6c126bbd0a829a2d91))
-
-
-
-## [1.1.1](https://github.com/observeinc/manifests/compare/v1.1.0...v1.1.1) (2024-03-19)
-
-
-### Bug Fixes
-
-* **deps:** Update dependencies ([#163](https://github.com/observeinc/manifests/issues/163)) ([593c34f](https://github.com/observeinc/manifests/commit/593c34feb41c74cc810f3244f78ad888db6d1ac8))
 
 
 
