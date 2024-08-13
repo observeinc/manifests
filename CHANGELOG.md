@@ -1,3 +1,12 @@
+## [1.4.2](https://github.com/observeinc/manifests/compare/v1.4.1...v1.4.2) (2024-08-13)
+
+
+### Bug Fixes
+
+* **deps:** Updated commit message ([b6f6594](https://github.com/observeinc/manifests/commit/b6f65940683a62f36a7b7f69c07bdd64b5b18b91))
+
+
+
 ## [1.4.1](https://github.com/observeinc/manifests/compare/v1.4.0...v1.4.1) (2024-06-11)
 
 
@@ -41,15 +50,6 @@
 ### Features
 
 * **traces:** set resource attributes from label metadata ([#167](https://github.com/observeinc/manifests/issues/167)) ([a532121](https://github.com/observeinc/manifests/commit/a532121e94e9a83925e1021b29d2caf4f903479e))
-
-
-
-## [1.1.2](https://github.com/observeinc/manifests/compare/v1.1.1...v1.1.2) (2024-03-20)
-
-
-### Bug Fixes
-
-* **metrics:** only scrape init containers if port set ([#165](https://github.com/observeinc/manifests/issues/165)) ([e794a3e](https://github.com/observeinc/manifests/commit/e794a3e285e5bf16e260ab6c126bbd0a829a2d91))
 
 
 
