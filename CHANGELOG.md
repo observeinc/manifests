@@ -1,3 +1,12 @@
+## [1.4.3](https://github.com/observeinc/manifests/compare/v1.4.2...v1.4.3) (2024-08-20)
+
+
+### Bug Fixes
+
+* **deps:** Update dependencies ([b586f10](https://github.com/observeinc/manifests/commit/b586f102fc00580ce44901c32f5b9d33767977da))
+
+
+
 ## [1.4.2](https://github.com/observeinc/manifests/compare/v1.4.1...v1.4.2) (2024-08-13)
 
 
@@ -41,15 +50,6 @@
 ### Features
 
 * **traces:** allow OBSERVE_CLUSTER override ([#168](https://github.com/observeinc/manifests/issues/168)) ([239d9c4](https://github.com/observeinc/manifests/commit/239d9c4fd19f92db35dcb68418c2fdd44175e1f5))
-
-
-
-# [1.2.0](https://github.com/observeinc/manifests/compare/v1.1.2...v1.2.0) (2024-04-16)
-
-
-### Features
-
-* **traces:** set resource attributes from label metadata ([#167](https://github.com/observeinc/manifests/issues/167)) ([a532121](https://github.com/observeinc/manifests/commit/a532121e94e9a83925e1021b29d2caf4f903479e))
 
 
 
