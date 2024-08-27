@@ -1,3 +1,12 @@
+## [1.4.4](https://github.com/observeinc/manifests/compare/v1.4.3...v1.4.4) (2024-08-27)
+
+
+### Bug Fixes
+
+* **deps:** Update dependencies ([08d9b43](https://github.com/observeinc/manifests/commit/08d9b43254eaee4ccc2cde2dfa4cf7d2a0046753))
+
+
+
 ## [1.4.3](https://github.com/observeinc/manifests/compare/v1.4.2...v1.4.3) (2024-08-20)
 
 
@@ -36,20 +45,6 @@
 ### Features
 
 * **deps:** update dependencies ([#166](https://github.com/observeinc/manifests/issues/166)) ([af77711](https://github.com/observeinc/manifests/commit/af777110b2c0c750053a5b2436331eda02ea9d55))
-
-
-
-# [1.3.0](https://github.com/observeinc/manifests/compare/v1.2.0...v1.3.0) (2024-04-23)
-
-
-### Bug Fixes
-
-* **traces:** add resource processor to metrics, logs ([#169](https://github.com/observeinc/manifests/issues/169)) ([73bff36](https://github.com/observeinc/manifests/commit/73bff36978a971ff31960d0fb174abce4550f1af))
-
-
-### Features
-
-* **traces:** allow OBSERVE_CLUSTER override ([#168](https://github.com/observeinc/manifests/issues/168)) ([239d9c4](https://github.com/observeinc/manifests/commit/239d9c4fd19f92db35dcb68418c2fdd44175e1f5))
 
 
 
