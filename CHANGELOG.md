@@ -1,3 +1,13 @@
+## [1.4.5](https://github.com/observeinc/manifests/compare/v1.4.4...v1.4.5) (2024-09-10)
+
+
+### Bug Fixes
+
+* **deps:** Update dependencies ([d872122](https://github.com/observeinc/manifests/commit/d872122e54fcfe51379d105e90b8b02a1ca13cd3))
+* **deps:** Update dependencies ([aee0aca](https://github.com/observeinc/manifests/commit/aee0aca367c9619fb67ddd7d49f039e6b3e757a3))
+
+
+
 ## [1.4.4](https://github.com/observeinc/manifests/compare/v1.4.3...v1.4.4) (2024-08-27)
 
 
@@ -31,20 +41,6 @@
 ### Bug Fixes
 
 * **metrics:** update grafana-agent and sync securityContext with upstream ([44adafa](https://github.com/observeinc/manifests/commit/44adafaf27457eb3497d252c04c1a3a7e9eb348b))
-
-
-
-# [1.4.0](https://github.com/observeinc/manifests/compare/v1.3.0...v1.4.0) (2024-05-21)
-
-
-### Bug Fixes
-
-* **deps:** Update dependencies ([#170](https://github.com/observeinc/manifests/issues/170)) ([7bf5724](https://github.com/observeinc/manifests/commit/7bf5724c0283f92bf147988791ee765219619575))
-
-
-### Features
-
-* **deps:** update dependencies ([#166](https://github.com/observeinc/manifests/issues/166)) ([af77711](https://github.com/observeinc/manifests/commit/af777110b2c0c750053a5b2436331eda02ea9d55))
 
 
 
