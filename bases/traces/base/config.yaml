@@ -1,7 +1,6 @@
 ---
 exporters:
-  logging:
-    loglevel: "${OTEL_LOG_LEVEL}"
+  debug: {}
   otlphttp:
     endpoint: "${OBSERVE_COLLECTOR_SCHEME}://${OBSERVE_CUSTOMER}.${OBSERVE_COLLECTOR_HOST}:${OBSERVE_COLLECTOR_PORT}/${OBSERVE_COLLECTOR_OTEL_VERSION}/otel"
     headers:
@@ -75,18 +74,18 @@ receivers:
 service:
   telemetry:
     logs:
-      level: "${OTEL_LOG_LEVEL}"
+      level: "info"
   extensions: [health_check, zpages]
   pipelines:
     traces:
       receivers: [otlp, zipkin]
       processors: [probabilistic_sampler, transform/truncate, k8sattributes, resource, memory_limiter, batch]
-      exporters: [otlphttp, logging]
+      exporters: [otlphttp, debug]
     metrics:
       receivers: [otlp]
       processors: [k8sattributes, resource, memory_limiter, batch]
-      exporters: [otlphttp, logging]
+      exporters: [otlphttp, debug]
     logs:
       receivers: [otlp]
       processors: [k8sattributes, resource, memory_limiter, batch]
-      exporters: [otlphttp, logging]
+      exporters: [otlphttp, debug]

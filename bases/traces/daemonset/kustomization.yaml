@@ -7,4 +7,4 @@ commonLabels:
   observeinc.com/component: 'traces'
 images:
   - name: otel/opentelemetry-collector-contrib
-    newTag: '0.112.0'
+    newTag: '0.101.0'
