@@ -1,3 +1,12 @@
+## [1.4.8](https://github.com/observeinc/manifests/compare/v1.4.7...v1.4.8) (2024-11-05)
+
+
+### Bug Fixes
+
+* **deps:** Update dependencies ([43e97d6](https://github.com/observeinc/manifests/commit/43e97d68a99c0f85ff7c225db84610d172ad6229))
+
+
+
 ## [1.4.7](https://github.com/observeinc/manifests/compare/v1.4.6...v1.4.7) (2024-09-24)
 
 
@@ -32,15 +41,6 @@
 ### Bug Fixes
 
 * **deps:** Update dependencies ([08d9b43](https://github.com/observeinc/manifests/commit/08d9b43254eaee4ccc2cde2dfa4cf7d2a0046753))
-
-
-
-## [1.4.3](https://github.com/observeinc/manifests/compare/v1.4.2...v1.4.3) (2024-08-20)
-
-
-### Bug Fixes
-
-* **deps:** Update dependencies ([b586f10](https://github.com/observeinc/manifests/commit/b586f102fc00580ce44901c32f5b9d33767977da))
 
 
 
