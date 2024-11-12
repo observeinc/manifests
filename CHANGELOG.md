@@ -1,3 +1,12 @@
+## [1.4.9](https://github.com/observeinc/manifests/compare/v1.4.8...v1.4.9) (2024-11-12)
+
+
+### Bug Fixes
+
+* **traces:** replace deprecated logging exporter ([ab8ce1d](https://github.com/observeinc/manifests/commit/ab8ce1dbde87971729934fe4f03d7d7de0c1d9f0))
+
+
+
 ## [1.4.8](https://github.com/observeinc/manifests/compare/v1.4.7...v1.4.8) (2024-11-05)
 
 
@@ -32,15 +41,6 @@
 
 * **deps:** Update dependencies ([d872122](https://github.com/observeinc/manifests/commit/d872122e54fcfe51379d105e90b8b02a1ca13cd3))
 * **deps:** Update dependencies ([aee0aca](https://github.com/observeinc/manifests/commit/aee0aca367c9619fb67ddd7d49f039e6b3e757a3))
-
-
-
-## [1.4.4](https://github.com/observeinc/manifests/compare/v1.4.3...v1.4.4) (2024-08-27)
-
-
-### Bug Fixes
-
-* **deps:** Update dependencies ([08d9b43](https://github.com/observeinc/manifests/commit/08d9b43254eaee4ccc2cde2dfa4cf7d2a0046753))
 
 
 
