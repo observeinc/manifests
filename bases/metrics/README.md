@@ -1,5 +1,7 @@
 # Metrics collection
 
+> **Maintenance status:** this base is no longer updated and will not get new releases, including for security advisories that affect the `grafana/agent` image it deploys. Grafana Agent is also archived upstream. Migrate to the [Observe agent Helm chart](https://github.com/observeinc/helm-charts/tree/main/charts/agent). See [Install on Kubernetes](https://docs.observeinc.com/docs/kubernetes).
+
 Our general collection posture is to collect as much information as possible out of the box while still being able to install successfully in large environments.
 
 In some cases this approach may lead to the collection of more metrics than
