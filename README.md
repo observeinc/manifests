@@ -3,6 +3,10 @@
 This repository contains _kustomized_ Kubernetes manifests supported by [Observe](https://www.observeinc.com/)
 These are intended as a way of quickly start ingesting data into Observe.
 
+## Maintenance status
+
+These manifests are no longer updated and will not get new releases, including for security advisories that affect the images they deploy (fluent-bit, grafana-agent, the OpenTelemetry Collector and the Windows fluentd image). Migrate to the [Observe agent Helm chart](https://github.com/observeinc/helm-charts/tree/main/charts/agent). See [Install on Kubernetes](https://docs.observeinc.com/docs/kubernetes). The agent chart does not run on Windows nodes, so the `winlogs` base has no direct replacement.
+
 # Quick setup
 
 You can install our kustomize stack directly using `kubectl`: Kustomize is built into kubectl, from version 1.14.[*](https://cloud.google.com/anthos-config-management/docs/concepts/kustomize)
